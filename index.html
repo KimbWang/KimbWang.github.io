@@ -748,50 +748,8 @@
 
             <section id="projects" class="my-16 fade-in delay-3">
                 <h2 class="section-title text-center mb-12">Highlighted Projects</h2>
-                <div class="projects-grid">
-                    <div class="tech-container project-card p-6 shadow-lg overflow-hidden" onclick="showProjectPage(1)">
-                        <img 
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-001%3C/text%3E%3C/svg%3E" 
-                            alt="Project 1 Placeholder"
-                            class="tech-img w-full h-48 object-cover mb-4"
-                        >
-                        <h3 class="text-xl font-semibold mb-2 text-white">CO Sensing and Ventilating System</h3>
-                        <p class="text-gray-400 mb-4">A system that senses for dangerous levels of CO in buildings and controls a ventilation system to recirculate air.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-tag">LTSpice</span>
-                            <span class="tech-tag">Circuit Analysis</span>
-                        </div>
-                        <span class="learn-more-btn">Learn More →</span>
+                <div class="projects-grid" id="featuredProjectsGrid">
                     </div>
-                    <div class="tech-container project-card p-6 shadow-lg overflow-hidden" onclick="showProjectPage(2)">
-                        <img 
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-002%3C/text%3E%3C/svg%3E" 
-                            alt="Project 2 Placeholder"
-                            class="tech-img w-full h-48 object-cover mb-4"
-                        >
-                        <h3 class="text-xl font-semibold mb-2 text-white">PI Controller Design</h3>
-                        <p class="text-gray-400 mb-4">Designed a custom 4-layer PCB for an autonomous navigation robot, integrating motor drivers and sensors.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-tag">LTSpice</span>
-                            <span class="tech-tag">Circuit Analysis</span>
-                        </div>
-                        <span class="learn-more-btn">Learn More →</span>
-                    </div>
-                    <div class="tech-container project-card p-6 shadow-lg overflow-hidden" onclick="showProjectPage(3)">
-                        <img 
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-003%3C/text%3E%3C/svg%3E" 
-                            alt="Project 3 Placeholder"
-                            class="tech-img w-full h-48 object-cover mb-4"
-                        >
-                        <h3 class="text-xl font-semibold mb-2 text-white">FPGA Signal Processing</h3>
-                        <p class="text-gray-400 mb-4">Implemented a real-time FIR filter on a Xilinx FPGA for audio signal processing applications.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-tag">FPGA</span>
-                            <span class="tech-tag">DSP</span>
-                        </div>
-                        <span class="learn-more-btn">Learn More →</span>
-                    </div>
-                </div>
 
                 <div class="text-center mt-12">
                     <button class="tech-button cta-button" onclick="navigatePage('projects')">
@@ -851,7 +809,7 @@
                     type="text" 
                     id="searchInput" 
                     class="search-input" 
-                    placeholder="Search by project title or technology..."
+                    placeholder="Search by project title or category..."
                     onkeyup="filterProjectList()"
                 >
                 <div id="filtersPanel">
@@ -897,7 +855,7 @@
 
     <script>
         // --- DATA ---
-        // Using the detailed data object
+        // MODIFIED: Removed 'technologies' array from all projects
         const projectDetails = {
             1: {
                 title: 'CO Sensing and Ventilation System',
@@ -913,8 +871,7 @@
                     'Customizable alert thresholds',
                     'Historical data analysis and trend reporting'
                 ],
-                technologies: ['LTSpice', 'Circuit Building', 'Circuit Measurement', 'Cloud API', 'Sensors', 'Web Dashboard'],
-                categories: ['LTSpice', 'Analog Circuit Design', 'Arduino', 'Cloud', 'ESP32'],
+                categories: ['LTSpice', 'Analog Circuit Design', 'Arduino', 'Cloud', 'ESP32', 'Sensors'],
                 challenges: 'The main challenge was power management to ensure year-round operation with minimal maintenance. Implemented low-power sleep modes and optimized sensor polling intervals. Additionally, ensuring reliable WiFi connectivity in outdoor environments required careful antenna design and signal strength optimization.',
                 results: 'Successfully deployed a reliable weather station with 99.5% uptime and accurate sensor readings within ±2% of commercial grade equipment. The system has been operational for over 18 months with minimal maintenance. Data collected has proven valuable for local climate research and agricultural applications.',
                 additionalInfo: 'The project started as a simple weather monitoring system but evolved into a comprehensive IoT solution. Key learnings include the importance of power budgeting in battery-powered systems, cloud service integration challenges, and real-world sensor calibration needs. Future improvements include adding more sensor types and implementing machine learning for weather prediction.'
@@ -933,8 +890,7 @@
                     'Ground plane for noise reduction',
                     'Protection circuits for over-current and reverse polarity'
                 ],
-                technologies: ['I2C', 'TI RSLK Car', 'MSP432', 'C (lang)', 'Microcontroller', 'Robotics', 'Sensor Integration'],
-                categories: ['Microcontroller', 'C Programming'],
+                categories: ['Microcontroller', 'C Programming', 'Robotics', 'Embedded', 'I2C', 'Sensor Integration'],
                 challenges: 'Signal integrity and EMI management were critical concerns. Implemented proper ground planes, trace routing, and shielding to minimize interference. The challenge of fitting all components in a compact space while maintaining good thermal characteristics required careful component placement and layer stackup design.',
                 results: 'Produced a robust PCB that passed all functional tests with zero manufacturing defects. The rover successfully navigated autonomous obstacle courses and demonstrated reliable operation over 50+ hours of continuous testing. The PCB design has been refined through two iterations based on field testing feedback.',
                 additionalInfo: 'This project taught valuable lessons about PCB design for robotics applications. Key considerations included power distribution to high-current motor drivers, minimizing ground bounce, and ensuring proper bypass capacitor placement. The final design achieved excellent thermal performance and has become a reference design for other robotics projects in the lab.'
@@ -953,8 +909,7 @@
                     'Real-time frequency response visualization',
                     'Scalable architecture for multiple parallel filters'
                 ],
-                technologies: ['Xilinx', 'Breadboard', 'Verilog', 'Xilinx ISE', 'Signal Processing', 'Audio'],
-                categories: ['Digital Circuit Design', 'DSP'],
+                categories: ['Digital Circuit Design', 'DSP', 'FPGA', 'Verilog', 'Xilinx'],
                 challenges: 'Optimizing for throughput while maintaining accuracy required careful pipeline design and resource allocation on the FPGA. Managing the trade-off between filter order (affecting quality) and FPGA resource usage was complex. Implementing efficient data flow and minimizing latency required deep understanding of FPGA architecture.',
                 results: 'Achieved 100x speedup compared to software implementation with minimal resource utilization (35% of available LUTs). The filter maintains <1ms latency even with high-order configurations. Successfully demonstrated real-time audio filtering with imperceptible delay.',
                 additionalInfo: 'This project provided comprehensive experience with FPGA design for signal processing. Key learning outcomes included understanding pipelining for throughput improvement, resource optimization techniques, and the practical benefits of hardware acceleration. The implementation is now used as a teaching example in the digital signal processing course.'
@@ -973,8 +928,7 @@
                     'Scheduling capabilities for automated lighting',
                     'Energy-efficient operation with power monitoring'
                 ],
-                technologies: ['Microcontroller', 'PWM', 'Bluetooth', 'RGB LEDs', 'Embedded', 'Mobile App'],
-                categories: ['Embedded', 'IoT', 'Microcontroller'],
+                categories: ['Embedded', 'IoT', 'Microcontroller', 'PWM', 'Bluetooth', 'Mobile App'],
                 challenges: 'Synchronizing color transitions smoothly while maintaining responsive wireless communication required careful timing and buffer management. Managing power consumption while maintaining responsiveness was critical for battery-powered applications. Implementing reliable Bluetooth communication with proper error handling and reconnection logic added complexity.',
                 results: 'Created a user-friendly system with seamless color transitions and sub-100ms control response time. Successfully tested with 500+ color changes without any glitches. The system has been deployed in 10+ installations with positive user feedback.',
                 additionalInfo: 'The project evolved from a simple LED controller to a comprehensive smart lighting solution. Notable features include adaptive color temperature based on time of day and integration with home automation systems. Future enhancements include gesture recognition and advanced scheduling algorithms.'
@@ -993,8 +947,7 @@
                     'Soft-start circuit for inrush current limiting',
                     'Multiple output taps for different voltage requirements'
                 ],
-                technologies: ['SMPS', 'Power', 'Electronics', 'Switching Regulators', 'Thermal Design', 'Protection Circuits'],
-                categories: ['Power', 'Electronics'],
+                categories: ['Power', 'Electronics', 'SMPS', 'Thermal Design'],
                 challenges: 'Designing an efficient switching power supply required careful component selection and PCB layout to minimize EMI and losses. Managing heat dissipation in a compact enclosure while maintaining efficiency was challenging. Implementing robust protection circuits without sacrificing performance required extensive testing.',
                 results: 'Achieved stable output with <1% ripple and 87% overall efficiency. Successfully tested under full load for 100+ hours without degradation. The PSU meets industry standards for power quality and reliability.',
                 additionalInfo: 'This project provided deep insights into power electronics design. Key learning points included transformer design, switching frequency optimization, and EMI mitigation techniques. The final design is now used as a reference for laboratory power supply requirements and student projects.'
@@ -1015,8 +968,7 @@
                     'Offline operation with automatic sync',
                     'Role-based access control for multi-user systems'
                 ],
-                technologies: ['Sensors', 'Cloud', 'Data Acquisition', 'Web Dashboard', 'Database', 'IoT'],
-                categories: ['Sensors', 'IoT', 'Cloud'],
+                categories: ['Sensors', 'IoT', 'Cloud', 'Data Acquisition', 'Database', 'Web Dashboard'],
                 challenges: 'Managing large datasets and ensuring reliable cloud synchronization with intermittent connectivity was complex. Implementing robust data validation and handling sensor failures gracefully required sophisticated error handling. Balancing storage capacity with battery life in remote deployments was challenging.',
                 results: 'Successfully deployed a system logging 50+ data points per second with 99.8% data integrity and <5 minute cloud sync latency. System has been in production for 12+ months with zero data loss incidents. Supports 100+ concurrent users on the web dashboard.',
                 additionalInfo: 'The data logger has become a critical tool for environmental monitoring and research. Key achievements include implementing predictive maintenance alerts and anomaly detection algorithms. The platform now hosts over 2TB of historical data supporting various research initiatives. Future plans include machine learning integration for advanced analytics.'
@@ -1081,9 +1033,9 @@
                         ${project.features.map(feature => `<li>${feature}</li>`).join('')}
                     </ul>
 
-                    <h3 class="detail-section-title">Technologies Used</h3>
+                    <h3 class="detail-section-title">Categories</h3>
                     <div class="project-detail-tags">
-                        ${project.technologies.map(tech => `<span class="project-detail-tag">${tech}</span>`).join('')}
+                        ${project.categories.map(cat => `<span class="project-detail-tag">${cat}</span>`).join('')}
                     </div>
 
                     <h3 class="detail-section-title">Challenges & Solutions</h3>
@@ -1108,6 +1060,43 @@
         function navigateToProject(projectId) {
             showProjectPage(projectId);
         }
+        
+        // --- NEW: Renders the "Featured Projects" on the Home Page ---
+        function renderFeaturedProjects() {
+            const container = document.getElementById('featuredProjectsGrid');
+            if (!container) return; 
+            
+            let html = '';
+            const featuredIds = [1, 2, 3]; // Show first 3 projects
+
+            for (const id of featuredIds) {
+                const project = projectDetails[id];
+                if (!project) continue; 
+
+                // Create a shortened description
+                const shortDescription = project.description.length > 100 ? 
+                    project.description.substring(0, 100) + '...' : 
+                    project.description;
+
+                html += `
+                    <div class="tech-container project-card p-6 shadow-lg overflow-hidden" onclick="showProjectPage(${id})">
+                        <img 
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${id}%3C/text%3E%3C/svg%3E" 
+                            alt="${project.title}"
+                            class="tech-img w-full h-48 object-cover mb-4"
+                        >
+                        <h3 class="text-xl font-semibold mb-2 text-white">${project.title}</h3>
+                        <p class="text-gray-400 mb-4">${shortDescription}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${project.categories.slice(0, 2).map(cat => `<span class="tech-tag">${cat}</span>`).join('')}
+                        </div>
+                        <span class="learn-more-btn">Learn More →</span>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
 
         // --- 'ALL PROJECTS' PAGE FUNCTIONS ---
 
@@ -1125,13 +1114,15 @@
             for (let id = 1; id <= 6; id++) {
                 const project = projectDetails[id];
                 const title = project.title.toLowerCase();
-                const technologies = project.technologies.join(' ').toLowerCase();
+                // MODIFIED: Search categories now
+                const categoriesString = project.categories.join(' ').toLowerCase(); 
                 const categories = project.categories || [];
 
                 // Check search
                 let matchesSearch = true;
                 if (searchInput) {
-                    matchesSearch = title.includes(searchInput) || technologies.includes(searchInput);
+                    // MODIFIED: Search categories instead of technologies
+                    matchesSearch = title.includes(searchInput) || categoriesString.includes(searchInput);
                 }
 
                 // Check category filters
@@ -1143,7 +1134,7 @@
                 if (matchesSearch && matchesFilter) {
                     visibleCount++;
                     html += `
-                        <div id="project-${id}" class="project-detail-card fade-in project-item" data-title="${title}" data-technologies="${technologies}">
+                        <div id="project-${id}" class="project-detail-card fade-in project-item" data-title="${title}" data-categories="${categoriesString}">
                             <img 
                                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${id}%3C/text%3E%3C/svg%3E" 
                                 alt="${project.title}"
@@ -1154,7 +1145,7 @@
                                 <p class="project-detail-description">${project.description}</p>
                                 <p><strong class="text-green-400">Overview:</strong> ${project.overview}</p>
                                 <div class="project-detail-tags">
-                                    ${project.technologies.map(tech => `<span class="project-detail-tag" onclick="filterByTag(event, '${tech}')">${tech}</span>`).join('')}
+                                    ${project.categories.map(cat => `<span class="project-detail-tag" onclick="filterByTag(event, '${cat}')">${cat}</span>`).join('')}
                                 </div>
                                 <span class="learn-more-btn" onclick="showProjectPage(${id})">View Full Details →</span>
                             </div>
@@ -1225,8 +1216,6 @@
              event.stopPropagation(); // Stop the click from bubbling up to the card's onclick
              
              // Find the corresponding filter button in the main filter bar
-             // Note: We search for the category name. This might not be 1-to-1 with tech tags.
-             // A better implementation would be to ensure categories and tech tags align.
              const filterButton = Array.from(document.querySelectorAll('#categoryFilterContainer .filter-tag')).find(btn => btn.textContent === category);
              
              if (filterButton && !activeFilters.includes(category)) {
@@ -1250,14 +1239,12 @@
 
             renderProjectList();
         }
-
-        // Find and replace your old toggleFiltersPanel function with this one
         
         function toggleFiltersPanel() {
             const container = document.getElementById('searchContainer');
             const btn = document.getElementById('toggleFiltersBtn');
             const panel = document.getElementById('filtersPanel');
-            const searchInput = document.getElementById('searchInput'); // <-- ADD THIS LINE
+            const searchInput = document.getElementById('searchInput'); 
     
             filtersCollapsed = !filtersCollapsed;
             
@@ -1265,12 +1252,12 @@
                 container.classList.add('collapsed');
                 btn.classList.add('collapsed');
                 panel.style.display = 'none';
-                searchInput.style.display = 'none'; // <-- ADD THIS LINE TO HIDE IT
+                searchInput.style.display = 'none'; 
             } else {
                 container.classList.remove('collapsed');
                 btn.classList.remove('collapsed');
                 panel.style.display = 'block';
-                searchInput.style.display = 'block'; // <-- ADD THIS LINE TO SHOW IT
+                searchInput.style.display = 'block'; 
             }
         }
 
@@ -1332,7 +1319,7 @@
         // Run this when the page first loads
         document.addEventListener('DOMContentLoaded', () => {
             populateFilters(); // Create the filter buttons
-            // By default, the 'homePage' is already active, so no render call is needed yet.
+            renderFeaturedProjects(); // NEW: Populate the home page projects
         });
 
         // Close mobile menu when clicking outside
