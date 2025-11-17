@@ -43,7 +43,6 @@
             clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
         }
 
-        /* This style applies the border/clip-path to images */
         .tech-img {
             clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
         }
@@ -326,7 +325,25 @@
             text-decoration: underline;
         }
 
-        /* 'All Projects' Page List Card Styles */
+        /* 'All Projects' LIST VIEW Styles (Default) */
+        #projectsListContainer {
+            display: block;
+        }
+
+        /* 'All Projects' GRID VIEW Styles (Toggled) */
+        #projectsListContainer.grid-view {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Styles for Grid View Transition */
+        #projectsListContainer.grid-view .project-detail-card {
+            flex-direction: column;
+            margin-bottom: 0; /* Grid handles gap */
+            height: 100%; /* Ensure uniform height */
+        }
+
         .project-detail-card {
             background-color: rgba(17, 24, 39, 0.8);
             border: 2px solid #22c55e;
@@ -353,48 +370,131 @@
         .project-detail-card:hover::before {
             left: 100%;
         }
+        
+        /* Default Image Style (List View) */
         .project-detail-card .project-detail-image {
             width: 300px;
             height: 250px;
             object-fit: cover;
             flex-shrink: 0;
             clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            transition: all 0.3s ease;
         }
+
+        /* Grid View Image Style - Reduced Height */
+        #projectsListContainer.grid-view .project-detail-card .project-detail-image {
+            width: 100%;
+            height: 150px; /* Reduced height for compact view */
+            margin-bottom: 1rem;
+        }
+
+        /* GRID VIEW CONTENT ALIGNMENT FIX */
         .project-detail-card .project-detail-content {
             flex: 1;
             display: flex;
             flex-direction: column;
+            width: 100%; 
         }
+
+        /* Ensures content stretches to fill card in Grid View */
+        #projectsListContainer.grid-view .project-detail-content {
+            height: 100%;
+            flex-grow: 1;
+        }
+
+        /* HEADER GROUP (Title + Date) LAYOUT */
+        .project-header-group {
+            display: flex;
+            flex-direction: column;
+        }
+        /* In LIST view, use row layout for header */
+        @media (min-width: 768px) {
+            #projectsListContainer:not(.grid-view) .project-header-group {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+
+        /* TEXT STYLING */
         .project-detail-card h3 {
             color: #3b82f6;
             font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             margin-top: 0;
             cursor: pointer;
             transition: color 0.3s ease;
         }
-        .project-detail-card h3:hover {
+        .project-detail-card:hover h3 {
             color: #22c55e;
         }
+        
+        /* Date Styling */
+        .project-date-display {
+            color: #22c55e;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Grid View: Make date smaller and gray */
+        #projectsListContainer.grid-view .project-date-display {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: -0.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Grid View: Make title slightly smaller */
+        #projectsListContainer.grid-view h3 {
+            font-size: 1.15rem;
+        }
+
+        /* CONTENT VISIBILITY */
         .project-detail-card p {
             color: #d1d5db;
             line-height: 1.6;
             margin-bottom: 0.8rem;
             font-size: 0.95rem;
         }
+
+        /* Grid View: Clamp Description lines */
+        #projectsListContainer.grid-view .project-detail-description {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        /* Grid View: Hide Overview completely */
+        #projectsListContainer.grid-view .project-overview-text {
+            display: none;
+        }
+
         .project-detail-card .project-detail-description {
             color: #9ca3af;
             font-size: 0.9rem;
             margin-bottom: 1rem;
             font-style: italic;
         }
+
+        /* TAGS ALIGNMENT FIX FOR GRID VIEW */
         .project-detail-card .project-detail-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.6rem;
             margin-top: 1rem;
         }
+        
+        /* Align tags to bottom in grid view using margin-top: auto */
+        /* This pushes tags (and anything after it) to the bottom of the flex container */
+        #projectsListContainer.grid-view .project-detail-card .project-detail-tags {
+            margin-top: auto; 
+            margin-bottom: 1rem; /* Add space before button */
+        }
+
         .project-detail-card .project-detail-tag {
             background-color: rgba(34, 197, 94, 0.2);
             border: 1px solid #22c55e;
@@ -448,6 +548,10 @@
                 width: 100%;
                 height: 200px;
             }
+            /* Hide view toggle on mobile since it's already column layout */
+            .view-toggle-container {
+                display: none;
+            }
         }
 
         /* 'All Projects' Filter Bar Styles */
@@ -460,17 +564,26 @@
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
             max-height: 500px;
             overflow-y: auto;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.3s ease, padding 0.3s ease;
         }
+        
+        /* CENTERED MINIMIZED BAR */
         .search-container.collapsed {
             max-height: 60px;
             overflow: hidden;
-            padding-top: 1.1rem;
-            padding-bottom: 1.1rem;
+            padding-top: 0; /* Remove vertical padding */
+            padding-bottom: 0; /* Remove vertical padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center Vertically */
         }
         .search-container.collapsed .filter-container-row {
             margin-bottom: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
         }
+
         .search-input {
             width: 100%;
             padding: 12px 16px;
@@ -506,6 +619,32 @@
             align-items: center;
             gap: 0.5rem;
         }
+        
+        /* View Toggle Buttons */
+        .view-toggle-btn {
+            background: transparent;
+            border: 1px solid #22c55e;
+            color: #22c55e;
+            padding: 4px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .view-toggle-btn.active {
+            background-color: #22c55e;
+            color: #111827;
+        }
+        .view-toggle-btn:first-child {
+            border-radius: 4px 0 0 4px;
+            border-right: none;
+        }
+        .view-toggle-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
         .toggle-filters-btn {
             background: none;
             border: none;
@@ -841,7 +980,7 @@
             </div>
         </div>
 
-        <main class="container mx-auto px-6 pb-20">
+        <main class="container mx-auto px-6 pb-20 flex flex-col">
              <div class="tech-container bg-gray-900/80 border border-green-500/30 p-8 shadow-lg fade-in">
                 <div class="flex flex-col md:flex-row gap-10 items-center md:items-start">
                     <div class="flex-shrink-0 text-center">
@@ -860,7 +999,7 @@
                     <div class="flex-1">
                         <h2 class="text-3xl font-bold text-white mb-4">Hello, I'm Kimberly Wang.</h2>
                         <p class="text-gray-300 leading-relaxed mb-6">
-                            I am an Electrical Engineering student at the University of Pittsburgh with a strong passion for embedded systems, robotics, and digital logic design. My journey in engineering is driven by a curiosity to understand how hardware and software interact to create intelligent systems.
+                            I am an Electrical Engineering student at Rensselaer Polytechnic Institute with a strong passion for analog, digital, and computer hardware design. My journey in engineering is driven by a curiosity to understand how hardware and software interact to create intelligent systems.
                         </p>
                         <p class="text-gray-300 leading-relaxed mb-8">
                             I enjoy taking complex problems and breaking them down into manageable components, whether it's designing a PCB for a rover or coding a finite state machine for a vending machine simulation. When I'm not in the lab, I'm constantly looking for new technologies to learn and apply to my personal projects.
@@ -868,10 +1007,10 @@
 
                         <h3 class="detail-section-title">Education</h3>
                         <div class="timeline-item">
-                            <h4 class="text-xl font-bold text-white">University of Pittsburgh</h4>
-                            <p class="text-green-400 font-semibold">Swanson School of Engineering</p>
-                            <p class="text-gray-400 text-sm mb-2">Major: Electrical Engineering | Expected Graduation: April 2025</p>
-                            <p class="text-gray-300">GPA: 3.63 / 4.00</p>
+                            <h4 class="text-xl font-bold text-white">Rensselaer Polytechnic Institute</h4>
+                            <p class="text-green-400 font-semibold">School of Engineering</p>
+                            <p class="text-gray-400 text-sm mb-2">Major: B.S. Electrical Engineering | Expected Graduation: December 2027</p>
+                            <p class="text-gray-300">GPA: 3.71 / 4.00</p>
                         </div>
 
                         <h3 class="detail-section-title">My Technical Toolkit</h3>
@@ -882,7 +1021,6 @@
                                     <span class="tech-tag active">Python</span>
                                     <span class="tech-tag active">C/C++</span>
                                     <span class="tech-tag active">VHDL</span>
-                                    <span class="tech-tag active">MATLAB</span>
                                 </div>
                             </div>
                              <div>
@@ -892,6 +1030,9 @@
                                     <span class="tech-tag">MSP432</span>
                                     <span class="tech-tag">Basys 3 FPGA</span>
                                     <span class="tech-tag">Oscilloscope</span>
+                                    <span class="tech-tag">Waveform Generator</span>
+                                    <span class="tech-tag">Multimeter</span>
+                                    <span class="tech-tag">Breadboard</span>
                                 </div>
                             </div>
                             <div class="md:col-span-2">
@@ -902,11 +1043,17 @@
                                     <span class="tech-tag">Vivado</span>
                                     <span class="tech-tag">Simulink</span>
                                     <span class="tech-tag">LabVIEW</span>
+                                    <span class="tech-tag">Siemens NX</span>
+                                    <span class="tech-tag">MATLAB</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+             </div>
+             
+             <div class="mt-8 pt-4 border-t border-gray-800">
+                <button class="back-button" onclick="navigatePage('home')">← Back to Home</button>
              </div>
         </main>
 
@@ -932,7 +1079,18 @@
                     <div class="filter-label">
                         <span>Search & Filter</span>
                     </div>
-                    <button class="toggle-filters-btn" onclick="toggleFiltersPanel()" id="toggleFiltersBtn" aria-label="Toggle Filters">▼</button>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="flex view-toggle-container">
+                            <button class="view-toggle-btn active" onclick="toggleView('list')" title="List View">
+                                ☰
+                            </button>
+                            <button class="view-toggle-btn" onclick="toggleView('grid')" title="Grid View">
+                                ⊞
+                            </button>
+                        </div>
+                        <button class="toggle-filters-btn" onclick="toggleFiltersPanel()" id="toggleFiltersBtn" aria-label="Toggle Filters">▼</button>
+                    </div>
                 </div>
                 <input 
                     type="text" 
@@ -953,6 +1111,10 @@
 
             <div id="projectsListContainer">
                 </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-800">
+                <button class="back-button" onclick="navigatePage('home')">← Back to Home</button>
+            </div>
         </main>
 
         <footer class="bg-gray-900 text-gray-400 mt-16 py-12 border-t border-gray-700">
@@ -969,9 +1131,13 @@
             </div>
         </div>
 
-        <main class="container mx-auto px-6 pb-20">
+        <main class="container mx-auto px-6 pb-20 flex flex-col">
             <div id="projectDetailContent">
                 </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-800">
+                <button class="back-button" onclick="navigatePage('projects')">← Back to All Projects</button>
+            </div>
         </main>
         
         <footer class="bg-gray-900 text-gray-400 mt-16 py-12 border-t border-gray-700">
@@ -986,6 +1152,7 @@
     <script>
         // --- DATA ---
         // UPDATED: Project Details with IDs reordered (1 = Most Recent)
+        // ADDED: 'Academic' tag to all existing projects
         const projectDetails = {
             1: {
                 title: 'CO Sensing and Ventilating System',
@@ -1002,7 +1169,7 @@
                     '555 Timer based PWM on ramping voltage signal',
                     'Adjustable duty cycle for ventilation control'
                 ],
-                categories: ['LTspice', 'Breadboard', 'Analog Circuit Design', 'Sensors'],
+                categories: ['LTspice', 'Breadboard'],
                 challenges: 'The primary challenge was configuring the integrator to ramp up and reset within specific timing windows (10s and 2s respectively). Additionally, generating a stable PWM signal from the ramping voltage using a 555 timer required precise component selection and tuning.',
                 results: 'Successfully designed and built the initial indication and processing stages. The system correctly identifies threshold crossings and initiates the ramp sequence. Currently working on the final implementation stage for full system integration.',
                 additionalInfo: 'This project demonstrates strong analog circuit design skills, specifically in signal conditioning and timing applications without relying solely on digital microcontrollers.'
@@ -1021,7 +1188,7 @@
                     'Real-time heading calculation',
                     'Closed-loop feedback system'
                 ],
-                categories: ['MSP432', 'C', 'I2C', 'Robotics', 'Embedded'],
+                categories: ['MSP432', 'C', 'I2C', 'Microcontroller'],
                 challenges: 'Interfacing with the magnetic sensor via I2C required strict adherence to protocol timing. Furthermore, tuning the PID controller to ensure smooth turns without overshooting the target heading was a complex iterative process.',
                 results: 'The car successfully reads compass data and executes movement commands with high accuracy. The PID implementation significantly reduced oscillation during turns, resulting in smooth navigation.',
                 additionalInfo: 'Demonstrates proficiency in low-level communication protocols (I2C) and control theory application in robotics.'
@@ -1040,7 +1207,7 @@
                     'State transition management',
                     'Circuit troubleshooting and debugging'
                 ],
-                categories: ['Logisim', 'Breadboard', 'Digital Logic', 'FSM'],
+                categories: ['Logisim', 'Breadboard'],
                 challenges: 'Minimizing the number of states and logic gates to fit the physical constraints of the breadboard and 74x series chips. Troubleshooting physical connection issues and propagation delays on the breadboard was also a key step.',
                 results: 'Successfully simulated the FSM in Logisim to validate state transitions. The physical circuit was constructed and debugged to match the simulation, correctly vending upon reaching the target total.',
                 additionalInfo: 'Highlights fundamental understanding of digital logic, state machines, and the transition from simulation to physical hardware.'
@@ -1059,7 +1226,7 @@
                     'Guess validation algorithms',
                     'Win/Loss state machine management'
                 ],
-                categories: ['MSP432', 'C', 'Embedded', 'Game Logic'],
+                categories: ['MSP432', 'C', 'Microcontroller'],
                 challenges: 'Designing a user-friendly interface using limited hardware (pushbuttons and LEDs) required creative state management. Validating guesses against the secret code involved complex array manipulation and logic checks.',
                 results: 'Prototypes a fully functional game where users can input guesses, receive feedback via LEDs, and trigger win/loss routines. The system runs reliably on the TI RSLK chassis hardware.',
                 additionalInfo: 'Showcases the ability to translate abstract logic and rules into structured embedded C code.'
@@ -1078,7 +1245,7 @@
                     'Bitstream generation',
                     'Hardware testing with switches and LEDs'
                 ],
-                categories: ['Vivado', 'VHDL', 'Basys 3', 'FPGA', 'Digital Logic'],
+                categories: ['Vivado', 'VHDL', 'Basys 3', 'FPGA'],
                 challenges: 'Defining correct timing constraints in Vivado and ensuring the logic handled edge cases (like overflow or negative numbers) correctly. Mapping the physical I/O of the Basys 3 board to the internal logic required precise constraint file configuration.',
                 results: 'Generated a valid bitstream and successfully programmed the Basys 3 board. All arithmetic and logical functions were verified using on-board switches as inputs and LEDs as outputs.',
                 additionalInfo: 'Demonstrates competence in Hardware Description Languages (VHDL) and the FPGA design flow using Xilinx Vivado.'
@@ -1097,7 +1264,7 @@
                     'Motor control integration',
                     'Return-to-home functionality'
                 ],
-                categories: ['Python', 'Raspberry Pi', 'Robotics', 'Algorithms'],
+                categories: ['Python', 'Raspberry Pi', 'Microcontroller'],
                 challenges: 'Developing a search algorithm that efficiently covers the grid without getting stuck in loops. translating the logical grid coordinates into physical motor movements and handling real-world friction/slippage.',
                 results: 'The cart successfully navigates the grid, identifies the unknown target coordinate, and executes the return path autonomously.',
                 additionalInfo: 'Combines high-level software algorithms (Python) with hardware control in a robotics context.'
@@ -1116,7 +1283,7 @@
                     'Physical breadboard verification',
                     'Error minimization (< 5%)'
                 ],
-                categories: ['LTspice', 'Breadboard', 'Analog Circuit Design', 'Control Systems'],
+                categories: ['LTspice', 'Breadboard'],
                 challenges: 'Selecting the correct Resistor and Capacitor values to achieve the specific settling time (4s) and stability. Minimizing steady-state error in the physical implementation due to component tolerances.',
                 results: 'The simulation achieved the target steady-state response. The physical circuit was built and verified to match the simulation results with less than 5% error.',
                 additionalInfo: 'Proves understanding of control theory concepts implemented via analog hardware.'
@@ -1135,7 +1302,7 @@
                     'Breadboard prototyping',
                     'User-controlled interface'
                 ],
-                categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Embedded'],
+                categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Microcontroller'],
                 challenges: 'Ensuring the linearity of the perceived brightness vs. duty cycle and verifying the signal integrity on the breadboard.',
                 results: 'Built a fully functional prototype where the user can smoothly adjust the LED brightness by changing the PWM duty cycle via the Arduino.',
                 additionalInfo: 'A foundational project demonstrating the link between software control (Arduino) and hardware behavior (LED brightness).'
@@ -1146,6 +1313,7 @@
         let activeFilters = [];
         let filtersCollapsed = false;
         let allCategories = new Set();
+        let currentView = 'list'; // 'list' or 'grid'
         
         // --- CORE NAVIGATION ---
 
@@ -1294,6 +1462,30 @@
 
         // --- 'ALL PROJECTS' PAGE FUNCTIONS ---
 
+        // NEW: Function to toggle view mode
+        function toggleView(mode) {
+            currentView = mode;
+            
+            // Update buttons UI
+            const buttons = document.querySelectorAll('.view-toggle-btn');
+            buttons.forEach(btn => {
+                if ((mode === 'list' && btn.title === 'List View') || 
+                    (mode === 'grid' && btn.title === 'Grid View')) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Toggle class on container
+            const container = document.getElementById('projectsListContainer');
+            if (mode === 'grid') {
+                container.classList.add('grid-view');
+            } else {
+                container.classList.remove('grid-view');
+            }
+        }
+
         function renderProjectList() {
             const container = document.getElementById('projectsListContainer');
             let html = '';
@@ -1301,9 +1493,13 @@
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             let visibleCount = 0;
 
-            // Iterate through sorted projects (1 to 8)
-            for (let id = 1; id <= 8; id++) {
-                const project = projectDetails[id];
+            // Convert object to array and sort by date descending (newest first)
+            const sortedProjects = Object.entries(projectDetails)
+                .map(([id, project]) => ({ id, ...project }))
+                .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // Iterate through sorted projects
+            sortedProjects.forEach(project => {
                 const title = project.title.toLowerCase();
                 const categoriesString = project.categories.join(' ').toLowerCase(); 
                 const categories = project.categories || [];
@@ -1323,29 +1519,29 @@
                 if (matchesSearch && matchesFilter) {
                     visibleCount++;
                     html += `
-                        <div id="project-${id}" class="project-detail-card fade-in project-item" data-title="${title}" data-categories="${categoriesString}">
+                        <div id="project-${project.id}" class="project-detail-card fade-in project-item" data-title="${title}" data-categories="${categoriesString}">
                             <img 
-                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${id}%3C/text%3E%3C/svg%3E" 
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${project.id}%3C/text%3E%3C/svg%3E" 
                                 alt="${project.title}"
                                 class="project-detail-image"
                                 onerror="handleImageError(this)"
                             >
                             <div class="project-detail-content">
-                                <div class="flex flex-col md:flex-row md:justify-between md:items-start">
-                                    <h3 onclick="showProjectPage(${id})">${project.title}</h3>
-                                    <span class="text-green-500 text-sm font-bold whitespace-nowrap mt-1 md:mt-0 mb-2 md:mb-0">${project.displayDate}</span>
+                                <div class="project-header-group">
+                                    <h3 onclick="showProjectPage(${project.id})">${project.title}</h3>
+                                    <span class="project-date-display">${project.displayDate}</span>
                                 </div>
-                                <p class="project-detail-description">${project.description}</p>
-                                <p><strong class="text-green-400">Overview:</strong> ${project.overview}</p>
+                                <p class="project-detail-description project-description-text">${project.description}</p>
+                                <p class="project-overview-text"><strong class="text-green-400">Overview:</strong> ${project.overview}</p>
                                 <div class="project-detail-tags">
                                     ${project.categories.map(cat => `<span class="project-detail-tag" onclick="filterByTag(event, '${cat}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter') filterByTag(event, '${cat}')">${cat}</span>`).join('')}
                                 </div>
-                                <span class="learn-more-btn" onclick="showProjectPage(${id})" role="button" tabindex="0" onkeydown="if(event.key==='Enter') showProjectPage(${id})">View Full Details →</span>
+                                <span class="learn-more-btn" onclick="showProjectPage(${project.id})" role="button" tabindex="0" onkeydown="if(event.key==='Enter') showProjectPage(${project.id})">View Full Details →</span>
                             </div>
                         </div>
                     `;
                 }
-            }
+            });
             
             if (visibleCount === 0) {
                 container.innerHTML = '<div class="no-results" id="noResults"><h3>No projects found</h3><p>Try adjusting your search or filters</p></div>';
