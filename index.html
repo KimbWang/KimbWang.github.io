@@ -50,33 +50,81 @@
         .tech-button {
             clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
         }
-
+        
+        /* --- MINIMALIST TERMINAL NAV --- */
+        
+        /* 1. The Flex Container (Ensures Right Alignment & Spacing) */
+        .nav-menu {
+            display: flex;
+            align-items: center;     /* Vertically center */
+            justify-content: flex-end; /* Push to the right */
+            gap: 2.5rem;             /* Consistent spacing between text links */
+        }
+        
+        /* 2. The Links (Clean, Thin, Geometric) */
         .nav-link {
-            cursor: pointer;
-            color: #d1d5db;
-            transition: all 0.3s ease;
             position: relative;
+            background: none;        /* No background box */
+            border: none;            /* No border box */
+            padding: 0;              /* 0 padding = Minimum vertical height */
+            margin: 0;
+        
+            /* Typography Settings */
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;      /* Small, precise text */
+            font-weight: 500;
+            color: #6b7280;          /* Darker Gray (muted state) */
+            text-transform: uppercase;
+            letter-spacing: 0.1em;   /* Spaced out for readability */
+            cursor: pointer;
+            transition: color 0.2s ease;
         }
-
+        
+        /* 3. Hover State (High Contrast + Glow) */
         .nav-link:hover {
-            color: #22c55e;
+            color: #22c55e;          /* Bright Neon Green */
+            text-shadow: 0 0 8px rgba(34, 197, 94, 0.4); /* Slight text glow */
         }
-
-        .nav-link::after {
-            content: '';
+        
+        /* 4. The "Cursor" Indicator ( > ) */
+        /* Appears to the left of the text on hover */
+        .nav-link::before {
+            content: '>';            /* Geometric command prompt symbol */
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #22c55e;
-            transition: width 0.3s ease;
+            left: -15px;             /* Position it to the left */
+            color: #22c55e;
+            font-weight: bold;
+            opacity: 0;              /* Invisible by default */
+            transform: translateX(5px); /* Start slightly offset */
+            transition: all 0.2s ease;
         }
-
-        .nav-link:hover::after {
-            width: 100%;
+        
+        /* Animate the cursor in on hover */
+        .nav-link:hover::before {
+            opacity: 1;
+            transform: translateX(0);
         }
-
+        
+        /* 5. Reset After-Effects (Remove old underlines) */
+        .nav-link::after {
+            content: none;
+        }
+        
+        /* 6. Normalize 'Contact' (Remove special button styling) */
+        .nav-link-cta {
+            /* Force Contact to look exactly like the others */
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            color: #6b7280 !important;
+        }
+        /* Re-apply hover specifically for the reset CTA to ensure it turns green */
+        .nav-link-cta:hover {
+            color: #22c55e !important;
+        }
+        
+        
         /* Card for Home Page */
         .project-card {
             background-color: rgba(17, 24, 39, 0.8);
@@ -819,24 +867,6 @@
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
         }
         
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            border-left: 2px solid rgba(34, 197, 94, 0.3);
-            margin-bottom: 2rem;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 0;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #22c55e;
-            box-shadow: 0 0 10px #22c55e;
-        }
-
         /* Toast Notification Styles - FIXED CENTERING */
         #toast-container {
             position: fixed;
@@ -891,23 +921,38 @@
             
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
             
-            <div class="nav-menu hidden md:flex space-x-6">
-                <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('home'); closeMobileMenu()">Home</a>
+            <div class="nav-menu hidden md:flex items-center ml-auto"> <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('home'); closeMobileMenu()">Home</a>
                 <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('about'); closeMobileMenu()">About</a>
                 <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('projects'); closeMobileMenu()">Projects</a>
-                <a href="#contact" class="nav-link" onclick="scrollToSection('contact'); closeMobileMenu()">Contact</a>
+                
+                <a href="#contact" class="nav-link nav-link-cta" onclick="scrollToSection('contact'); closeMobileMenu()">Contact</a>
             </div>
         </nav>
     </header>
 
     <div id="homePage" class="page-container active">
         <main class="container mx-auto px-6 mt-16">
-            <section id="home" class="text-center py-24 fade-in">
-                <h1 class="text-5xl font-bold text-white mb-4">Projects Portfolio</h1>
-                <p class="text-xl text-gray-300 mb-8">Electrical Engineering Student and Hobbyist Tinkerer</p>
-                <div class="flex gap-4 justify-center flex-wrap">
-                    <button class="tech-button cta-button" onclick="navigatePage('about')">About Me</button>
-                    <button class="tech-button cta-button" onclick="navigatePage('projects')">View Projects</button>
+            <section id="home" class="text-center py-32 relative fade-in">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-64 bg-green-500/10 blur-[100px] -z-10 pointer-events-none"></div>
+
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
+                    Welcome to my <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">Digital Notebook</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Hi, I'm <strong class="text-green-400">Kimberly Wang</strong>. 
+                    <br class="hidden md:block" />
+                    This space is dedicated to documenting my work on everything engineering related.
+                </p>
+
+                <div class="flex justify-center gap-4 flex-wrap">
+                    <button class="tech-button cta-button" onclick="navigatePage('projects')">
+                        All Projects
+                    </button>
+                    <button class="tech-button px-6 py-3 border border-blue-600 hover:border-green-500 text-blue-300 hover:text-green-400 transition-all rounded bg-transparent" onclick="navigatePage('about')">
+                        More About Me
+                    </button>
                 </div>
             </section>
 
@@ -976,7 +1021,7 @@
             <div class="container mx-auto px-6">
                 <button class="back-button" onclick="navigatePage('home')">← Back to Home</button>
                 <h1 class="text-4xl font-bold text-white">About Me</h1>
-                <p class="text-gray-300 mt-2">My Background, Education, and Journey</p>
+                <p class="text-gray-300 mt-2">My Background and Journey</p>
             </div>
         </div>
 
@@ -990,7 +1035,7 @@
                             class="about-profile-img mb-4 mx-auto"
                             onerror="handleImageError(this)"
                         >
-                        <div class="flex gap-3 justify-center mt-4">
+                        <div class="flex gap-3 justify-center" style="margin-top: 40px;">
                              <button class="tech-button px-4 py-2 bg-green-600/20 border border-green-500 text-green-400 hover:bg-green-600 hover:text-white transition-colors text-sm font-bold" onclick="handleExternalLink('linkedin')">LinkedIn</button>
                              <button class="tech-button px-4 py-2 bg-blue-600/20 border border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white transition-colors text-sm font-bold" onclick="handleExternalLink('github')">GitHub</button>
                         </div>
@@ -1004,50 +1049,6 @@
                         <p class="text-gray-300 leading-relaxed mb-8">
                             I enjoy taking complex problems and breaking them down into manageable components, whether it's designing a PCB for a rover or coding a finite state machine for a vending machine simulation. When I'm not in the lab, I'm constantly looking for new technologies to learn and apply to my personal projects.
                         </p>
-
-                        <h3 class="detail-section-title">Education</h3>
-                        <div class="timeline-item">
-                            <h4 class="text-xl font-bold text-white">Rensselaer Polytechnic Institute</h4>
-                            <p class="text-green-400 font-semibold">School of Engineering</p>
-                            <p class="text-gray-400 text-sm mb-2">B.S. Electrical Engineering | Expected Graduation: December 2027</p>
-                            <p class="text-gray-300">GPA: 3.71 / 4.00</p>
-                        </div>
-
-                        <h3 class="detail-section-title">My Technical Toolkit</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <h4 class="font-bold text-white mb-2">Languages</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-tag active">Python</span>
-                                    <span class="tech-tag active">C/C++</span>
-                                    <span class="tech-tag active">VHDL</span>
-                                </div>
-                            </div>
-                             <div>
-                                <h4 class="font-bold text-white mb-2">Hardware</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-tag">Arduino</span>
-                                    <span class="tech-tag">MSP432</span>
-                                    <span class="tech-tag">Basys 3 FPGA</span>
-                                    <span class="tech-tag">Oscilloscope</span>
-                                    <span class="tech-tag">Waveform Generator</span>
-                                    <span class="tech-tag">Multimeter</span>
-                                    <span class="tech-tag">Breadboard</span>
-                                </div>
-                            </div>
-                            <div class="md:col-span-2">
-                                <h4 class="font-bold text-white mb-2">Software & Tools</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="tech-tag">LTspice</span>
-                                    <span class="tech-tag">Altium Designer</span>
-                                    <span class="tech-tag">Vivado</span>
-                                    <span class="tech-tag">Simulink</span>
-                                    <span class="tech-tag">LabVIEW</span>
-                                    <span class="tech-tag">Siemens NX</span>
-                                    <span class="tech-tag">MATLAB</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
              </div>
@@ -1150,6 +1151,45 @@
     <div id="toast-container"></div>
 
     <script>
+        // --- TYPEWRITER EFFECT ---
+        const words = ["Embedded Systems", "PCB Design", "IoT Solutions", "Robotics", "Firmware"];
+        let i = 0;
+        let timer;
+        
+        function typeWriter() {
+            const element = document.getElementById('typewriter-text');
+            if (!element) return; // Safety check
+            
+            const currentWord = words[i % words.length];
+            const isDeleting = element.getAttribute('data-deleting') === 'true';
+            const text = element.innerText;
+        
+            if (isDeleting) {
+                element.innerText = currentWord.substring(0, text.length - 1);
+            } else {
+                element.innerText = currentWord.substring(0, text.length + 1);
+            }
+        
+            let typeSpeed = isDeleting ? 50 : 100;
+        
+            if (!isDeleting && element.innerText === currentWord) {
+                typeSpeed = 2000; // Pause at end of word
+                element.setAttribute('data-deleting', 'true');
+            } else if (isDeleting && element.innerText === '') {
+                isDeleting = false;
+                element.setAttribute('data-deleting', 'false');
+                i++;
+                typeSpeed = 500; // Pause before new word
+            }
+        
+            timer = setTimeout(typeWriter, typeSpeed);
+        }
+        
+        // Start the effect when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... your existing load code ...
+            typeWriter(); 
+        });
         // --- DATA ---
         // UPDATED: Project Details with IDs reordered (1 = Most Recent)
         // ADDED: 'Academic' tag to all existing projects
