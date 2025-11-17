@@ -35,15 +35,9 @@
             background-attachment: fixed;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
-        .tech-container {
-            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
-        }
-
-        .tech-img {
+        .tech-container, .tech-img {
             clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
         }
 
@@ -51,81 +45,62 @@
             clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
         }
         
-        /* --- MINIMALIST TERMINAL NAV --- */
-        
-        /* 1. The Flex Container (Ensures Right Alignment & Spacing) */
+        /* Navigation */
         .nav-menu {
             display: flex;
-            align-items: center;     /* Vertically center */
-            justify-content: flex-end; /* Push to the right */
-            gap: 2.5rem;             /* Consistent spacing between text links */
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2.5rem;
         }
         
-        /* 2. The Links (Clean, Thin, Geometric) */
         .nav-link {
             position: relative;
-            background: none;        /* No background box */
-            border: none;            /* No border box */
-            padding: 0;              /* 0 padding = Minimum vertical height */
+            background: none;
+            border: none;
+            padding: 0;
             margin: 0;
-        
-            /* Typography Settings */
             font-family: 'Roboto Mono', monospace;
-            font-size: 0.85rem;      /* Small, precise text */
+            font-size: 0.85rem;
             font-weight: 500;
-            color: #6b7280;          /* Darker Gray (muted state) */
+            color: #6b7280;
             text-transform: uppercase;
-            letter-spacing: 0.1em;   /* Spaced out for readability */
+            letter-spacing: 0.1em;
             cursor: pointer;
             transition: color 0.2s ease;
         }
         
-        /* 3. Hover State (High Contrast + Glow) */
         .nav-link:hover {
-            color: #22c55e;          /* Bright Neon Green */
-            text-shadow: 0 0 8px rgba(34, 197, 94, 0.4); /* Slight text glow */
+            color: #22c55e;
+            text-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
         }
         
-        /* 4. The "Cursor" Indicator ( > ) */
-        /* Appears to the left of the text on hover */
         .nav-link::before {
-            content: '>';            /* Geometric command prompt symbol */
+            content: '>';
             position: absolute;
-            left: -15px;             /* Position it to the left */
+            left: -15px;
             color: #22c55e;
             font-weight: bold;
-            opacity: 0;              /* Invisible by default */
-            transform: translateX(5px); /* Start slightly offset */
+            opacity: 0;
+            transform: translateX(5px);
             transition: all 0.2s ease;
         }
         
-        /* Animate the cursor in on hover */
         .nav-link:hover::before {
             opacity: 1;
             transform: translateX(0);
         }
         
-        /* 5. Reset After-Effects (Remove old underlines) */
-        .nav-link::after {
-            content: none;
-        }
-        
-        /* 6. Normalize 'Contact' (Remove special button styling) */
         .nav-link-cta {
-            /* Force Contact to look exactly like the others */
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
             padding: 0 !important;
             color: #6b7280 !important;
         }
-        /* Re-apply hover specifically for the reset CTA to ensure it turns green */
-        .nav-link-cta:hover {
-            color: #22c55e !important;
-        }
         
+        .nav-link-cta:hover { color: #22c55e !important; }
         
-        /* Card for Home Page */
+        /* Cards & Layout */
         .project-card {
             background-color: rgba(17, 24, 39, 0.8);
             border: 2px solid #22c55e;
@@ -147,9 +122,7 @@
             background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
             transition: left 0.5s ease;
         }
-        .project-card:hover::before {
-            left: 100%;
-        }
+        .project-card:hover::before { left: 100%; }
         .project-card:hover {
             border-color: #3b82f6;
             transform: translateY(-8px) scale(1.02);
@@ -160,9 +133,7 @@
             font-weight: 700;
             transition: color 0.3s ease;
         }
-        .project-card:hover h3 {
-            color: #3b82f6;
-        }
+        .project-card:hover h3 { color: #3b82f6; }
 
         .tech-tag {
             background-color: rgba(34, 197, 94, 0.2);
@@ -176,15 +147,10 @@
             cursor: pointer;
         }
 
-        .tech-tag:hover {
+        .tech-tag:hover, .tech-tag.active {
             background-color: #22c55e;
             color: #0f0f0f;
             transform: scale(1.1);
-        }
-
-        .tech-tag.active {
-            background-color: #22c55e;
-            color: #0f0f0f;
         }
 
         .section-title {
@@ -232,14 +198,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .delay-1 { animation-delay: 0.1s; }
@@ -273,9 +233,7 @@
             background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
             transition: left 0.5s ease;
         }
-        .contact-card:hover::before {
-            left: 100%;
-        }
+        .contact-card:hover::before { left: 100%; }
         .contact-card:hover {
             border-color: #3b82f6;
             transform: translateY(-8px) scale(1.02);
@@ -286,18 +244,7 @@
             font-weight: 700;
             transition: color 0.3s ease;
         }
-        .contact-card:hover h3 {
-            color: #3b82f6;
-        }
-
-        .about-section {
-            display: flex;
-            flex-direction: column;
-        }
-        .about-title {
-            align-self: flex-start;
-            margin-bottom: 1.5rem;
-        }
+        .contact-card:hover h3 { color: #3b82f6; }
 
         .mobile-menu-btn {
             display: none;
@@ -308,14 +255,23 @@
             cursor: pointer;
             transition: color 0.3s ease;
         }
-        .mobile-menu-btn:hover {
-            color: #22c55e;
+        .mobile-menu-btn:hover { color: #22c55e; }
+        
+        .project-detail-card .project-detail-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            height: 100%; 
+        }
+        
+        .project-detail-card .project-detail-tags {
+            margin-top: auto;     
+            margin-bottom: 0.5rem; 
+            padding-top: 1rem;     
         }
         
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
+            .mobile-menu-btn { display: block; }
             .nav-menu {
                 display: none;
                 position: absolute;
@@ -328,27 +284,19 @@
                 padding: 1.5rem;
                 border-bottom: 2px solid #22c55e;
             }
-            .nav-menu.active {
-                display: flex;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+            .nav-menu.active { display: flex; }
+            .section-title { font-size: 1.8rem; }
+            .projects-grid { grid-template-columns: 1fr; }
         }
 
-        /* Page Container Styles */
+        /* Page Containers */
         .page-container {
             display: none;
             min-height: 100vh;
         }
-        .page-container.active {
-            display: block;
-        }
+        .page-container.active { display: block; }
 
-        /* Shared Header Styles */
+        /* Projects Header */
         .projects-page-header {
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(59, 130, 246, 0.1));
             padding: 3rem 0;
@@ -373,23 +321,19 @@
             text-decoration: underline;
         }
 
-        /* 'All Projects' LIST VIEW Styles (Default) */
-        #projectsListContainer {
-            display: block;
-        }
-
-        /* 'All Projects' GRID VIEW Styles (Toggled) */
+        /* Projects Views */
+        #projectsListContainer { display: block; }
+        
         #projectsListContainer.grid-view {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2.5rem;
         }
 
-        /* Styles for Grid View Transition */
         #projectsListContainer.grid-view .project-detail-card {
             flex-direction: column;
-            margin-bottom: 0; /* Grid handles gap */
-            height: 100%; /* Ensure uniform height */
+            margin-bottom: 0; 
+            height: 100%; 
         }
 
         .project-detail-card {
@@ -415,11 +359,8 @@
             background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
             transition: left 0.5s ease;
         }
-        .project-detail-card:hover::before {
-            left: 100%;
-        }
+        .project-detail-card:hover::before { left: 100%; }
         
-        /* Default Image Style (List View) */
         .project-detail-card .project-detail-image {
             width: 300px;
             height: 250px;
@@ -429,14 +370,12 @@
             transition: all 0.3s ease;
         }
 
-        /* Grid View Image Style - Reduced Height */
         #projectsListContainer.grid-view .project-detail-card .project-detail-image {
             width: 100%;
-            height: 150px; /* Reduced height for compact view */
+            height: 150px; 
             margin-bottom: 1rem;
         }
 
-        /* GRID VIEW CONTENT ALIGNMENT FIX */
         .project-detail-card .project-detail-content {
             flex: 1;
             display: flex;
@@ -444,18 +383,16 @@
             width: 100%; 
         }
 
-        /* Ensures content stretches to fill card in Grid View */
         #projectsListContainer.grid-view .project-detail-content {
             height: 100%;
             flex-grow: 1;
         }
 
-        /* HEADER GROUP (Title + Date) LAYOUT */
         .project-header-group {
             display: flex;
             flex-direction: column;
         }
-        /* In LIST view, use row layout for header */
+        
         @media (min-width: 768px) {
             #projectsListContainer:not(.grid-view) .project-header-group {
                 flex-direction: row;
@@ -464,7 +401,6 @@
             }
         }
 
-        /* TEXT STYLING */
         .project-detail-card h3 {
             color: #3b82f6;
             font-size: 1.4rem;
@@ -474,11 +410,8 @@
             cursor: pointer;
             transition: color 0.3s ease;
         }
-        .project-detail-card:hover h3 {
-            color: #22c55e;
-        }
+        .project-detail-card:hover h3 { color: #22c55e; }
         
-        /* Date Styling */
         .project-date-display {
             color: #22c55e;
             font-weight: 700;
@@ -486,7 +419,6 @@
             margin-bottom: 0.5rem;
         }
         
-        /* Grid View: Make date smaller and gray */
         #projectsListContainer.grid-view .project-date-display {
             font-size: 0.75rem;
             color: #9ca3af;
@@ -494,12 +426,8 @@
             margin-bottom: 0.75rem;
         }
 
-        /* Grid View: Make title slightly smaller */
-        #projectsListContainer.grid-view h3 {
-            font-size: 1.15rem;
-        }
+        #projectsListContainer.grid-view h3 { font-size: 1.15rem; }
 
-        /* CONTENT VISIBILITY */
         .project-detail-card p {
             color: #d1d5db;
             line-height: 1.6;
@@ -507,7 +435,6 @@
             font-size: 0.95rem;
         }
 
-        /* Grid View: Clamp Description lines */
         #projectsListContainer.grid-view .project-detail-description {
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -516,10 +443,7 @@
             margin-bottom: 1rem;
         }
         
-        /* Grid View: Hide Overview completely */
-        #projectsListContainer.grid-view .project-overview-text {
-            display: none;
-        }
+        #projectsListContainer.grid-view .project-overview-text { display: none; }
 
         .project-detail-card .project-detail-description {
             color: #9ca3af;
@@ -528,7 +452,6 @@
             font-style: italic;
         }
 
-        /* TAGS ALIGNMENT FIX FOR GRID VIEW */
         .project-detail-card .project-detail-tags {
             display: flex;
             flex-wrap: wrap;
@@ -536,11 +459,9 @@
             margin-top: 1rem;
         }
         
-        /* Align tags to bottom in grid view using margin-top: auto */
-        /* This pushes tags (and anything after it) to the bottom of the flex container */
         #projectsListContainer.grid-view .project-detail-card .project-detail-tags {
             margin-top: auto; 
-            margin-bottom: 1rem; /* Add space before button */
+            margin-bottom: 1rem; 
         }
 
         .project-detail-card .project-detail-tag {
@@ -573,9 +494,7 @@
         }
 
         @media (max-width: 1024px) {
-            .project-detail-card {
-                flex-direction: column;
-            }
+            .project-detail-card { flex-direction: column; }
             .project-detail-card .project-detail-image {
                 width: 100%;
                 height: 250px;
@@ -586,23 +505,16 @@
                 padding: 1.5rem;
                 flex-direction: column;
             }
-            .project-detail-card h3 {
-                font-size: 1.1rem;
-            }
-            .project-detail-card p {
-                font-size: 0.9rem;
-            }
+            .project-detail-card h3 { font-size: 1.1rem; }
+            .project-detail-card p { font-size: 0.9rem; }
             .project-detail-card .project-detail-image {
                 width: 100%;
                 height: 200px;
             }
-            /* Hide view toggle on mobile since it's already column layout */
-            .view-toggle-container {
-                display: none;
-            }
+            .view-toggle-container { display: none; }
         }
 
-        /* 'All Projects' Filter Bar Styles */
+        /* Filter Bar */
         .search-container {
             background-color: rgba(17, 24, 39, 0.8);
             border: 2px solid #22c55e;
@@ -615,15 +527,14 @@
             transition: max-height 0.3s ease, padding 0.3s ease;
         }
         
-        /* CENTERED MINIMIZED BAR */
         .search-container.collapsed {
             max-height: 60px;
             overflow: hidden;
-            padding-top: 0; /* Remove vertical padding */
-            padding-bottom: 0; /* Remove vertical padding */
+            padding-top: 0; 
+            padding-bottom: 0; 
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Center Vertically */
+            justify-content: center; 
         }
         .search-container.collapsed .filter-container-row {
             margin-bottom: 0;
@@ -650,9 +561,8 @@
             border-color: #3b82f6;
             box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
         }
-        .search-input::placeholder {
-            color: #6b7280;
-        }
+        .search-input::placeholder { color: #6b7280; }
+        
         .filter-container {
             display: flex;
             align-items: center;
@@ -668,7 +578,6 @@
             gap: 0.5rem;
         }
         
-        /* View Toggle Buttons */
         .view-toggle-btn {
             background: transparent;
             border: 1px solid #22c55e;
@@ -689,9 +598,7 @@
             border-radius: 4px 0 0 4px;
             border-right: none;
         }
-        .view-toggle-btn:last-child {
-            border-radius: 0 4px 4px 0;
-        }
+        .view-toggle-btn:last-child { border-radius: 0 4px 4px 0; }
 
         .toggle-filters-btn {
             background: none;
@@ -706,9 +613,8 @@
             width: 24px;
             height: 24px;
         }
-        .toggle-filters-btn.collapsed {
-            transform: rotate(-90deg);
-        }
+        .toggle-filters-btn.collapsed { transform: rotate(-90deg); }
+
         .filter-tags {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -730,9 +636,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .filter-tag:hover {
-            background-color: rgba(34, 197, 94, 0.3);
-        }
+        .filter-tag:hover { background-color: rgba(34, 197, 94, 0.3); }
         .filter-tag.active {
             background-color: #22c55e;
             color: #0f0f0f;
@@ -766,7 +670,7 @@
             color: #0f0f0f;
         }
         
-        /* Full Project Detail Page Styles */
+        /* Detail View */
         .project-detail-view {
             background-color: rgba(17, 24, 39, 0.8);
             border: 2px solid #22c55e;
@@ -839,46 +743,38 @@
         }
 
         @media (max-width: 768px) {
-            .filter-tags {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            }
+            .filter-tags { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
             .filter-tag {
                 font-size: 10px;
                 padding: 5px 10px;
             }
-            .project-detail-view .project-detail-image-main {
-                height: 250px;
-            }
-            .project-detail-view h2 {
-                font-size: 1.8rem;
-            }
-            .project-detail-view .detail-section-title {
-                font-size: 1.25rem;
-            }
+            .project-detail-view .project-detail-image-main { height: 250px; }
+            .project-detail-view h2 { font-size: 1.8rem; }
+            .project-detail-view .detail-section-title { font-size: 1.25rem; }
         }
         
-        /* About Page Specifics */
+        /* About Page Profile Image - Consolidated and Updated */
         .about-profile-img {
-            width: 250px;
-            height: 250px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 50%;
             border: 3px solid #22c55e;
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
         }
         
-        /* Toast Notification Styles - FIXED CENTERING */
+        /* Toast Notification Styles */
         #toast-container {
             position: fixed;
             bottom: 20px;
             left: 50%;
-            transform: translateX(-50%); /* This centers the container horizontally */
+            transform: translateX(-50%);
             z-index: 100;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            pointer-events: none; /* Allows clicking through the container area */
+            pointer-events: none; 
         }
 
         .toast {
@@ -892,18 +788,13 @@
             align-items: center;
             gap: 10px;
             min-width: 300px;
-            pointer-events: auto; /* Re-enable clicks for the toast itself */
-            
-            /* FIXED ANIMATION: Only animate Y axis */
+            pointer-events: auto; 
             animation: slideUp 0.3s ease forwards;
         }
 
-        .toast.hiding {
-            animation: fadeOut 0.3s ease forwards;
-        }
+        .toast.hiding { animation: fadeOut 0.3s ease forwards; }
 
         @keyframes slideUp {
-            /* Changed from translate(-50%, ...) to just translateY */
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
@@ -917,7 +808,32 @@
 
     <header class="bg-gray-900/80 backdrop-blur-md shadow-md border-b border-gray-700 sticky top-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white cursor-pointer hover:text-green-400 transition-colors" onclick="event.preventDefault(); navigatePage('home')">Kimberly Wang</a>
+            <a href="#" class="group flex items-center font-mono no-underline" onclick="event.preventDefault(); navigatePage('home')">
+                
+                <div class="flex items-center">
+                    <span class="text-[10px] font-bold text-green-400 mr-1">VCC</span>
+                    <span class="w-3 h-[2px] bg-gradient-to-r from-green-400 to-teal-400"></span>
+                </div>
+            
+                <div class="p-[2px] bg-gradient-to-r from-teal-400 to-blue-400 mx-0 relative z-10 group-hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-shadow duration-300">
+                    <div class="bg-gray-900 px-2 py-0.5">
+                        <span class="font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                            KW
+                        </span>
+                    </div>
+                </div>
+            
+                <div class="flex items-center">
+                    <span class="w-3 h-[2px] bg-gradient-to-r from-blue-400 to-blue-500"></span>
+                    
+                    <svg class="w-5 h-5 text-blue-500 -ml-[1px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                         <path d="M2 12 L6 12" />
+                         <path d="M6 6 L6 18" />
+                         <path d="M10 8 L10 16" />
+                         <path d="M14 10 L14 14" />
+                    </svg>
+                </div>
+            </a>
             
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
             
@@ -987,7 +903,7 @@
                     </div>
                     <div class="tech-container contact-card p-8 shadow-lg overflow-hidden">
                         <h3 class="text-2xl font-bold mb-4">Connect</h3>
-                        <p class="text-gray-400 mb-6">Find me on social media and professional networks for more updates.</p>
+                        <p class="text-gray-400 mb-6">Find me here on socials and professional networks.</p>
                         <div class="flex gap-4 flex-wrap">
                             <span 
                                 class="text-green-500 hover:text-green-400 hover:underline transition duration-300 cursor-pointer font-semibold" 
@@ -1015,49 +931,56 @@
             </div>
         </footer>
     </div>
-
+    
     <div id="aboutPage" class="page-container">
         <div class="projects-page-header">
             <div class="container mx-auto px-6">
                 <button class="back-button" onclick="navigatePage('home')">← Back to Home</button>
                 <h1 class="text-4xl font-bold text-white">About Me</h1>
-                <p class="text-gray-300 mt-2">My Background and Journey</p>
+                <p class="text-gray-300 mt-2">Learn about my background</p>
             </div>
         </div>
-
+    
         <main class="container mx-auto px-6 pb-20 flex flex-col">
-             <div class="tech-container bg-gray-900/80 border border-green-500/30 p-8 shadow-lg fade-in">
+                <div class="tech-container bg-gray-900/80 border border-green-500/30 p-8 shadow-lg fade-in">
+                
                 <div class="flex flex-col md:flex-row gap-10 items-center md:items-start">
+                
                     <div class="flex-shrink-0 text-center">
-                         <img 
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Crect fill='%231f2937' width='250' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='36' fill='%2322c55e' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EKimberly%3C/text%3E%3C/svg%3E" 
+                        <img 
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%231f2937' width='200' height='200'/%3E%3Ctext x='50%25' y='50%25' font-size='36' fill='%2322c55e' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EKimberly%3C/text%3E%3C/svg%3E" 
                             alt="Kimberly Wang Profile" 
-                            class="about-profile-img mb-4 mx-auto"
+                            class="about-profile-img mx-auto"
                             onerror="handleImageError(this)"
                         >
-                        <div class="flex gap-3 justify-center" style="margin-top: 40px;">
-                             <button class="tech-button px-4 py-2 bg-green-600/20 border border-green-500 text-green-400 hover:bg-green-600 hover:text-white transition-colors text-sm font-bold" onclick="handleExternalLink('linkedin')">LinkedIn</button>
-                             <button class="tech-button px-4 py-2 bg-blue-600/20 border border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white transition-colors text-sm font-bold" onclick="handleExternalLink('github')">GitHub</button>
+                
+                        <div class="flex items-center justify-center gap-2 mt-8 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span class="text-sm font-mono font-semibold">San Jose, CA <span class="text-green-500 mx-1">/</span> Troy, NY</span>
                         </div>
                     </div>
                     
                     <div class="flex-1">
                         <h2 class="text-3xl font-bold text-white mb-4">Hello, I'm Kimberly Wang.</h2>
                         <p class="text-gray-300 leading-relaxed mb-6">
-                            I am an Electrical Engineering student at Rensselaer Polytechnic Institute with a strong passion for analog, digital, and computer hardware design. My journey in engineering is driven by a curiosity to understand how hardware and software interact to create intelligent systems.
+                            I'm an Electrical Engineering student at Rensselaer Polytechnic Institute with a passion for analog, digital, and computer hardware design. My journey in engineering is defined by a curiosity for how things work and a drive to turn abstract ideas into tangible systems.
                         </p>
                         <p class="text-gray-300 leading-relaxed mb-8">
-                            I enjoy taking complex problems and breaking them down into manageable components, whether it's designing a PCB for a rover or coding a finite state machine for a vending machine simulation. When I'm not in the lab, I'm constantly looking for new technologies to learn and apply to my personal projects.
+                            In my free time, I enjoy biking, movies, and sightseeing. Even in my personal life, I apply my engineering skills using CAD and 3D printing to create simple, practical tools for daily life.
                         </p>
                     </div>
+                
                 </div>
-             </div>
-             
-             <div class="mt-8 pt-4 border-t border-gray-800">
+                </div>
+                
+                <div class="mt-8 pt-4 border-t border-gray-800">
                 <button class="back-button" onclick="navigatePage('home')">← Back to Home</button>
-             </div>
+                </div>
         </main>
-
+    
         <footer class="bg-gray-900 text-gray-400 mt-16 py-12 border-t border-gray-700">
             <div class="container mx-auto px-6 text-center">
                 <p class="text-sm">&copy; 2025 Kimberly Wang. All rights reserved.</p>
@@ -1151,48 +1074,8 @@
     <div id="toast-container"></div>
 
     <script>
-        // --- TYPEWRITER EFFECT ---
-        const words = ["Embedded Systems", "PCB Design", "IoT Solutions", "Robotics", "Firmware"];
-        let i = 0;
-        let timer;
-        
-        function typeWriter() {
-            const element = document.getElementById('typewriter-text');
-            if (!element) return; // Safety check
-            
-            const currentWord = words[i % words.length];
-            const isDeleting = element.getAttribute('data-deleting') === 'true';
-            const text = element.innerText;
-        
-            if (isDeleting) {
-                element.innerText = currentWord.substring(0, text.length - 1);
-            } else {
-                element.innerText = currentWord.substring(0, text.length + 1);
-            }
-        
-            let typeSpeed = isDeleting ? 50 : 100;
-        
-            if (!isDeleting && element.innerText === currentWord) {
-                typeSpeed = 2000; // Pause at end of word
-                element.setAttribute('data-deleting', 'true');
-            } else if (isDeleting && element.innerText === '') {
-                isDeleting = false;
-                element.setAttribute('data-deleting', 'false');
-                i++;
-                typeSpeed = 500; // Pause before new word
-            }
-        
-            timer = setTimeout(typeWriter, typeSpeed);
-        }
-        
-        // Start the effect when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            // ... your existing load code ...
-            typeWriter(); 
-        });
         // --- DATA ---
         // UPDATED: Project Details with IDs reordered (1 = Most Recent)
-        // ADDED: 'Academic' tag to all existing projects
         const projectDetails = {
             1: {
                 title: 'CO Sensing and Ventilating System',
@@ -1356,12 +1239,6 @@
         let currentView = 'list'; // 'list' or 'grid'
         
         // --- CORE NAVIGATION ---
-
-        /**
-         * Manages which page (div) is visible and updates browser history.
-         * @param {string} page - The page ID ('home', 'projects', 'detail', 'about')
-         * @param {boolean} addToHistory - Whether to push this state to browser history
-         */
         function navigatePage(page, addToHistory = true) {
             closeMobileMenu();
             
@@ -1383,16 +1260,11 @@
                 if (addToHistory) history.pushState({page: 'about'}, '', '#about');
             } else if (page === 'detail') {
                 document.getElementById('projectDetailPage').classList.add('active');
-                // Detail specific state is handled in showProjectPage
             }
             
-            // SCROLL FIX: Force scroll to top instantly when changing pages
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
         
-        /**
-         * Navigates to the dedicated detail page for a project.
-         */
         function showProjectPage(projectId, addToHistory = true) {
             const project = projectDetails[projectId];
             if (!project) return;
@@ -1449,7 +1321,6 @@
                 history.pushState({page: 'detail', id: projectId}, '', `#project=${projectId}`);
             }
             
-            // SCROLL FIX: Force scroll to top instantly when opening a project
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
         
@@ -1501,8 +1372,6 @@
 
 
         // --- 'ALL PROJECTS' PAGE FUNCTIONS ---
-
-        // NEW: Function to toggle view mode
         function toggleView(mode) {
             currentView = mode;
             
@@ -1533,24 +1402,20 @@
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             let visibleCount = 0;
 
-            // Convert object to array and sort by date descending (newest first)
             const sortedProjects = Object.entries(projectDetails)
                 .map(([id, project]) => ({ id, ...project }))
                 .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            // Iterate through sorted projects
             sortedProjects.forEach(project => {
                 const title = project.title.toLowerCase();
                 const categoriesString = project.categories.join(' ').toLowerCase(); 
                 const categories = project.categories || [];
 
-                // Check search
                 let matchesSearch = true;
                 if (searchInput) {
                     matchesSearch = title.includes(searchInput) || categoriesString.includes(searchInput);
                 }
 
-                // Check category filters
                 let matchesFilter = true;
                 if (activeFilters.length > 0) {
                     matchesFilter = categories.some(cat => activeFilters.includes(cat));
@@ -1591,7 +1456,6 @@
         }
         
         function populateFilters() {
-            // First, get all unique categories
             Object.values(projectDetails).forEach(project => {
                 if (project.categories) {
                     project.categories.forEach(cat => allCategories.add(cat));
@@ -1602,7 +1466,6 @@
             if (!container) return; 
             
             let html = '';
-            // Sort categories alphabetically and create a button for each
             [...allCategories].sort().forEach(category => {
                 html += `<button class="filter-tag" onclick="toggleFilter(event, '${category}')">${category}</button>`;
             });
@@ -1618,29 +1481,26 @@
             const index = activeFilters.indexOf(category);
             
             if (index > -1) {
-                activeFilters.splice(index, 1); // Remove from array
+                activeFilters.splice(index, 1); 
                 button.classList.remove('active');
             } else {
-                activeFilters.push(category); // Add to array
+                activeFilters.push(category); 
                 button.classList.add('active');
             }
 
-            renderProjectList(); // Re-render the list
+            renderProjectList(); 
         }
         
         function filterByTag(event, category) {
              event.stopPropagation(); 
              
-             // Find the corresponding filter button in the main filter bar
              const filterButton = Array.from(document.querySelectorAll('#categoryFilterContainer .filter-tag')).find(btn => btn.textContent === category);
              
              if (filterButton && !activeFilters.includes(category)) {
-                 // If the tag isn't active, activate it
                  activeFilters.push(category);
                  filterButton.classList.add('active');
              }
              
-             // Scroll to top of list to see filters
              document.getElementById('searchContainer').scrollIntoView({behavior: 'smooth'});
              renderProjectList(); 
         }
@@ -1649,7 +1509,6 @@
             activeFilters = [];
             document.getElementById('searchInput').value = '';
             
-            // Remove active class from all filter buttons
             const buttons = document.querySelectorAll('#categoryFilterContainer .filter-tag');
             buttons.forEach(btn => {
                 btn.classList.remove('active');
@@ -1663,7 +1522,7 @@
             const btn = document.getElementById('toggleFiltersBtn');
             const panel = document.getElementById('filtersPanel');
             const searchInput = document.getElementById('searchInput'); 
-    
+   
             filtersCollapsed = !filtersCollapsed;
             
             if (filtersCollapsed) {
@@ -1679,17 +1538,11 @@
             }
         }
 
-
         // --- OTHER HELPER FUNCTIONS ---
-
-        /**
-         * Improved scroll function using requestAnimationFrame for smoothness
-         */
         function scrollToSection(sectionId) {
             if (!document.getElementById('homePage').classList.contains('active')) {
                 navigatePage('home');
                 
-                // Wait for DOM update
                 requestAnimationFrame(() => {
                     setTimeout(() => {
                         const element = document.getElementById(sectionId);
@@ -1712,15 +1565,11 @@
             navMenu.classList.remove('active');
         }
 
-        /**
-         * Toast Notification Handler
-         */
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'toast';
             
-            // Add an icon based on type
             const icon = type === 'success' ? '✓' : 'ℹ';
             
             toast.innerHTML = `
@@ -1730,7 +1579,6 @@
 
             container.appendChild(toast);
 
-            // Remove after 3 seconds
             setTimeout(() => {
                 toast.classList.add('hiding');
                 toast.addEventListener('animationend', () => {
@@ -1759,22 +1607,17 @@
             }
         }
 
-        /**
-         * Fallback for broken images
-         */
         function handleImageError(img) {
-            img.onerror = null; // Prevent infinite loop
+            img.onerror = null; 
             img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' style='background:%23111827'%3E%3Ctext x='50%25' y='50%25' font-family='monospace' fill='%2322c55e' font-size='20' text-anchor='middle'%3E[IMAGE_DATA_MISSING]%3C/text%3E%3C/svg%3E";
             img.style.border = "1px dashed #22c55e";
         }
 
         // --- INITIALIZATION ---
-
         document.addEventListener('DOMContentLoaded', () => {
             populateFilters();
             renderFeaturedProjects();
             
-            // History API Handling (Back Button)
             window.addEventListener('popstate', (event) => {
                 if (event.state) {
                     if (event.state.page === 'detail' && event.state.id) {
@@ -1787,12 +1630,10 @@
                         navigatePage('home', false);
                     }
                 } else {
-                    // Default to home if no state
                     navigatePage('home', false);
                 }
             });
 
-            // Check hash on load for direct links
             const hash = window.location.hash;
             if (hash === '#projects') {
                 navigatePage('projects', false);
@@ -1804,7 +1645,6 @@
             }
         });
 
-        // Close mobile menu when clicking outside
         document.addEventListener('click', function(event) {
             const nav = document.querySelector('nav');
             const navMenu = document.querySelector('.nav-menu');
