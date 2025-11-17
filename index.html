@@ -1082,20 +1082,20 @@
                 date: '2025-09-01', 
                 displayDate: 'Sep 2025 - Present',
                 description: 'A multi-stage safety system designed to detect carbon monoxide, filter signals, and control ventilation automatically.',
-                overview: 'This project involves the creation of a robust environmental safety system. It features a CO sensor that triggers ventilation controls when gas levels exceed a threshold. The design utilizes analog circuitry for signal processing and timing control.',
+                overview: 'This project uses analog circuit design to create an improved HVAC system for sensing and ventilating CO in buildings. The goal is to reduce wasted electricity used for ventilating rooms so that the fan is only triggered when necessary so workers remain in OSHA safe workplaces while the building owners can save costs in ventilation systems',
                 features: [
-                    'Multi-stage system including CO sensing and signal filtering',
+                    'Multi-stage system including CO sensing and ventilation control',
                     'Initial indication stage using RC filter and comparator',
-                    'Visual LED output for status indication',
-                    'Integrator configured to ramp 0-5V in 10s (Trigger ON)',
-                    'Automatic reset functionality (0V in 2s)',
+                    'Visual LED output for indication of dangerous levels of CO',
+                    'Integrator configured to ramp 0-5V in 10s (when triggered ON)',
+                    'Automatic reset functionality for the capacitor (when triggered OFF)',
                     '555 Timer based PWM on ramping voltage signal',
                     'Adjustable duty cycle for ventilation control'
                 ],
                 categories: ['LTspice', 'Breadboard', 'Analog'],
-                challenges: 'The primary challenge was configuring the integrator to ramp up and reset within specific timing windows (10s and 2s respectively). Additionally, generating a stable PWM signal from the ramping voltage using a 555 timer required precise component selection and tuning.',
-                results: 'Successfully designed and built the initial indication and processing stages. The system correctly identifies threshold crossings and initiates the ramp sequence. Currently working on the final implementation stage for full system integration.',
-                additionalInfo: 'This project demonstrates strong analog circuit design skills, specifically in signal conditioning and timing applications without relying solely on digital microcontrollers.'
+                challenges: 'One of the challenges of designing this circuit was having to reset the capacitor being used for the integrator. Since I want the integrator to always start ramping from 0V, the capacitor needs to be discharged whenever the CO ',
+                results: 'Successfully designed and built the initial indication and processing stages. The system correctly responds to the input of CO sensor readings in order to treat it accordingly. Currently working on the final implementation stage using filters for full system integration.',
+                additionalInfo: 'This project aims to improve cities using a smart HVAC system in order to keep buildings and homes safe while saving electricity and costs.'
             },
             2: {
                 title: 'Compass Controlled TI RSLK Car',
