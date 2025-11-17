@@ -1540,18 +1540,28 @@
 
         // --- OTHER HELPER FUNCTIONS ---
         function scrollToSection(sectionId) {
+            // 1. If we are NOT on the home page
             if (!document.getElementById('homePage').classList.contains('active')) {
-                navigatePage('home');
                 
+                // Switch to home page
+                navigatePage('home'); 
+        
+                // Increase timeout to 100ms to give the browser time to render the Home page DOM
                 requestAnimationFrame(() => {
                     setTimeout(() => {
                         const element = document.getElementById(sectionId);
-                        if (element) element.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
+                        if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 100); // Increased from 50 to 100
                 });
-            } else {
+            } 
+            // 2. If we ARE already on the home page
+            else {
                 const element = document.getElementById(sectionId);
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         }
 
