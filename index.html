@@ -1169,7 +1169,7 @@
                     '555 Timer based PWM on ramping voltage signal',
                     'Adjustable duty cycle for ventilation control'
                 ],
-                categories: ['LTspice', 'Breadboard'],
+                categories: ['LTspice', 'Breadboard', 'Analog'],
                 challenges: 'The primary challenge was configuring the integrator to ramp up and reset within specific timing windows (10s and 2s respectively). Additionally, generating a stable PWM signal from the ramping voltage using a 555 timer required precise component selection and tuning.',
                 results: 'Successfully designed and built the initial indication and processing stages. The system correctly identifies threshold crossings and initiates the ramp sequence. Currently working on the final implementation stage for full system integration.',
                 additionalInfo: 'This project demonstrates strong analog circuit design skills, specifically in signal conditioning and timing applications without relying solely on digital microcontrollers.'
@@ -1207,7 +1207,7 @@
                     'State transition management',
                     'Circuit troubleshooting and debugging'
                 ],
-                categories: ['Logisim', 'Breadboard'],
+                categories: ['Logisim', 'Breadboard', 'Digital'],
                 challenges: 'Minimizing the number of states and logic gates to fit the physical constraints of the breadboard and 74x series chips. Troubleshooting physical connection issues and propagation delays on the breadboard was also a key step.',
                 results: 'Successfully simulated the FSM in Logisim to validate state transitions. The physical circuit was constructed and debugged to match the simulation, correctly vending upon reaching the target total.',
                 additionalInfo: 'Highlights fundamental understanding of digital logic, state machines, and the transition from simulation to physical hardware.'
@@ -1283,7 +1283,7 @@
                     'Physical breadboard verification',
                     'Error minimization (< 5%)'
                 ],
-                categories: ['LTspice', 'Breadboard'],
+                categories: ['LTspice', 'Breadboard', 'Analog'],
                 challenges: 'Selecting the correct Resistor and Capacitor values to achieve the specific settling time (4s) and stability. Minimizing steady-state error in the physical implementation due to component tolerances.',
                 results: 'The simulation achieved the target steady-state response. The physical circuit was built and verified to match the simulation results with less than 5% error.',
                 additionalInfo: 'Proves understanding of control theory concepts implemented via analog hardware.'
@@ -1302,7 +1302,7 @@
                     'Breadboard prototyping',
                     'User-controlled interface'
                 ],
-                categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Microcontroller'],
+                categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Microcontroller', 'Analog'],
                 challenges: 'Ensuring the linearity of the perceived brightness vs. duty cycle and verifying the signal integrity on the breadboard.',
                 results: 'Built a fully functional prototype where the user can smoothly adjust the LED brightness by changing the PWM duty cycle via the Arduino.',
                 additionalInfo: 'A foundational project demonstrating the link between software control (Arduino) and hardware behavior (LED brightness).'
