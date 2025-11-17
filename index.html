@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Kimberly Wang, Electrical Engineering Student specializing in Embedded Systems, PCB Design, and IoT.">
+    <meta name="keywords" content="Kimberly Wang, Electrical Engineer, PCB Design, FPGA, Embedded Systems, Portfolio, MSP432, Verilog, Python">
+    <meta name="author" content="Kimberly Wang">
     <title>Kimberly Wang - Engineering Portfolio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -84,6 +87,8 @@
             overflow: hidden;
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
         .project-card::before {
             content: '';
@@ -133,25 +138,6 @@
         .tech-tag.active {
             background-color: #22c55e;
             color: #0f0f0f;
-        }
-
-        .skill-item {
-            background-color: rgba(34, 197, 94, 0.15);
-            border: 1.5px solid #22c55e;
-            color: #22c55e;
-            padding: 10px 16px;
-            border-radius: 4px;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            display: inline-block;
-            margin: 6px 6px 6px 0;
-        }
-
-        .skill-item:hover {
-            background-color: #22c55e;
-            color: #0f0f0f;
-            transform: scale(1.05);
         }
 
         .section-title {
@@ -265,17 +251,6 @@
             align-self: flex-start;
             margin-bottom: 1.5rem;
         }
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .skill-category {
-            margin-bottom: 2rem;
-        }
-        .skill-category h3 {
-            margin-bottom: 1rem;
-        }
 
         .mobile-menu-btn {
             display: none;
@@ -343,6 +318,8 @@
             transition: all 0.3s ease;
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
+            background: none;
+            border: none;
         }
         .back-button:hover {
             color: #3b82f6;
@@ -394,11 +371,11 @@
             font-weight: 600;
             margin-bottom: 0.8rem;
             margin-top: 0;
-            cursor: pointer; /* Add cursor to title */
+            cursor: pointer;
             transition: color 0.3s ease;
         }
         .project-detail-card h3:hover {
-            color: #22c55e; /* Add hover effect */
+            color: #22c55e;
         }
         .project-detail-card p {
             color: #d1d5db;
@@ -491,7 +468,6 @@
             padding-top: 1.1rem;
             padding-bottom: 1.1rem;
         }
-        /* Removes the bottom margin from the header row ONLY when collapsed */
         .search-container.collapsed .filter-container-row {
             margin-bottom: 0;
         }
@@ -603,20 +579,18 @@
             color: #0f0f0f;
         }
         
-        /* --- NEW: Full Project Detail Page Styles --- */
+        /* Full Project Detail Page Styles */
         .project-detail-view {
             background-color: rgba(17, 24, 39, 0.8);
             border: 2px solid #22c55e;
             padding: 2rem;
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
         }
-        /* MODIFIED: This class is for the main image on the detail page */
         .project-detail-view .project-detail-image-main {
             width: 100%;
             height: 400px;
             object-fit: cover;
             margin-bottom: 2rem;
-            /* No border or clip-path */
         }
         .project-detail-view h2 {
             color: #3b82f6;
@@ -695,19 +669,92 @@
                 font-size: 1.25rem;
             }
         }
+        
+        /* About Page Specifics */
+        .about-profile-img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #22c55e;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(34, 197, 94, 0.3);
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            box-shadow: 0 0 10px #22c55e;
+        }
+
+        /* Toast Notification Styles - FIXED CENTERING */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%); /* This centers the container horizontally */
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            pointer-events: none; /* Allows clicking through the container area */
+        }
+
+        .toast {
+            background-color: rgba(17, 24, 39, 0.95);
+            border: 1px solid #22c55e;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 300px;
+            pointer-events: auto; /* Re-enable clicks for the toast itself */
+            
+            /* FIXED ANIMATION: Only animate Y axis */
+            animation: slideUp 0.3s ease forwards;
+        }
+
+        .toast.hiding {
+            animation: fadeOut 0.3s ease forwards;
+        }
+
+        @keyframes slideUp {
+            /* Changed from translate(-50%, ...) to just translateY */
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(20px); }
+        }
     </style>
 </head>
 <body class="text-gray-300">
 
-    <header class="bg-gray-900/90 backdrop-blur-sm shadow-md border-b border-gray-700 sticky top-0 z-10">
+    <header class="bg-gray-900/80 backdrop-blur-md shadow-md border-b border-gray-700 sticky top-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white cursor-pointer hover:text-green-400 transition-colors" onclick="event.preventDefault(); navigatePage('home')">Kimberly Wang</a>
             
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
             
             <div class="nav-menu hidden md:flex space-x-6">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('home'); closeMobileMenu()">Home</a>
-                <a href="#about" class="nav-link" onclick="scrollToSection('about'); closeMobileMenu()">About</a>
+                <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('about'); closeMobileMenu()">About</a>
                 <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('projects'); closeMobileMenu()">Projects</a>
                 <a href="#contact" class="nav-link" onclick="scrollToSection('contact'); closeMobileMenu()">Contact</a>
             </div>
@@ -720,29 +767,8 @@
                 <h1 class="text-5xl font-bold text-white mb-4">Projects Portfolio</h1>
                 <p class="text-xl text-gray-300 mb-8">Electrical Engineering Student and Hobbyist Tinkerer</p>
                 <div class="flex gap-4 justify-center flex-wrap">
+                    <button class="tech-button cta-button" onclick="navigatePage('about')">About Me</button>
                     <button class="tech-button cta-button" onclick="navigatePage('projects')">View Projects</button>
-                    <button class="tech-button cta-button" onclick="scrollToSection('contact')">Get in Touch</button>
-                </div>
-            </section>
-
-            <section id="about" class="tech-container py-16 mt-16 bg-gray-900 shadow-lg overflow-hidden fade-in delay-1">
-                <div class="grid md:grid-cols-2 gap-8 items-start">
-                    <div class="about-section p-8">
-                        <h2 class="text-3xl font-bold text-white about-title">About Me</h2>
-                        <p class="text-gray-300 mb-4">
-                            Hello, I'm Kimberly Wang, an electrical engineering student passionate about designing innovative electronic systems and solutions.
-                        </p>
-                        <p class="text-gray-300">
-                            This website serves as a portfolio for my academic and personal projects. Feel free to explore and reach out!
-                        </p>
-                    </div>
-                    <div class="p-8">
-                        <img 
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EProfile%3C/text%3E%3C/svg%3E" 
-                            alt="Profile"
-                            class="tech-img shadow-md w-full h-auto object-cover"
-                        >
-                    </div>
                 </div>
             </section>
 
@@ -767,19 +793,122 @@
                     <div class="tech-container contact-card p-8 shadow-lg overflow-hidden">
                         <h3 class="text-2xl font-bold mb-4">Email</h3>
                         <p class="text-gray-400 mb-6">Get in touch via email for inquiries and collaboration opportunities.</p>
-                        <span class="text-green-500 text-lg hover:text-green-400 hover:underline transition duration-300 cursor-pointer font-semibold" onclick="copyToClipboard('kimberlyjrw@gmail.com')">kimberlyjrw@gmail.com</span>
+                        <span 
+                            class="text-green-500 text-lg hover:text-green-400 hover:underline transition duration-300 cursor-pointer font-semibold" 
+                            onclick="copyToClipboard('kimberlyjrw@gmail.com')"
+                            role="button"
+                            tabindex="0"
+                            onkeydown="if(event.key === 'Enter') copyToClipboard('kimberlyjrw@gmail.com')"
+                        >kimberlyjrw@gmail.com</span>
                     </div>
                     <div class="tech-container contact-card p-8 shadow-lg overflow-hidden">
                         <h3 class="text-2xl font-bold mb-4">Connect</h3>
                         <p class="text-gray-400 mb-6">Find me on social media and professional networks for more updates.</p>
                         <div class="flex gap-4 flex-wrap">
-                            <span class="text-green-500 hover:text-green-400 hover:underline transition duration-300 cursor-pointer font-semibold" onclick="handleExternalLink('linkedin')">LinkedIn</span>
-                            <span class="text-green-500 hover:text-green-400 hover:underline transition duration-300 cursor-pointer font-semibold" onclick="handleExternalLink('github')">GitHub</span>
+                            <span 
+                                class="text-green-500 hover:text-green-400 hover:underline transition duration-300 cursor-pointer font-semibold" 
+                                onclick="handleExternalLink('linkedin')"
+                                role="button"
+                                tabindex="0"
+                                onkeydown="if(event.key === 'Enter') handleExternalLink('linkedin')"
+                            >LinkedIn</span>
+                            <span 
+                                class="text-green-500 hover:text-green-400 hover:underline transition duration-300 cursor-pointer font-semibold" 
+                                onclick="handleExternalLink('github')"
+                                role="button"
+                                tabindex="0"
+                                onkeydown="if(event.key === 'Enter') handleExternalLink('github')"
+                            >GitHub</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <footer class="bg-gray-900 text-gray-400 mt-16 py-12 border-t border-gray-700">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-sm">&copy; 2025 Kimberly Wang. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <div id="aboutPage" class="page-container">
+        <div class="projects-page-header">
+            <div class="container mx-auto px-6">
+                <button class="back-button" onclick="navigatePage('home')">← Back to Home</button>
+                <h1 class="text-4xl font-bold text-white">About Me</h1>
+                <p class="text-gray-300 mt-2">My Background, Education, and Journey</p>
+            </div>
+        </div>
+
+        <main class="container mx-auto px-6 pb-20">
+             <div class="tech-container bg-gray-900/80 border border-green-500/30 p-8 shadow-lg fade-in">
+                <div class="flex flex-col md:flex-row gap-10 items-center md:items-start">
+                    <div class="flex-shrink-0 text-center">
+                         <img 
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Crect fill='%231f2937' width='250' height='250'/%3E%3Ctext x='50%25' y='50%25' font-size='36' fill='%2322c55e' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EKimberly%3C/text%3E%3C/svg%3E" 
+                            alt="Kimberly Wang Profile" 
+                            class="about-profile-img mb-4 mx-auto"
+                            onerror="handleImageError(this)"
+                        >
+                        <div class="flex gap-3 justify-center mt-4">
+                             <button class="tech-button px-4 py-2 bg-green-600/20 border border-green-500 text-green-400 hover:bg-green-600 hover:text-white transition-colors text-sm font-bold" onclick="handleExternalLink('linkedin')">LinkedIn</button>
+                             <button class="tech-button px-4 py-2 bg-blue-600/20 border border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white transition-colors text-sm font-bold" onclick="handleExternalLink('github')">GitHub</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h2 class="text-3xl font-bold text-white mb-4">Hello, I'm Kimberly Wang.</h2>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            I am an Electrical Engineering student at the University of Pittsburgh with a strong passion for embedded systems, robotics, and digital logic design. My journey in engineering is driven by a curiosity to understand how hardware and software interact to create intelligent systems.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed mb-8">
+                            I enjoy taking complex problems and breaking them down into manageable components, whether it's designing a PCB for a rover or coding a finite state machine for a vending machine simulation. When I'm not in the lab, I'm constantly looking for new technologies to learn and apply to my personal projects.
+                        </p>
+
+                        <h3 class="detail-section-title">Education</h3>
+                        <div class="timeline-item">
+                            <h4 class="text-xl font-bold text-white">University of Pittsburgh</h4>
+                            <p class="text-green-400 font-semibold">Swanson School of Engineering</p>
+                            <p class="text-gray-400 text-sm mb-2">Major: Electrical Engineering | Expected Graduation: April 2025</p>
+                            <p class="text-gray-300">GPA: 3.63 / 4.00</p>
+                        </div>
+
+                        <h3 class="detail-section-title">My Technical Toolkit</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-white mb-2">Languages</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-tag active">Python</span>
+                                    <span class="tech-tag active">C/C++</span>
+                                    <span class="tech-tag active">VHDL</span>
+                                    <span class="tech-tag active">MATLAB</span>
+                                </div>
+                            </div>
+                             <div>
+                                <h4 class="font-bold text-white mb-2">Hardware</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-tag">Arduino</span>
+                                    <span class="tech-tag">MSP432</span>
+                                    <span class="tech-tag">Basys 3 FPGA</span>
+                                    <span class="tech-tag">Oscilloscope</span>
+                                </div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <h4 class="font-bold text-white mb-2">Software & Tools</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-tag">LTspice</span>
+                                    <span class="tech-tag">Altium Designer</span>
+                                    <span class="tech-tag">Vivado</span>
+                                    <span class="tech-tag">Simulink</span>
+                                    <span class="tech-tag">LabVIEW</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </main>
 
         <footer class="bg-gray-900 text-gray-400 mt-16 py-12 border-t border-gray-700">
             <div class="container mx-auto px-6 text-center">
@@ -803,7 +932,7 @@
                     <div class="filter-label">
                         <span>Search & Filter</span>
                     </div>
-                    <button class="toggle-filters-btn" onclick="toggleFiltersPanel()" id="toggleFiltersBtn">▼</button>
+                    <button class="toggle-filters-btn" onclick="toggleFiltersPanel()" id="toggleFiltersBtn" aria-label="Toggle Filters">▼</button>
                 </div>
                 <input 
                     type="text" 
@@ -852,126 +981,164 @@
         </footer>
     </div>
 
+    <div id="toast-container"></div>
 
     <script>
         // --- DATA ---
-        // MODIFIED: Removed 'technologies' array from all projects
+        // UPDATED: Project Details with IDs reordered (1 = Most Recent)
         const projectDetails = {
             1: {
-                title: 'CO Sensing and Ventilation System',
-                description: 'A comprehensive web-connected weather station that collects and reports real-time environmental data.',
-                overview: 'This project integrates an ESP32 microcontroller with multiple environmental sensors to create a fully functional weather monitoring system. The station transmits data to a cloud platform for remote monitoring and historical data analysis.',
+                title: 'CO Sensing and Ventilating System',
+                date: '2025-09-01', 
+                displayDate: 'Sep 2025 - Present',
+                description: 'A multi-stage safety system designed to detect carbon monoxide, filter signals, and control ventilation automatically.',
+                overview: 'This project involves the creation of a robust environmental safety system. It features a CO sensor that triggers ventilation controls when gas levels exceed a threshold. The design utilizes analog circuitry for signal processing and timing control.',
                 features: [
-                    'Real-time temperature, humidity, and pressure monitoring',
-                    'WiFi connectivity for cloud data transmission',
-                    'Local web dashboard for data visualization',
-                    'Battery-powered operation with solar charging capability',
-                    'Data logging with SD card storage',
-                    'Mobile app integration for remote access',
-                    'Customizable alert thresholds',
-                    'Historical data analysis and trend reporting'
+                    'Multi-stage system including CO sensing and signal filtering',
+                    'Initial indication stage using RC filter and comparator',
+                    'Visual LED output for status indication',
+                    'Integrator configured to ramp 0-5V in 10s (Trigger ON)',
+                    'Automatic reset functionality (0V in 2s)',
+                    '555 Timer based PWM on ramping voltage signal',
+                    'Adjustable duty cycle for ventilation control'
                 ],
-                categories: ['LTSpice', 'Analog Circuit Design', 'Arduino', 'Cloud', 'ESP32', 'Sensors'],
-                challenges: 'The main challenge was power management to ensure year-round operation with minimal maintenance. Implemented low-power sleep modes and optimized sensor polling intervals. Additionally, ensuring reliable WiFi connectivity in outdoor environments required careful antenna design and signal strength optimization.',
-                results: 'Successfully deployed a reliable weather station with 99.5% uptime and accurate sensor readings within ±2% of commercial grade equipment. The system has been operational for over 18 months with minimal maintenance. Data collected has proven valuable for local climate research and agricultural applications.',
-                additionalInfo: 'The project started as a simple weather monitoring system but evolved into a comprehensive IoT solution. Key learnings include the importance of power budgeting in battery-powered systems, cloud service integration challenges, and real-world sensor calibration needs. Future improvements include adding more sensor types and implementing machine learning for weather prediction.'
+                categories: ['LTspice', 'Breadboard', 'Analog Circuit Design', 'Sensors'],
+                challenges: 'The primary challenge was configuring the integrator to ramp up and reset within specific timing windows (10s and 2s respectively). Additionally, generating a stable PWM signal from the ramping voltage using a 555 timer required precise component selection and tuning.',
+                results: 'Successfully designed and built the initial indication and processing stages. The system correctly identifies threshold crossings and initiates the ramp sequence. Currently working on the final implementation stage for full system integration.',
+                additionalInfo: 'This project demonstrates strong analog circuit design skills, specifically in signal conditioning and timing applications without relying solely on digital microcontrollers.'
             },
             2: {
-                title: 'Compass Controlled RC Car',
-                description: 'A custom 4-layer PCB design for an autonomous navigation robot with integrated motor drivers and sensor interfaces.',
-                overview: 'Designed and fabricated a professional-grade PCB that serves as the main control board for an autonomous rover. The board integrates motor drivers, sensor interfaces, and power distribution in a compact form factor optimized for robotics applications.',
+                title: 'Compass Controlled TI RSLK Car',
+                date: '2025-04-02', 
+                displayDate: 'Apr 2025',
+                description: 'An autonomous robotics project using magnetic sensor feedback and PID control for precise navigation.',
+                overview: 'Developed an autonomous vehicle using the TI RSLK platform. The car utilizes a magnetometer (compass) to determine its heading and makes real-time motor adjustments to follow specific directional instructions.',
                 features: [
-                    'Dual H-bridge motor drivers for independent wheel control',
-                    'Multiple sensor connectors (ultrasonic, IR, IMU)',
-                    'Integrated voltage regulators for 3.3V and 5V rails',
-                    'USB programming interface',
-                    'Thermal management with copper pour and vias',
-                    'Compact form factor (100mm x 80mm)',
-                    'Ground plane for noise reduction',
-                    'Protection circuits for over-current and reverse polarity'
+                    'Integration with MSP432 microcontroller',
+                    'I2C communication protocol implementation',
+                    'GPIO interaction with magnetic sensors',
+                    'PID control algorithm for motor movements',
+                    'Real-time heading calculation',
+                    'Closed-loop feedback system'
                 ],
-                categories: ['Microcontroller', 'C Programming', 'Robotics', 'Embedded', 'I2C', 'Sensor Integration'],
-                challenges: 'Signal integrity and EMI management were critical concerns. Implemented proper ground planes, trace routing, and shielding to minimize interference. The challenge of fitting all components in a compact space while maintaining good thermal characteristics required careful component placement and layer stackup design.',
-                results: 'Produced a robust PCB that passed all functional tests with zero manufacturing defects. The rover successfully navigated autonomous obstacle courses and demonstrated reliable operation over 50+ hours of continuous testing. The PCB design has been refined through two iterations based on field testing feedback.',
-                additionalInfo: 'This project taught valuable lessons about PCB design for robotics applications. Key considerations included power distribution to high-current motor drivers, minimizing ground bounce, and ensuring proper bypass capacitor placement. The final design achieved excellent thermal performance and has become a reference design for other robotics projects in the lab.'
+                categories: ['MSP432', 'C', 'I2C', 'Robotics', 'Embedded'],
+                challenges: 'Interfacing with the magnetic sensor via I2C required strict adherence to protocol timing. Furthermore, tuning the PID controller to ensure smooth turns without overshooting the target heading was a complex iterative process.',
+                results: 'The car successfully reads compass data and executes movement commands with high accuracy. The PID implementation significantly reduced oscillation during turns, resulting in smooth navigation.',
+                additionalInfo: 'Demonstrates proficiency in low-level communication protocols (I2C) and control theory application in robotics.'
             },
             3: {
                 title: 'Vending Machine Moore FSM',
-                description: 'Real-time digital signal processing implementation on a Xilinx FPGA for audio filtering applications.',
-                overview: 'Implemented a high-performance FIR (Finite Impulse Response) filter on a Xilinx FPGA to process audio signals in real-time. The project demonstrates advanced DSP techniques and hardware acceleration benefits compared to software implementations.',
+                date: '2025-04-01',
+                displayDate: 'Apr 2025',
+                description: 'A digital logic project simulating a vending machine using a multi-state Moore Finite State Machine.',
+                overview: 'Designed a complex state machine to track coin inputs and determine when a total is reached to "vend" an item. The logic was simulated and then implemented physically using 74x series logic chips.',
                 features: [
-                    'Configurable FIR filter with adjustable coefficients',
-                    'Real-time audio processing at 48kHz sampling rate',
-                    'Low-latency signal processing (<1ms)',
-                    'Hardware acceleration vs software comparison',
-                    'GUI for filter parameter adjustment',
-                    'Multiple filter types (lowpass, highpass, bandpass)',
-                    'Real-time frequency response visualization',
-                    'Scalable architecture for multiple parallel filters'
+                    'Multi-state Moore FSM architecture',
+                    'Coin input tracking logic',
+                    'Logisim simulation and validation',
+                    'Physical implementation with 74x series chips',
+                    'State transition management',
+                    'Circuit troubleshooting and debugging'
                 ],
-                categories: ['Digital Circuit Design', 'DSP', 'FPGA', 'Verilog', 'Xilinx'],
-                challenges: 'Optimizing for throughput while maintaining accuracy required careful pipeline design and resource allocation on the FPGA. Managing the trade-off between filter order (affecting quality) and FPGA resource usage was complex. Implementing efficient data flow and minimizing latency required deep understanding of FPGA architecture.',
-                results: 'Achieved 100x speedup compared to software implementation with minimal resource utilization (35% of available LUTs). The filter maintains <1ms latency even with high-order configurations. Successfully demonstrated real-time audio filtering with imperceptible delay.',
-                additionalInfo: 'This project provided comprehensive experience with FPGA design for signal processing. Key learning outcomes included understanding pipelining for throughput improvement, resource optimization techniques, and the practical benefits of hardware acceleration. The implementation is now used as a teaching example in the digital signal processing course.'
+                categories: ['Logisim', 'Breadboard', 'Digital Logic', 'FSM'],
+                challenges: 'Minimizing the number of states and logic gates to fit the physical constraints of the breadboard and 74x series chips. Troubleshooting physical connection issues and propagation delays on the breadboard was also a key step.',
+                results: 'Successfully simulated the FSM in Logisim to validate state transitions. The physical circuit was constructed and debugged to match the simulation, correctly vending upon reaching the target total.',
+                additionalInfo: 'Highlights fundamental understanding of digital logic, state machines, and the transition from simulation to physical hardware.'
             },
             4: {
-                title: 'Smart LED Controller',
-                description: 'Microcontroller-based RGB LED system with wireless control and advanced PWM dimming capabilities.',
-                overview: 'Built a smart lighting system that allows wireless control of RGB LEDs with color mixing, brightness adjustment, and programmable lighting effects. The system demonstrates embedded systems design and wireless communication protocols.',
+                title: 'Mastermind on a Microcontroller',
+                date: '2025-02-01',
+                displayDate: 'Feb 2025',
+                description: 'An embedded implementation of the classic Mastermind game using the MSP432 and custom hardware peripherals.',
+                overview: 'Designed and implemented the logic for the Mastermind game on an MSP432 microcontroller. The project required translating game rules into C code and managing hardware inputs/outputs for user interaction.',
                 features: [
-                    'RGB color mixing with 16 million color options',
-                    'PWM-based brightness control (0-100%)',
-                    'Wireless control via Bluetooth',
-                    'Pre-programmed lighting effects and animations',
-                    'Mobile app interface for easy control',
-                    'Voice command integration',
-                    'Scheduling capabilities for automated lighting',
-                    'Energy-efficient operation with power monitoring'
+                    'Complete game logic implementation in C',
+                    'Block diagram design for gameplay routine',
+                    'Pushbutton input processing with debounce',
+                    'Bi-color LED output for game status',
+                    'Guess validation algorithms',
+                    'Win/Loss state machine management'
                 ],
-                categories: ['Embedded', 'IoT', 'Microcontroller', 'PWM', 'Bluetooth', 'Mobile App'],
-                challenges: 'Synchronizing color transitions smoothly while maintaining responsive wireless communication required careful timing and buffer management. Managing power consumption while maintaining responsiveness was critical for battery-powered applications. Implementing reliable Bluetooth communication with proper error handling and reconnection logic added complexity.',
-                results: 'Created a user-friendly system with seamless color transitions and sub-100ms control response time. Successfully tested with 500+ color changes without any glitches. The system has been deployed in 10+ installations with positive user feedback.',
-                additionalInfo: 'The project evolved from a simple LED controller to a comprehensive smart lighting solution. Notable features include adaptive color temperature based on time of day and integration with home automation systems. Future enhancements include gesture recognition and advanced scheduling algorithms.'
+                categories: ['MSP432', 'C', 'Embedded', 'Game Logic'],
+                challenges: 'Designing a user-friendly interface using limited hardware (pushbuttons and LEDs) required creative state management. Validating guesses against the secret code involved complex array manipulation and logic checks.',
+                results: 'Prototypes a fully functional game where users can input guesses, receive feedback via LEDs, and trigger win/loss routines. The system runs reliably on the TI RSLK chassis hardware.',
+                additionalInfo: 'Showcases the ability to translate abstract logic and rules into structured embedded C code.'
             },
             5: {
-                title: 'Power Supply Unit',
-                description: 'A regulated DC power supply with integrated protection circuits and advanced thermal management.',
-                overview: 'Designed and built a professional-grade power supply unit capable of delivering stable, regulated DC power with comprehensive protection features and efficient thermal dissipation. The PSU demonstrates understanding of power electronics and circuit design.',
+                title: 'Implementation of ALU',
+                date: '2025-02-02',
+                displayDate: 'Feb 2025',
+                description: 'Design of an Arithmetic Logic Unit (ALU) using VHDL on a Basys 3 FPGA board.',
+                overview: 'Authored VHDL code to create a 4-bit ALU capable of performing addition, subtraction, bit parity checks, and comparisons. The design was synthesized and deployed to a Basys 3 FPGA.',
                 features: [
-                    'Adjustable output voltage (5V-24V)',
-                    'Over-current and over-voltage protection',
-                    'Thermal management with active cooling',
-                    'Efficiency >85% across load range',
-                    'LED status indicators and metering',
-                    'Remote sensing capability',
-                    'Soft-start circuit for inrush current limiting',
-                    'Multiple output taps for different voltage requirements'
+                    '4-bit Arithmetic Logic Unit design',
+                    'Operations: Adder, Subtractor, Bit Parity, Comparator',
+                    'VHDL coding and synthesis',
+                    'Vivado constraints definition',
+                    'Bitstream generation',
+                    'Hardware testing with switches and LEDs'
                 ],
-                categories: ['Power', 'Electronics', 'SMPS', 'Thermal Design'],
-                challenges: 'Designing an efficient switching power supply required careful component selection and PCB layout to minimize EMI and losses. Managing heat dissipation in a compact enclosure while maintaining efficiency was challenging. Implementing robust protection circuits without sacrificing performance required extensive testing.',
-                results: 'Achieved stable output with <1% ripple and 87% overall efficiency. Successfully tested under full load for 100+ hours without degradation. The PSU meets industry standards for power quality and reliability.',
-                additionalInfo: 'This project provided deep insights into power electronics design. Key learning points included transformer design, switching frequency optimization, and EMI mitigation techniques. The final design is now used as a reference for laboratory power supply requirements and student projects.'
+                categories: ['Vivado', 'VHDL', 'Basys 3', 'FPGA', 'Digital Logic'],
+                challenges: 'Defining correct timing constraints in Vivado and ensuring the logic handled edge cases (like overflow or negative numbers) correctly. Mapping the physical I/O of the Basys 3 board to the internal logic required precise constraint file configuration.',
+                results: 'Generated a valid bitstream and successfully programmed the Basys 3 board. All arithmetic and logical functions were verified using on-board switches as inputs and LEDs as outputs.',
+                additionalInfo: 'Demonstrates competence in Hardware Description Languages (VHDL) and the FPGA design flow using Xilinx Vivado.'
             },
             6: {
-                title: 'Sensor Data Logger',
-                description: 'Multi-sensor data acquisition system with cloud connectivity and real-time monitoring dashboard.',
-                overview: 'A comprehensive data logging platform that collects data from multiple sensors, stores it locally, and synchronizes with cloud services for remote monitoring and analysis. The system demonstrates IoT architecture and data management principles.',
+                title: 'Puzzle Solving Autonomous Raspberry Pi Cart',
+                date: '2024-12-01',
+                displayDate: 'Dec 2024',
+                description: 'A pathfinding robot powered by Raspberry Pi that navigates a grid to find an unknown target.',
+                overview: 'Designed a strategy and Python program for a cart to navigate a 4x4 physical grid. The robot determines a path based on adjacent grid coordinates to locate a target and return to the start.',
                 features: [
-                    'Support for 8+ simultaneous sensors',
-                    'Local SD card storage with cloud sync',
-                    'Real-time web dashboard',
-                    'Data export in multiple formats (CSV, JSON)',
-                    'Alarm notifications for threshold violations',
-                    'Historical data analysis and reporting',
-                    'Configurable sampling rates',
-                    'Data validation and error correction',
-                    'Offline operation with automatic sync',
-                    'Role-based access control for multi-user systems'
+                    'Python programming for high-level control',
+                    'Pathfinding algorithm implementation',
+                    '4x4 Grid navigation strategy',
+                    'Sensor input processing',
+                    'Motor control integration',
+                    'Return-to-home functionality'
                 ],
-                categories: ['Sensors', 'IoT', 'Cloud', 'Data Acquisition', 'Database', 'Web Dashboard'],
-                challenges: 'Managing large datasets and ensuring reliable cloud synchronization with intermittent connectivity was complex. Implementing robust data validation and handling sensor failures gracefully required sophisticated error handling. Balancing storage capacity with battery life in remote deployments was challenging.',
-                results: 'Successfully deployed a system logging 50+ data points per second with 99.8% data integrity and <5 minute cloud sync latency. System has been in production for 12+ months with zero data loss incidents. Supports 100+ concurrent users on the web dashboard.',
-                additionalInfo: 'The data logger has become a critical tool for environmental monitoring and research. Key achievements include implementing predictive maintenance alerts and anomaly detection algorithms. The platform now hosts over 2TB of historical data supporting various research initiatives. Future plans include machine learning integration for advanced analytics.'
+                categories: ['Python', 'Raspberry Pi', 'Robotics', 'Algorithms'],
+                challenges: 'Developing a search algorithm that efficiently covers the grid without getting stuck in loops. translating the logical grid coordinates into physical motor movements and handling real-world friction/slippage.',
+                results: 'The cart successfully navigates the grid, identifies the unknown target coordinate, and executes the return path autonomously.',
+                additionalInfo: 'Combines high-level software algorithms (Python) with hardware control in a robotics context.'
+            },
+            7: {
+                title: 'PI Controller Design',
+                date: '2024-11-01',
+                displayDate: 'Nov 2024',
+                description: 'Analog design and simulation of a Proportional-Integral (PI) controller using Op-Amps.',
+                overview: 'Designed and simulated an analog PI controller in LTspice. The circuit utilizes two inverting operational amplifiers and a parallel RC circuit to achieve a steady-state voltage matching the input within 4 seconds.',
+                features: [
+                    'Analog PI Controller architecture',
+                    'Inverting Op-Amp configuration',
+                    'Parallel RC circuit integration',
+                    'Transient analysis in LTspice',
+                    'Physical breadboard verification',
+                    'Error minimization (< 5%)'
+                ],
+                categories: ['LTspice', 'Breadboard', 'Analog Circuit Design', 'Control Systems'],
+                challenges: 'Selecting the correct Resistor and Capacitor values to achieve the specific settling time (4s) and stability. Minimizing steady-state error in the physical implementation due to component tolerances.',
+                results: 'The simulation achieved the target steady-state response. The physical circuit was built and verified to match the simulation results with less than 5% error.',
+                additionalInfo: 'Proves understanding of control theory concepts implemented via analog hardware.'
+            },
+            8: {
+                title: 'PWM Control of an LED',
+                date: '2024-10-01',
+                displayDate: 'Oct 2024',
+                description: 'A user-controlled dimmable LED system using Arduino and PWM signaling.',
+                overview: 'Designed a circuit to control LED brightness through Pulse Width Modulation (PWM). The project involved LTspice simulation, Arduino programming for duty cycle control, and physical validation.',
+                features: [
+                    'PWM signal generation',
+                    'Arduino R4 programming',
+                    'Duty cycle control logic',
+                    'LTspice circuit simulation',
+                    'Breadboard prototyping',
+                    'User-controlled interface'
+                ],
+                categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Embedded'],
+                challenges: 'Ensuring the linearity of the perceived brightness vs. duty cycle and verifying the signal integrity on the breadboard.',
+                results: 'Built a fully functional prototype where the user can smoothly adjust the LED brightness by changing the PWM duty cycle via the Arduino.',
+                additionalInfo: 'A foundational project demonstrating the link between software control (Arduino) and hardware behavior (LED brightness).'
             }
         };
 
@@ -983,31 +1150,42 @@
         // --- CORE NAVIGATION ---
 
         /**
-         * Manages which page (div) is visible.
+         * Manages which page (div) is visible and updates browser history.
+         * @param {string} page - The page ID ('home', 'projects', 'detail', 'about')
+         * @param {boolean} addToHistory - Whether to push this state to browser history
          */
-        function navigatePage(page) {
+        function navigatePage(page, addToHistory = true) {
             closeMobileMenu();
             
             // Hide all pages
             document.getElementById('homePage').classList.remove('active');
             document.getElementById('projectsPage').classList.remove('active');
             document.getElementById('projectDetailPage').classList.remove('active');
+            document.getElementById('aboutPage').classList.remove('active');
 
             if (page === 'home') {
                 document.getElementById('homePage').classList.add('active');
+                if (addToHistory) history.pushState({page: 'home'}, '', '#home');
             } else if (page === 'projects') {
                 document.getElementById('projectsPage').classList.add('active');
-                renderProjectList(); // Render the list of full cards
+                renderProjectList();
+                if (addToHistory) history.pushState({page: 'projects'}, '', '#projects');
+            } else if (page === 'about') {
+                document.getElementById('aboutPage').classList.add('active');
+                if (addToHistory) history.pushState({page: 'about'}, '', '#about');
             } else if (page === 'detail') {
                 document.getElementById('projectDetailPage').classList.add('active');
+                // Detail specific state is handled in showProjectPage
             }
-            window.scrollTo(0, 0);
+            
+            // SCROLL FIX: Force scroll to top instantly when changing pages
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
         
         /**
-         * NEW: Navigates to the dedicated detail page for a project.
+         * Navigates to the dedicated detail page for a project.
          */
-        function showProjectPage(projectId) {
+        function showProjectPage(projectId, addToHistory = true) {
             const project = projectDetails[projectId];
             if (!project) return;
 
@@ -1020,9 +1198,13 @@
                         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${projectId}%3C/text%3E%3C/svg%3E" 
                         alt="${project.title}"
                         class="project-detail-image-main" 
+                        onerror="handleImageError(this)"
                     >
                     
-                    <h2>${project.title}</h2>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-4">
+                        <h2 class="mb-0">${project.title}</h2>
+                        <span class="text-green-400 font-bold text-lg">${project.displayDate}</span>
+                    </div>
                     <p class="project-detail-description">${project.description}</p>
                     
                     <h3 class="detail-section-title">Project Overview</h3>
@@ -1033,7 +1215,7 @@
                         ${project.features.map(feature => `<li>${feature}</li>`).join('')}
                     </ul>
 
-                    <h3 class="detail-section-title">Categories</h3>
+                    <h3 class="detail-section-title">Technical Skills</h3>
                     <div class="project-detail-tags">
                         ${project.categories.map(cat => `<span class="project-detail-tag">${cat}</span>`).join('')}
                     </div>
@@ -1050,45 +1232,57 @@
             `;
             
             // Switch to the detail page
-            navigatePage('detail');
-        }
+            document.getElementById('homePage').classList.remove('active');
+            document.getElementById('projectsPage').classList.remove('active');
+            document.getElementById('aboutPage').classList.remove('active');
+            document.getElementById('projectDetailPage').classList.add('active');
 
-        /**
-         * MODIFIED: This function is called from the Home Page cards.
-         * It now calls showProjectPage() to go directly to the detail view.
-         */
-        function navigateToProject(projectId) {
-            showProjectPage(projectId);
+            if (addToHistory) {
+                history.pushState({page: 'detail', id: projectId}, '', `#project=${projectId}`);
+            }
+            
+            // SCROLL FIX: Force scroll to top instantly when opening a project
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
         
-        // --- NEW: Renders the "Featured Projects" on the Home Page ---
+        // --- Renders the "Featured Projects" on the Home Page ---
         function renderFeaturedProjects() {
             const container = document.getElementById('featuredProjectsGrid');
             if (!container) return; 
             
             let html = '';
-            const featuredIds = [1, 2, 3]; // Show first 3 projects
+            // Just pick the first 3 projects since IDs are now 1=Newest
+            const featuredIds = [1, 2, 3]; 
 
             for (const id of featuredIds) {
                 const project = projectDetails[id];
                 if (!project) continue; 
 
-                // Create a shortened description
                 const shortDescription = project.description.length > 100 ? 
                     project.description.substring(0, 100) + '...' : 
                     project.description;
 
                 html += `
-                    <div class="tech-container project-card p-6 shadow-lg overflow-hidden" onclick="showProjectPage(${id})">
+                    <div 
+                        class="tech-container project-card p-6 shadow-lg overflow-hidden" 
+                        onclick="showProjectPage(${id})"
+                        role="button"
+                        tabindex="0"
+                        onkeydown="if(event.key === 'Enter') showProjectPage(${id})"
+                    >
                         <img 
                             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${id}%3C/text%3E%3C/svg%3E" 
                             alt="${project.title}"
                             class="tech-img w-full h-48 object-cover mb-4"
+                            onerror="handleImageError(this)"
                         >
-                        <h3 class="text-xl font-semibold mb-2 text-white">${project.title}</h3>
-                        <p class="text-gray-400 mb-4">${shortDescription}</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            ${project.categories.slice(0, 2).map(cat => `<span class="tech-tag">${cat}</span>`).join('')}
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-white mb-0">${project.title}</h3>
+                        </div>
+                        <p class="text-green-500 text-xs font-bold mb-3 uppercase tracking-wide">${project.displayDate}</p>
+                        <p class="text-gray-400 mb-4 flex-grow">${shortDescription}</p>
+                        <div class="flex flex-wrap gap-2 mb-4 mt-auto">
+                            ${project.categories.slice(0, 3).map(cat => `<span class="tech-tag">${cat}</span>`).join('')}
                         </div>
                         <span class="learn-more-btn">Learn More →</span>
                     </div>
@@ -1100,10 +1294,6 @@
 
         // --- 'ALL PROJECTS' PAGE FUNCTIONS ---
 
-        /**
-         * Renders the list of project cards for the 'All Projects' page
-         * (This is the layout from your image)
-         */
         function renderProjectList() {
             const container = document.getElementById('projectsListContainer');
             let html = '';
@@ -1111,17 +1301,16 @@
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             let visibleCount = 0;
 
-            for (let id = 1; id <= 6; id++) {
+            // Iterate through sorted projects (1 to 8)
+            for (let id = 1; id <= 8; id++) {
                 const project = projectDetails[id];
                 const title = project.title.toLowerCase();
-                // MODIFIED: Search categories now
                 const categoriesString = project.categories.join(' ').toLowerCase(); 
                 const categories = project.categories || [];
 
                 // Check search
                 let matchesSearch = true;
                 if (searchInput) {
-                    // MODIFIED: Search categories instead of technologies
                     matchesSearch = title.includes(searchInput) || categoriesString.includes(searchInput);
                 }
 
@@ -1139,22 +1328,25 @@
                                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${id}%3C/text%3E%3C/svg%3E" 
                                 alt="${project.title}"
                                 class="project-detail-image"
+                                onerror="handleImageError(this)"
                             >
                             <div class="project-detail-content">
-                                <h3 onclick="showProjectPage(${id})">${project.title}</h3>
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-start">
+                                    <h3 onclick="showProjectPage(${id})">${project.title}</h3>
+                                    <span class="text-green-500 text-sm font-bold whitespace-nowrap mt-1 md:mt-0 mb-2 md:mb-0">${project.displayDate}</span>
+                                </div>
                                 <p class="project-detail-description">${project.description}</p>
                                 <p><strong class="text-green-400">Overview:</strong> ${project.overview}</p>
                                 <div class="project-detail-tags">
-                                    ${project.categories.map(cat => `<span class="project-detail-tag" onclick="filterByTag(event, '${cat}')">${cat}</span>`).join('')}
+                                    ${project.categories.map(cat => `<span class="project-detail-tag" onclick="filterByTag(event, '${cat}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter') filterByTag(event, '${cat}')">${cat}</span>`).join('')}
                                 </div>
-                                <span class="learn-more-btn" onclick="showProjectPage(${id})">View Full Details →</span>
+                                <span class="learn-more-btn" onclick="showProjectPage(${id})" role="button" tabindex="0" onkeydown="if(event.key==='Enter') showProjectPage(${id})">View Full Details →</span>
                             </div>
                         </div>
                     `;
                 }
             }
             
-            // Show "no results" message if needed
             if (visibleCount === 0) {
                 container.innerHTML = '<div class="no-results" id="noResults"><h3>No projects found</h3><p>Try adjusting your search or filters</p></div>';
             } else {
@@ -1162,9 +1354,6 @@
             }
         }
         
-        /**
-         * Populates the filter buttons dynamically from the project data.
-         */
         function populateFilters() {
             // First, get all unique categories
             Object.values(projectDetails).forEach(project => {
@@ -1174,7 +1363,7 @@
             });
 
             const container = document.getElementById('categoryFilterContainer');
-            if (!container) return; // Safety check
+            if (!container) return; 
             
             let html = '';
             // Sort categories alphabetically and create a button for each
@@ -1184,16 +1373,10 @@
             container.innerHTML = html;
         }
 
-        /**
-         * Called by the search input's onkeyup event.
-         */
         function filterProjectList() {
             renderProjectList();
         }
 
-        /**
-         * Called by clicking a filter tag.
-         */
         function toggleFilter(event, category) {
             const button = event.target;
             const index = activeFilters.indexOf(category);
@@ -1209,11 +1392,8 @@
             renderProjectList(); // Re-render the list
         }
         
-        /**
-         * Called by clicking a tag inside a project card
-         */
         function filterByTag(event, category) {
-             event.stopPropagation(); // Stop the click from bubbling up to the card's onclick
+             event.stopPropagation(); 
              
              // Find the corresponding filter button in the main filter bar
              const filterButton = Array.from(document.querySelectorAll('#categoryFilterContainer .filter-tag')).find(btn => btn.textContent === category);
@@ -1224,7 +1404,9 @@
                  filterButton.classList.add('active');
              }
              
-             renderProjectList(); // Re-render the list
+             // Scroll to top of list to see filters
+             document.getElementById('searchContainer').scrollIntoView({behavior: 'smooth'});
+             renderProjectList(); 
         }
 
         function clearAllFilters() {
@@ -1264,24 +1446,23 @@
 
         // --- OTHER HELPER FUNCTIONS ---
 
+        /**
+         * Improved scroll function using requestAnimationFrame for smoothness
+         */
         function scrollToSection(sectionId) {
-            // Check if we are on the home page, if not, navigate there first
             if (!document.getElementById('homePage').classList.contains('active')) {
                 navigatePage('home');
                 
-                // Wait for page navigation to complete before scrolling
-                setTimeout(() => {
-                    const element = document.getElementById(sectionId);
-                    if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }, 100);
+                // Wait for DOM update
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        const element = document.getElementById(sectionId);
+                        if (element) element.scrollIntoView({ behavior: 'smooth' });
+                    }, 50);
+                });
             } else {
-                // Already on the home page, just scroll
                 const element = document.getElementById(sectionId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -1295,11 +1476,39 @@
             navMenu.classList.remove('active');
         }
 
+        /**
+         * Toast Notification Handler
+         */
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            
+            // Add an icon based on type
+            const icon = type === 'success' ? '✓' : 'ℹ';
+            
+            toast.innerHTML = `
+                <span style="color: #22c55e; font-weight: bold; font-size: 1.2em;">${icon}</span>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('hiding');
+                toast.addEventListener('animationend', () => {
+                    toast.remove();
+                });
+            }, 3000);
+        }
+
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Email copied to clipboard!');
+                showToast('Email copied to clipboard!');
             }).catch(err => {
                 console.error('Failed to copy:', err);
+                showToast('Failed to copy email', 'error');
             });
         }
 
@@ -1314,12 +1523,49 @@
             }
         }
 
+        /**
+         * Fallback for broken images
+         */
+        function handleImageError(img) {
+            img.onerror = null; // Prevent infinite loop
+            img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' style='background:%23111827'%3E%3Ctext x='50%25' y='50%25' font-family='monospace' fill='%2322c55e' font-size='20' text-anchor='middle'%3E[IMAGE_DATA_MISSING]%3C/text%3E%3C/svg%3E";
+            img.style.border = "1px dashed #22c55e";
+        }
+
         // --- INITIALIZATION ---
 
-        // Run this when the page first loads
         document.addEventListener('DOMContentLoaded', () => {
-            populateFilters(); // Create the filter buttons
-            renderFeaturedProjects(); // NEW: Populate the home page projects
+            populateFilters();
+            renderFeaturedProjects();
+            
+            // History API Handling (Back Button)
+            window.addEventListener('popstate', (event) => {
+                if (event.state) {
+                    if (event.state.page === 'detail' && event.state.id) {
+                        showProjectPage(event.state.id, false);
+                    } else if (event.state.page === 'about') {
+                        navigatePage('about', false);
+                    } else if (event.state.page === 'projects') {
+                        navigatePage('projects', false);
+                    } else {
+                        navigatePage('home', false);
+                    }
+                } else {
+                    // Default to home if no state
+                    navigatePage('home', false);
+                }
+            });
+
+            // Check hash on load for direct links
+            const hash = window.location.hash;
+            if (hash === '#projects') {
+                navigatePage('projects', false);
+            } else if (hash === '#about') {
+                navigatePage('about', false);
+            } else if (hash.startsWith('#project=')) {
+                const id = hash.split('=')[1];
+                showProjectPage(id, false);
+            }
         });
 
         // Close mobile menu when clicking outside
