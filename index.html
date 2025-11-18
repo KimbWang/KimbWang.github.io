@@ -1083,18 +1083,18 @@
                 description: 'A two-milestone analog system to detect carbon monoxide, issue an alert, and dynamically control ventilation fan speed based on exposure duration for energy efficiency.',
                 overview: 'This project demonstrates a multi-stage, energy-efficient HVAC safety system built entirely using analog components. Milestone 1 (MS1) focuses on detection and indication, using a comparator to check CO sensor voltage against a fixed reference voltage. Milestone 2 (MS2) implements dynamic ventilation control, where the DC brushless fan speed (using PWM) increases proportionally to the duration of unsafe CO exposure, optimizing air exchange and conserving electricity and costs compared to simple ON/OFF systems. ',
                 features: [
-                    '**MS1 Decision-Making:** The system utilizes an Op-Amp configured as a comparator to perform basic decision-making. The filtered sensor voltage ($V_{filter}$) is compared against a reference voltage ($V_{ref}$) set by a potentiometer, which simulates the $\\text{50 ppm}$ OSHA threshold for unsafe workplace exposure.',
-                    '**Integrator:** The $\\text{V}_{comp}$ output feeds into a two-stage op-amp circuit: a non-inverting inverter followed by an inverting integrator. This allows the output voltage ($V_{int}$) to ramp linearly from $0\\text{V}$ to $5\\text{V}$ over $\\text{10 seconds}$ while $\\text{V}_{comp}$ is HIGH.',
-                    '**Capacitor Reset Mechanism:** A second Op-Amp drives an **NMOS transistor (M1)**. When $\\text{V}_{comp}$ is LOW ($\\text{-5V}$), the NMOS turns ON, instantly discharging the integrating capacitor ($\\text{C}_{int}$) to $0\\text{V}$ to ensure the next ramp always starts correctly.',
-                    '**PWM Control:** The $\\text{V}_{int}$ signal is fed to the Control Voltage ($\\text{CV}$) pin of a **NE555 Timer** in astable configuration. As $\\text{V}_{int}$ ramps up, the resulting pulse signal\'s duty cycle increases, which accelerates the DC fan speed.',
-                    '**Motor Driver & Protection:** The PWM pulse signal drives an NMOS transistor (M2) controlling the DC fan\'s operation. A **flyback diode (D1)** is placed in parallel with the fan motor to protect the switching transistor from back-EMF generated when the motor is switched OFF.'
+                    'Decision-Making: The system utilizes an Op-Amp configured as a comparator to perform basic decision-making. The filtered sensor voltage ($V_{filter}$) is compared against a reference voltage ($V_{ref}$) set by a potentiometer, which simulates the $\\text{50 ppm}$ OSHA threshold for unsafe workplace exposure.',
+                    'Integrator: The $\\text{V}_{comp}$ output feeds into a two-stage op-amp circuit: a non-inverting inverter followed by an inverting integrator. This allows the output voltage ($V_{int}$) to ramp linearly from $0\\text{V}$ to $5\\text{V}$ over $\\text{10 seconds}$ while $\\text{V}_{comp}$ is HIGH.',
+                    'Capacitor Reset Mechanism: A second Op-Amp drives an **NMOS transistor (M1)**. When $\\text{V}_{comp}$ is LOW ($\\text{-5V}$), the NMOS turns ON, instantly discharging the integrating capacitor ($\\text{C}_{int}$) to $0\\text{V}$ to ensure the next ramp always starts correctly.',
+                    'PWM Control: The $\\text{V}_{int}$ signal is fed to the Control Voltage ($\\text{CV}$) pin of a **NE555 Timer** in astable configuration. As $\\text{V}_{int}$ ramps up, the resulting pulse signal\'s duty cycle increases, which accelerates the DC fan speed.',
+                    'Motor Driver & Protection: The PWM pulse signal drives an NMOS transistor (M2) controlling the DC fan\'s operation. A **flyback diode (D1)** is placed in parallel with the fan motor to protect the switching transistor from back-EMF generated when the motor is switched OFF.'
                 ],
-                categories: ['LTspice', 'Analog', 'Op-Amps', '555 Timer', 'NMOS', 'RC Filter', 'Control Theory', 'HVAC'],
+                categories: ['LTspice','Breadboard', 'Analog', 'Digital'],
                 challenges: 'Achieving an immediate and reliable integrator reset was critical for energy efficiency. The solution involved bypassing the standard, slow parallel-resistor discharge method in favor of an active NMOS transistor switch, triggered by an op-amp comparator, to quickly connect the $\\text{C}_{int}$ capacitor to ground. Another tradeoff involved circuit stability versus sensitivity: setting the reference voltage too close to the noise floor can cause the comparator output (and LED) to flicker; while a solution like a Schmitt Trigger adds stability, it would unnecessarily waste energy by delaying the ventilation system\'s turn-off time. Component tolerances, especially for the $\\text{1 M}\\Omega$ resistor in the integrator, are a practical limitation, as they directly affect the **slope of the voltage ramp**.',
                 results: 'The system successfully executed two stages of control: basic indication (MS1) and dynamic speed control (MS2). Simulation confirmed linear voltage ramping for $\\text{V}_{int}$ and proportional increases in the 555 timer\'s **PWM duty cycle** when the dangerous condition is active. The active capacitor discharge was verified to successfully reset $\\text{V}_{int}$ to $0\\text{V}$ when the simulated CO risk ended. The use of a simple ramping function instead of complex PID control was chosen as a cost-effective trade-off, deemed appropriate for gases where levels change slowly.',
                 additionalInfo: 'Initial prototyping required switching the comparator op-amp from the $\\text{TL072IP}$ to the rail-to-rail $\\text{OP484}$ to ensure the output voltage reached the full $\\pm 5\\text{V}$ rails for stable operation in the MS2 blocks. Furthermore, the fan required a high-current $+5\\text{V}$ source (sourced from an external microcontroller like Arduino) for operation, demonstrating the need for external power stages in practical circuit design. **Access the full lab report and detailed simulation data plots via the primary file link below.**',
                 imagePath: './images/CO_Sensor.jpg',
-                primaryFile: './docs/ECSE2010_MS2_Omega_ProjectManual.pdf' // PDF Path
+                primaryFile: './docs/ECSE2010_MS2_Omega_ProjectManual.pdf'
             },
             2: {
                 title: 'Compass Controlled TI RSLK Car',
@@ -1115,14 +1115,14 @@
                 results: 'The car successfully reads compass data and executes movement commands with high accuracy. The PID implementation significantly reduced oscillation during turns, resulting in smooth navigation.',
                 additionalInfo: 'Demonstrates proficiency in low-level communication protocols (I2C) and control theory application in robotics.',
                 imagePath: './images/Compass_Controlled_Cart.jpg',
-                primaryFile: './code/Compass_Controlled_Cart.c' // Code Path Example
+                primaryFile: './code/Compass_Controlled_Cart.c'
             },
             3: {
                 title: 'Vending Machine Moore FSM',
                 date: '2025-04-01',
                 displayDate: 'Apr 2025',
                 description: 'A digital logic project simulating a vending machine using a multi-state Moore Finite State Machine.',
-                overview: 'Designed a complex state machine to track coin inputs and determine when a total is reached to "vend" an item. The logic was simulated and then implemented physically using 74x series logic chips.',
+                overview: 'Designed a complex state machine to track coin inputs and determine when a total is reached to "vend" an item. The logic was simulated on Logisim and then implemented physically using 74x series logic chips.',
                 features: [
                     'Multi-state Moore FSM architecture',
                     'Coin input tracking logic',
@@ -1233,7 +1233,7 @@
                     'Breadboard prototyping',
                     'User-controlled interface'
                 ],
-                categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Microcontroller', 'Analog'],
+                categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Microcontroller', 'Analog', 'Digital'],
                 challenges: 'Ensuring the linearity of the perceived brightness vs. duty cycle and verifying the signal integrity on the breadboard.',
                 results: 'Built a fully functional prototype where the user can smoothly adjust the LED brightness by changing the PWM duty cycle via the Arduino.',
                 additionalInfo: 'A foundational project demonstrating the link between software control (Arduino) and hardware behavior (LED brightness).',
