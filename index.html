@@ -1096,6 +1096,7 @@
                 challenges: 'One of the challenges of designing this circuit was having to reset the capacitor being used for the integrator. Since I want the integrator to always start ramping from 0V, the capacitor needs to be discharged whenever the CO ',
                 results: 'Successfully designed and built the initial indication and processing stages. The system correctly responds to the input of CO sensor readings in order to treat it accordingly. Currently working on the final implementation stage using filters for full system integration.',
                 additionalInfo: 'This project aims to improve cities using a smart HVAC system in order to keep buildings and homes safe while saving electricity and costs.'
+                imagePath: './images/CO_Sensor.jpg'
             },
             2: {
                 title: 'Compass Controlled TI RSLK Car',
@@ -1268,14 +1269,16 @@
         function showProjectPage(projectId, addToHistory = true) {
             const project = projectDetails[projectId];
             if (!project) return;
-
+        
             const container = document.getElementById('projectDetailContent');
+            
+            const imageUrl = project.imagePath || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${projectId}%3C/text%3E%3C/svg%3E`;
             
             // Build the full-page HTML for the project
             container.innerHTML = `
                 <div class="project-detail-view tech-container fade-in">
                     <img 
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${projectId}%3C/text%3E%3C/svg%3E" 
+                        src="${imageUrl}" 
                         alt="${project.title}"
                         class="project-detail-image-main" 
                         onerror="handleImageError(this)"
@@ -1289,20 +1292,20 @@
                     
                     <h3 class="detail-section-title">Project Overview</h3>
                     <p>${project.overview}</p>
-
+        
                     <h3 class="detail-section-title">Key Features</h3>
                     <ul>
                         ${project.features.map(feature => `<li>${feature}</li>`).join('')}
                     </ul>
-
+        
                     <h3 class="detail-section-title">Technical Skills</h3>
                     <div class="project-detail-tags">
                         ${project.categories.map(cat => `<span class="project-detail-tag">${cat}</span>`).join('')}
                     </div>
-
+        
                     <h3 class="detail-section-title">Challenges & Solutions</h3>
                     <p>${project.challenges}</p>
-
+        
                     <h3 class="detail-section-title">Results & Outcome</h3>
                     <p>${project.results}</p>
                     
@@ -1316,7 +1319,7 @@
             document.getElementById('projectsPage').classList.remove('active');
             document.getElementById('aboutPage').classList.remove('active');
             document.getElementById('projectDetailPage').classList.add('active');
-
+        
             if (addToHistory) {
                 history.pushState({page: 'detail', id: projectId}, '', `#project=${projectId}`);
             }
@@ -1332,15 +1335,17 @@
             let html = '';
             // Just pick the first 3 projects since IDs are now 1=Newest
             const featuredIds = [1, 2, 3]; 
-
+        
             for (const id of featuredIds) {
                 const project = projectDetails[id];
                 if (!project) continue; 
-
+        
                 const shortDescription = project.description.length > 100 ? 
                     project.description.substring(0, 100) + '...' : 
                     project.description;
-
+                    
+                const imageUrl = project.imagePath || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${id}%3C/text%3E%3C/svg%3E`;
+        
                 html += `
                     <div 
                         class="tech-container project-card p-6 shadow-lg overflow-hidden" 
@@ -1350,7 +1355,7 @@
                         onkeydown="if(event.key === 'Enter') showProjectPage(${id})"
                     >
                         <img 
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${id}%3C/text%3E%3C/svg%3E" 
+                            src="${imageUrl}" 
                             alt="${project.title}"
                             class="tech-img w-full h-48 object-cover mb-4"
                             onerror="handleImageError(this)"
@@ -1398,35 +1403,38 @@
         function renderProjectList() {
             const container = document.getElementById('projectsListContainer');
             let html = '';
-
+        
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             let visibleCount = 0;
-
+        
             const sortedProjects = Object.entries(projectDetails)
                 .map(([id, project]) => ({ id, ...project }))
                 .sort((a, b) => new Date(b.date) - new Date(a.date));
-
+        
             sortedProjects.forEach(project => {
                 const title = project.title.toLowerCase();
                 const categoriesString = project.categories.join(' ').toLowerCase(); 
                 const categories = project.categories || [];
-
+        
                 let matchesSearch = true;
                 if (searchInput) {
                     matchesSearch = title.includes(searchInput) || categoriesString.includes(searchInput);
                 }
-
+        
                 let matchesFilter = true;
                 if (activeFilters.length > 0) {
                     matchesFilter = categories.some(cat => activeFilters.includes(cat));
                 }
-
+                
+                const imageUrl = project.imagePath || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${project.id}%3C/text%3E%3C/svg%3E`;
+        
+        
                 if (matchesSearch && matchesFilter) {
                     visibleCount++;
                     html += `
                         <div id="project-${project.id}" class="project-detail-card fade-in project-item" data-title="${title}" data-categories="${categoriesString}">
                             <img 
-                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${project.id}%3C/text%3E%3C/svg%3E" 
+                                src="${imageUrl}" 
                                 alt="${project.title}"
                                 class="project-detail-image"
                                 onerror="handleImageError(this)"
