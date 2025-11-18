@@ -1096,7 +1096,7 @@
                 challenges: 'One of the challenges of designing this circuit was having to reset the capacitor being used for the integrator. Since I want the integrator to always start ramping from 0V, the capacitor needs to be discharged whenever the CO ',
                 results: 'Successfully designed and built the initial indication and processing stages. The system correctly responds to the input of CO sensor readings in order to treat it accordingly. Currently working on the final implementation stage using filters for full system integration.',
                 additionalInfo: 'This project aims to improve cities using a smart HVAC system in order to keep buildings and homes safe while saving electricity and costs.',
-                imagePath: './images/CO_Sensor.jpg'
+                imagePath: './image/CO_Sensor.jpg'
             },
 
             2: {
@@ -1116,7 +1116,8 @@
                 categories: ['MSP432', 'C', 'I2C', 'Microcontroller'],
                 challenges: 'Interfacing with the magnetic sensor via I2C required strict adherence to protocol timing. Furthermore, tuning the PID controller to ensure smooth turns without overshooting the target heading was a complex iterative process.',
                 results: 'The car successfully reads compass data and executes movement commands with high accuracy. The PID implementation significantly reduced oscillation during turns, resulting in smooth navigation.',
-                additionalInfo: 'Demonstrates proficiency in low-level communication protocols (I2C) and control theory application in robotics.'
+                additionalInfo: 'Demonstrates proficiency in low-level communication protocols (I2C) and control theory application in robotics.',
+                imagePath: './image/Compass_Controlled_Cart.jpg'
             },
             3: {
                 title: 'Vending Machine Moore FSM',
@@ -1135,7 +1136,8 @@
                 categories: ['Logisim', 'Breadboard', 'Digital'],
                 challenges: 'Minimizing the number of states and logic gates to fit the physical constraints of the breadboard and 74x series chips. Troubleshooting physical connection issues and propagation delays on the breadboard was also a key step.',
                 results: 'Successfully simulated the FSM in Logisim to validate state transitions. The physical circuit was constructed and debugged to match the simulation, correctly vending upon reaching the target total.',
-                additionalInfo: 'Highlights fundamental understanding of digital logic, state machines, and the transition from simulation to physical hardware.'
+                additionalInfo: 'Highlights fundamental understanding of digital logic, state machines, and the transition from simulation to physical hardware.',
+                imagePath: './image/Vending_Machine.jpg'
             },
             4: {
                 title: 'Mastermind on a Microcontroller',
@@ -1154,7 +1156,8 @@
                 categories: ['MSP432', 'C', 'Microcontroller'],
                 challenges: 'Designing a user-friendly interface using limited hardware (pushbuttons and LEDs) required creative state management. Validating guesses against the secret code involved complex array manipulation and logic checks.',
                 results: 'Prototypes a fully functional game where users can input guesses, receive feedback via LEDs, and trigger win/loss routines. The system runs reliably on the TI RSLK chassis hardware.',
-                additionalInfo: 'Showcases the ability to translate abstract logic and rules into structured embedded C code.'
+                additionalInfo: 'Showcases the ability to translate abstract logic and rules into structured embedded C code.',
+                imagePath: './image/Mastermind.jpg'
             },
             5: {
                 title: 'Implementation of ALU',
@@ -1173,7 +1176,8 @@
                 categories: ['Vivado', 'VHDL', 'Basys 3', 'FPGA'],
                 challenges: 'Defining correct timing constraints in Vivado and ensuring the logic handled edge cases (like overflow or negative numbers) correctly. Mapping the physical I/O of the Basys 3 board to the internal logic required precise constraint file configuration.',
                 results: 'Generated a valid bitstream and successfully programmed the Basys 3 board. All arithmetic and logical functions were verified using on-board switches as inputs and LEDs as outputs.',
-                additionalInfo: 'Demonstrates competence in Hardware Description Languages (VHDL) and the FPGA design flow using Xilinx Vivado.'
+                additionalInfo: 'Demonstrates competence in Hardware Description Languages (VHDL) and the FPGA design flow using Xilinx Vivado.',
+                imagePath: './image/Boolean_FPGA.jpg'
             },
             6: {
                 title: 'Puzzle Solving Autonomous Raspberry Pi Cart',
@@ -1192,7 +1196,8 @@
                 categories: ['Python', 'Raspberry Pi', 'Microcontroller'],
                 challenges: 'Developing a search algorithm that efficiently covers the grid without getting stuck in loops. translating the logical grid coordinates into physical motor movements and handling real-world friction/slippage.',
                 results: 'The cart successfully navigates the grid, identifies the unknown target coordinate, and executes the return path autonomously.',
-                additionalInfo: 'Combines high-level software algorithms (Python) with hardware control in a robotics context.'
+                additionalInfo: 'Combines high-level software algorithms (Python) with hardware control in a robotics context.',
+                imagePath: './image/Wumpus_World.jpg'
             },
             7: {
                 title: 'PI Controller Design',
@@ -1211,7 +1216,8 @@
                 categories: ['LTspice', 'Breadboard', 'Analog'],
                 challenges: 'Selecting the correct Resistor and Capacitor values to achieve the specific settling time (4s) and stability. Minimizing steady-state error in the physical implementation due to component tolerances.',
                 results: 'The simulation achieved the target steady-state response. The physical circuit was built and verified to match the simulation results with less than 5% error.',
-                additionalInfo: 'Proves understanding of control theory concepts implemented via analog hardware.'
+                additionalInfo: 'Proves understanding of control theory concepts implemented via analog hardware.',
+                imagePath: './image/PI_Controller.jpg'
             },
             8: {
                 title: 'PWM Control of an LED',
@@ -1230,7 +1236,8 @@
                 categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Microcontroller', 'Analog'],
                 challenges: 'Ensuring the linearity of the perceived brightness vs. duty cycle and verifying the signal integrity on the breadboard.',
                 results: 'Built a fully functional prototype where the user can smoothly adjust the LED brightness by changing the PWM duty cycle via the Arduino.',
-                additionalInfo: 'A foundational project demonstrating the link between software control (Arduino) and hardware behavior (LED brightness).'
+                additionalInfo: 'A foundational project demonstrating the link between software control (Arduino) and hardware behavior (LED brightness).',
+                imagePath: './image/PWM.jpg'
             }
         };
 
