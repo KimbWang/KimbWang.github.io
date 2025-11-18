@@ -1072,32 +1072,30 @@
 
     <div id="toast-container"></div>
 
-    <script>
+        <script>
         // --- DATA ---
         // UPDATED: Project Details with IDs reordered (1 = Most Recent)
         const projectDetails = {
             1: {
-                title: 'CO Sensing and Ventilating System',
+                title: 'CO Sensing & Dynamic Ventilation Control (Analog System)',
                 date: '2025-09-01', 
                 displayDate: 'Sep 2025 - Present',
-                description: 'A multi-stage safety system designed to detect carbon monoxide, filter signals, and control ventilation automatically.',
-                overview: 'This project uses analog circuit design to create an improved HVAC system for sensing and ventilating CO in buildings. The goal is to reduce wasted electricity used for ventilating rooms so that the fan is only triggered when necessary so workers remain in OSHA safe workplaces while the building owners can save costs in ventilation systems',
+                description: 'A two-milestone analog system to detect carbon monoxide, issue an alert, and dynamically control ventilation fan speed based on exposure duration for energy efficiency.',
+                overview: 'This project demonstrates a multi-stage, energy-efficient HVAC safety system built entirely using analog components. Milestone 1 (MS1) focuses on detection and indication, using a comparator to check CO sensor voltage against a fixed reference voltage. Milestone 2 (MS2) implements dynamic ventilation control, where the DC brushless fan speed (using PWM) increases proportionally to the duration of unsafe CO exposure, optimizing air exchange and conserving electricity and costs compared to simple ON/OFF systems. ',
                 features: [
-                    'Multi-stage system including CO sensing and ventilation control',
-                    'Initial indication stage using RC filter and comparator',
-                    'Visual LED output for indication of dangerous levels of CO',
-                    'Integrator configured to ramp 0-5V in 10s (when triggered ON)',
-                    'Automatic reset functionality for the capacitor (when triggered OFF)',
-                    '555 Timer based PWM on ramping voltage signal',
-                    'Adjustable duty cycle for ventilation control'
+                    '**MS1 Decision-Making:** The system utilizes an Op-Amp configured as a comparator to perform basic decision-making. The filtered sensor voltage ($V_{filter}$) is compared against a reference voltage ($V_{ref}$) set by a potentiometer, which simulates the $\\text{50 ppm}$ OSHA threshold for unsafe workplace exposure.',
+                    '**Integrator:** The $\\text{V}_{comp}$ output feeds into a two-stage op-amp circuit: a non-inverting inverter followed by an inverting integrator. This allows the output voltage ($V_{int}$) to ramp linearly from $0\\text{V}$ to $5\\text{V}$ over $\\text{10 seconds}$ while $\\text{V}_{comp}$ is HIGH.',
+                    '**Capacitor Reset Mechanism:** A second Op-Amp drives an **NMOS transistor (M1)**. When $\\text{V}_{comp}$ is LOW ($\\text{-5V}$), the NMOS turns ON, instantly discharging the integrating capacitor ($\\text{C}_{int}$) to $0\\text{V}$ to ensure the next ramp always starts correctly.',
+                    '**PWM Control:** The $\\text{V}_{int}$ signal is fed to the Control Voltage ($\\text{CV}$) pin of a **NE555 Timer** in astable configuration. As $\\text{V}_{int}$ ramps up, the resulting pulse signal\'s duty cycle increases, which accelerates the DC fan speed.',
+                    '**Motor Driver & Protection:** The PWM pulse signal drives an NMOS transistor (M2) controlling the DC fan\'s operation. A **flyback diode (D1)** is placed in parallel with the fan motor to protect the switching transistor from back-EMF generated when the motor is switched OFF.'
                 ],
-                categories: ['LTspice', 'Breadboard', 'Analog'],
-                challenges: 'One of the challenges of designing this circuit was having to reset the capacitor being used for the integrator. Since I want the integrator to always start ramping from 0V, the capacitor needs to be discharged whenever the CO ',
-                results: 'Successfully designed and built the initial indication and processing stages. The system correctly responds to the input of CO sensor readings in order to treat it accordingly. Currently working on the final implementation stage using filters for full system integration.',
-                additionalInfo: 'This project aims to improve cities using a smart HVAC system in order to keep buildings and homes safe while saving electricity and costs.',
-                imagePath: './images/CO_Sensor.jpg'
+                categories: ['LTspice', 'Analog', 'Op-Amps', '555 Timer', 'NMOS', 'RC Filter', 'Control Theory', 'HVAC'],
+                challenges: 'Achieving an immediate and reliable integrator reset was critical for energy efficiency. The solution involved bypassing the standard, slow parallel-resistor discharge method in favor of an active NMOS transistor switch, triggered by an op-amp comparator, to quickly connect the $\\text{C}_{int}$ capacitor to ground. Another tradeoff involved circuit stability versus sensitivity: setting the reference voltage too close to the noise floor can cause the comparator output (and LED) to flicker; while a solution like a Schmitt Trigger adds stability, it would unnecessarily waste energy by delaying the ventilation system\'s turn-off time. Component tolerances, especially for the $\\text{1 M}\\Omega$ resistor in the integrator, are a practical limitation, as they directly affect the **slope of the voltage ramp**.',
+                results: 'The system successfully executed two stages of control: basic indication (MS1) and dynamic speed control (MS2). Simulation confirmed linear voltage ramping for $\\text{V}_{int}$ and proportional increases in the 555 timer\'s **PWM duty cycle** when the dangerous condition is active. The active capacitor discharge was verified to successfully reset $\\text{V}_{int}$ to $0\\text{V}$ when the simulated CO risk ended. The use of a simple ramping function instead of complex PID control was chosen as a cost-effective trade-off, deemed appropriate for gases where levels change slowly.',
+                additionalInfo: 'Initial prototyping required switching the comparator op-amp from the $\\text{TL072IP}$ to the rail-to-rail $\\text{OP484}$ to ensure the output voltage reached the full $\\pm 5\\text{V}$ rails for stable operation in the MS2 blocks. Furthermore, the fan required a high-current $+5\\text{V}$ source (sourced from an external microcontroller like Arduino) for operation, demonstrating the need for external power stages in practical circuit design. **Access the full lab report and detailed simulation data plots via the primary file link below.**',
+                imagePath: './images/CO_Sensor.jpg',
+                primaryFile: './docs/ECSE2010_Project_Manual_MS2.pdf' // PDF Path
             },
-
             2: {
                 title: 'Compass Controlled TI RSLK Car',
                 date: '2025-04-02', 
@@ -1116,7 +1114,8 @@
                 challenges: 'Interfacing with the magnetic sensor via I2C required strict adherence to protocol timing. Furthermore, tuning the PID controller to ensure smooth turns without overshooting the target heading was a complex iterative process.',
                 results: 'The car successfully reads compass data and executes movement commands with high accuracy. The PID implementation significantly reduced oscillation during turns, resulting in smooth navigation.',
                 additionalInfo: 'Demonstrates proficiency in low-level communication protocols (I2C) and control theory application in robotics.',
-                imagePath: './images/Compass_Controlled_Cart.jpg'
+                imagePath: './images/Compass_Controlled_Cart.jpg',
+                primaryFile: './code/Compass_Controlled_Cart.c' // Code Path Example
             },
             3: {
                 title: 'Vending Machine Moore FSM',
@@ -1239,7 +1238,7 @@
                 imagePath: './images/PWM.jpg'
             }
         };
-
+        
         // --- GLOBAL STATE ---
         let activeFilters = [];
         let filtersCollapsed = false;
@@ -1255,7 +1254,7 @@
             document.getElementById('projectsPage').classList.remove('active');
             document.getElementById('projectDetailPage').classList.remove('active');
             document.getElementById('aboutPage').classList.remove('active');
-
+        
             if (page === 'home') {
                 document.getElementById('homePage').classList.add('active');
                 if (addToHistory) history.pushState({page: 'home'}, '', '#home');
@@ -1279,7 +1278,31 @@
         
             const container = document.getElementById('projectDetailContent');
             
+            // Use imagePath if available, otherwise fallback to SVG placeholder
             const imageUrl = project.imagePath || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${projectId}%3C/text%3E%3C/svg%3E`;
+        
+            // Conditional rendering for the primary file link
+            let fileLinkText = "View File";
+            if (project.primaryFile) {
+                if (project.primaryFile.toLowerCase().endsWith('.pdf')) {
+                    fileLinkText = "View Full Report";
+                } else if (project.primaryFile.toLowerCase().endsWith('.c') || project.primaryFile.toLowerCase().endsWith('.rar')) {
+                    fileLinkText = "View Main Code";
+                } else if (project.primaryFile.toLowerCase().endsWith('.py') || project.primaryFile.toLowerCase().endsWith('.rar')) {
+                    fileLinkText = "View Main Code";
+                } else if (project.primaryFile.toLowerCase().includes('github') || project.primaryFile.toLowerCase().includes('bitbucket')) {
+                    fileLinkText = "View Code Repository";
+                }
+            }
+        
+            const primaryFileHtml = project.primaryFile ? `
+                <h3 class="detail-section-title">Primary File/Documentation</h3>
+                <p>Access the main deliverable for this project:
+                    <a href="${project.primaryFile}" target="_blank" class="text-blue-400 hover:text-blue-300 hover:underline font-semibold transition duration-300">
+                        ${fileLinkText}
+                    </a>
+                </p>
+            ` : '';
             
             // Build the full-page HTML for the project
             container.innerHTML = `
@@ -1300,7 +1323,7 @@
                     <h3 class="detail-section-title">Project Overview</h3>
                     <p>${project.overview}</p>
         
-                    <h3 class="detail-section-title">Key Features</h3>
+                    ${primaryFileHtml} <h3 class="detail-section-title">Key Features</h3>
                     <ul>
                         ${project.features.map(feature => `<li>${feature}</li>`).join('')}
                     </ul>
@@ -1381,8 +1404,8 @@
             }
             container.innerHTML = html;
         }
-
-
+        
+        
         // --- 'ALL PROJECTS' PAGE FUNCTIONS ---
         function toggleView(mode) {
             currentView = mode;
@@ -1397,7 +1420,7 @@
                     btn.classList.remove('active');
                 }
             });
-
+        
             // Toggle class on container
             const container = document.getElementById('projectsListContainer');
             if (mode === 'grid') {
@@ -1406,36 +1429,36 @@
                 container.classList.remove('grid-view');
             }
         }
-
+        
         function renderProjectList() {
             const container = document.getElementById('projectsListContainer');
             let html = '';
-        
+            
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             let visibleCount = 0;
-        
+            
             const sortedProjects = Object.entries(projectDetails)
                 .map(([id, project]) => ({ id, ...project }))
                 .sort((a, b) => new Date(b.date) - new Date(a.date));
-        
+            
             sortedProjects.forEach(project => {
                 const title = project.title.toLowerCase();
                 const categoriesString = project.categories.join(' ').toLowerCase(); 
                 const categories = project.categories || [];
-        
+            
                 let matchesSearch = true;
                 if (searchInput) {
                     matchesSearch = title.includes(searchInput) || categoriesString.includes(searchInput);
                 }
-        
+            
                 let matchesFilter = true;
                 if (activeFilters.length > 0) {
                     matchesFilter = categories.some(cat => activeFilters.includes(cat));
                 }
                 
                 const imageUrl = project.imagePath || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${project.id}%3C/text%3E%3C/svg%3E`;
-        
-        
+            
+            
                 if (matchesSearch && matchesFilter) {
                     visibleCount++;
                     html += `
@@ -1476,7 +1499,7 @@
                     project.categories.forEach(cat => allCategories.add(cat));
                 }
             });
-
+        
             const container = document.getElementById('categoryFilterContainer');
             if (!container) return; 
             
@@ -1486,11 +1509,11 @@
             });
             container.innerHTML = html;
         }
-
+        
         function filterProjectList() {
             renderProjectList();
         }
-
+        
         function toggleFilter(event, category) {
             const button = event.target;
             const index = activeFilters.indexOf(category);
@@ -1502,7 +1525,7 @@
                 activeFilters.push(category); 
                 button.classList.add('active');
             }
-
+        
             renderProjectList(); 
         }
         
@@ -1519,7 +1542,7 @@
              document.getElementById('searchContainer').scrollIntoView({behavior: 'smooth'});
              renderProjectList(); 
         }
-
+        
         function clearAllFilters() {
             activeFilters = [];
             document.getElementById('searchInput').value = '';
@@ -1528,7 +1551,7 @@
             buttons.forEach(btn => {
                 btn.classList.remove('active');
             });
-
+        
             renderProjectList();
         }
         
@@ -1537,7 +1560,7 @@
             const btn = document.getElementById('toggleFiltersBtn');
             const panel = document.getElementById('filtersPanel');
             const searchInput = document.getElementById('searchInput'); 
-   
+        
             filtersCollapsed = !filtersCollapsed;
             
             if (filtersCollapsed) {
@@ -1552,7 +1575,7 @@
                 searchInput.style.display = 'block'; 
             }
         }
-
+        
         // --- OTHER HELPER FUNCTIONS ---
         function scrollToSection(sectionId) {
             // 1. If we are NOT on the home page
@@ -1579,17 +1602,17 @@
                 }
             }
         }
-
+        
         function toggleMobileMenu() {
             const navMenu = document.querySelector('.nav-menu');
             navMenu.classList.toggle('active');
         }
-
+        
         function closeMobileMenu() {
             const navMenu = document.querySelector('.nav-menu');
             navMenu.classList.remove('active');
         }
-
+        
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
@@ -1601,9 +1624,9 @@
                 <span style="color: #22c55e; font-weight: bold; font-size: 1.2em;">${icon}</span>
                 <span>${message}</span>
             `;
-
+        
             container.appendChild(toast);
-
+        
             setTimeout(() => {
                 toast.classList.add('hiding');
                 toast.addEventListener('animationend', () => {
@@ -1611,7 +1634,7 @@
                 });
             }, 3000);
         }
-
+        
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 showToast('Email copied to clipboard!');
@@ -1620,7 +1643,7 @@
                 showToast('Failed to copy email', 'error');
             });
         }
-
+        
         function handleExternalLink(platform) {
             const links = {
                 'linkedin': 'https://www.linkedin.com/in/wangkimb/',
@@ -1631,13 +1654,13 @@
                 window.open(links[platform], '_blank');
             }
         }
-
+        
         function handleImageError(img) {
             img.onerror = null; 
             img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' style='background:%23111827'%3E%3Ctext x='50%25' y='50%25' font-family='monospace' fill='%2322c55e' font-size='20' text-anchor='middle'%3E[IMAGE_DATA_MISSING]%3C/text%3E%3C/svg%3E";
             img.style.border = "1px dashed #22c55e";
         }
-
+        
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             populateFilters();
@@ -1658,7 +1681,7 @@
                     navigatePage('home', false);
                 }
             });
-
+        
             const hash = window.location.hash;
             if (hash === '#projects') {
                 navigatePage('projects', false);
@@ -1669,7 +1692,7 @@
                 showProjectPage(id, false);
             }
         });
-
+        
         document.addEventListener('click', function(event) {
             const nav = document.querySelector('nav');
             const navMenu = document.querySelector('.nav-menu');
@@ -1678,7 +1701,7 @@
                  navMenu.classList.remove('active');
             }
         });
-    </script>
+        </script>
 
 </body>
 </html>
