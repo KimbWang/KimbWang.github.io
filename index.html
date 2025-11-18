@@ -1094,7 +1094,7 @@
                 results: 'The system successfully executed two stages of control: basic indication (MS1) and dynamic speed control (MS2). Simulation confirmed linear voltage ramping for $\\text{V}_{int}$ and proportional increases in the 555 timer\'s **PWM duty cycle** when the dangerous condition is active. The active capacitor discharge was verified to successfully reset $\\text{V}_{int}$ to $0\\text{V}$ when the simulated CO risk ended. The use of a simple ramping function instead of complex PID control was chosen as a cost-effective trade-off, deemed appropriate for gases where levels change slowly.',
                 additionalInfo: 'Initial prototyping required switching the comparator op-amp from the $\\text{TL072IP}$ to the rail-to-rail $\\text{OP484}$ to ensure the output voltage reached the full $\\pm 5\\text{V}$ rails for stable operation in the MS2 blocks. Furthermore, the fan required a high-current $+5\\text{V}$ source (sourced from an external microcontroller like Arduino) for operation, demonstrating the need for external power stages in practical circuit design. **Access the full lab report and detailed simulation data plots via the primary file link below.**',
                 imagePath: './images/CO_Sensor.jpg',
-                primaryFile: './docs/ECSE2010_Project_Manual_MS2.pdf' // PDF Path
+                primaryFile: './docs/ECSE2010_MS2_Omega_ProjectManual.pdf' // PDF Path
             },
             2: {
                 title: 'Compass Controlled TI RSLK Car',
