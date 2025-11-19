@@ -1142,7 +1142,7 @@
                 title: 'Mastermind on a Microcontroller',
                 date: '2025-02-01',
                 displayDate: 'Feb 2025',
-                description: 'An embedded implementation of the classic Mastermind game using the MSP432 and custom hardware peripherals.',
+                description: 'An embedded implementation of the classic Mastermind game using the MSP432.',
                 overview: 'Designed and implemented the logic for the Mastermind game on an MSP432 microcontroller. The project required translating game rules into C code and managing hardware inputs/outputs for user interaction.',
                 features: [
                     'Complete game logic implementation in C',
@@ -1153,18 +1153,18 @@
                     'Win/Loss state machine management'
                 ],
                 categories: ['MSP432', 'C', 'Microcontroller'],
-                challenges: 'Designing a user-friendly interface using limited hardware (pushbuttons and LEDs) required creative state management. Validating guesses against the secret code involved complex array manipulation and logic checks.',
-                results: 'Prototypes a fully functional game where users can input guesses, receive feedback via LEDs, and trigger win/loss routines. The system runs reliably on the TI RSLK chassis hardware.',
-                additionalInfo: 'Showcases the ability to translate abstract logic and rules into structured embedded C code.',
+                challenges: 'Setting up multiple timers for different stages of the game and considering the unique user cases. There needed to be debouncing and delays set for in case the bumper buttons double pressed or were spammed. There was also a necessity to create a response where no inputs were put in where after 20-30s, the guess would be considered wrong.',
+                results: 'Prototypes a fully functional game where users can input guesses, receive feedback via LEDs and text, and correctly trigger win/loss routines. The system runs reliably and consistently with multiple uses and randomized problems.',
+                additionalInfo: 'Demonstrates a translation of gane logic and rules into embedded C code.',
                 imagePath: './images/Mastermind.jpg',
-                primaryFile: './code/Mastermind.c' // Code Path Example
+                primaryFile: './code/Mastermind.c'
             },
             5: {
                 title: 'Implementation of ALU for Boolean Functions',
                 date: '2025-02-02',
                 displayDate: 'Feb 2025',
                 description: 'Design of an Arithmetic Logic Unit (ALU) using VHDL on a Basys 3 FPGA board.',
-                overview: 'Authored VHDL code to create a 4-bit ALU capable of performing addition, subtraction, bit parity checks, and comparisons. The design was synthesized and deployed to a Basys 3 FPGA.',
+                overview: 'Authored VHDL code to create a 4-bit ALU capable of performing addition, subtraction, bit parity, and comparisons. The design was synthesized and deployed to a Basys 3 FPGA using on-board switches and LEDs.',
                 features: [
                     '4-bit Arithmetic Logic Unit design',
                     'Operations: Adder, Subtractor, Bit Parity, Comparator',
@@ -1174,9 +1174,9 @@
                     'Hardware testing with switches and LEDs'
                 ],
                 categories: ['Vivado', 'VHDL', 'Basys 3', 'FPGA'],
-                challenges: 'Defining correct timing constraints in Vivado and ensuring the logic handled edge cases (like overflow or negative numbers) correctly. Mapping the physical I/O of the Basys 3 board to the internal logic required precise constraint file configuration.',
-                results: 'Generated a valid bitstream and successfully programmed the Basys 3 board. All arithmetic and logical functions were verified using on-board switches as inputs and LEDs as outputs.',
-                additionalInfo: 'Demonstrates competence in Hardware Description Languages (VHDL) and the FPGA design flow using Xilinx Vivado.',
+                challenges: 'It was difficult to deal with situations where carry was involved in adding and subtracting especially. An additional challenge was also being able to switch between the different functions with a set of switches to select which function you want to test. This was done by creating a "master" file that decided the function being used.',
+                results: 'Generated a valid bitstream and successfully programmed the Basys 3 board. All arithmetic and logical functions were verified using on-board switches as inputs and LEDs as outputs and transitioned between functions as expected.',
+                additionalInfo: 'Utilization of VHDL on Xilinx Vivado to perform multiple arithmetic functions verified on an FPGA',
                 imagePath: './images/Boolean_FPGA.jpg',
                 primaryFile: './docs/ECSE2610_StudioA_Omega.pdf'
             },
@@ -1185,7 +1185,7 @@
                 date: '2024-12-01',
                 displayDate: 'Dec 2024',
                 description: 'A pathfinding cart powered by Raspberry Pi that navigates a grid of unknown dangers to find a treasure.',
-                overview: 'Designed a strategy and programmed in Python for a Raspberry Pi based cart to navigate a 4x4 physical grid. The robot is given information on what can be on adjacent grids and determines a path until it finds treasure and finds its way back to the start safely. On the grid, there are "pits" where when adjacent to, the cart will feel a "breeze". There is one Wumpus which ',
+                overview: 'Designed a strategy and programmed in Python for a Raspberry Pi based cart to navigate a 4x4 physical grid. This project was designed to solve the Wumpus World Problem which is described here: https://www.geeksforgeeks.org/machine-learning/ai-the-wumpus-world-description/',
                 features: [
                     'Python programming for high-level control',
                     'Pathfinding algorithm implementation',
@@ -1195,9 +1195,9 @@
                     'Return-to-home functionality'
                 ],
                 categories: ['Python', 'Raspberry Pi', 'Microcontroller'],
-                challenges: 'Developing a search algorithm that keeps the cart away from dangerous grids with holes and Wumpus and also finding the treasure. Many generated grid cases had multiple holes in adjacent grids and the algorithm had trouble sometimes deciding how many holes there really were and where they were located in the grid. It was also possible that the cart ended up in an infinite loop of traveling the coordinates that it knew was safe.',
-                results: 'The cart successfully navigates the grid, identifies the unknown target coordinate, and executes the return path autonomously.',
-                additionalInfo: 'Combines high-level software algorithms (Python) with hardware control in a robotics context.',
+                challenges: 'Developing a successful starting strategy to consistently solve multiple grid examples. Many generated grid cases had multiple holes in adjacent grids and the algorithm had trouble sometimes deciding how many holes there really were and where they were located in the grid. It was also possible that the cart ended up in an infinite loop of traveling the coordinates that it knew was safe.',
+                results: 'The cart successfully navigates the grid, identifies where holes, Wumpus, and treasure is, safely navigated to get the treasure and then returned to the starting point in the shortest possible safe path.',
+                additionalInfo: 'Uses logical thinking, python programming, and microcontroller motor controls to implement.',
                 imagePath: './images/Wumpus.jpg',
                 primaryFile: './code/Wumpus_World.zip'
             },
@@ -1206,7 +1206,7 @@
                 date: '2024-11-01',
                 displayDate: 'Nov 2024',
                 description: 'Analog design and simulation of a Proportional-Integral (PI) controller using Op-Amps.',
-                overview: 'Designed and simulated an analog PI controller in LTspice. The circuit utilizes two inverting operational amplifiers and a parallel RC circuit to achieve a steady-state voltage matching the input within 4 seconds.',
+                overview: 'Designed and simulated an analog PI controller in LTspice. The circuit utilizes two inverting operational amplifiers and a parallel RC circuit to achieve a steady-state voltage matching the input within 3 seconds.',
                 features: [
                     'Analog PI Controller architecture',
                     'Inverting Op-Amp configuration',
@@ -1216,9 +1216,9 @@
                     'Error minimization (< 5%)'
                 ],
                 categories: ['LTspice', 'Breadboard', 'Analog'],
-                challenges: 'Selecting the correct Resistor and Capacitor values to achieve the specific settling time (4s) and stability. Minimizing steady-state error in the physical implementation due to component tolerances.',
+                challenges: 'Selecting the correct resistor and capacitor values to achieve the specific settling time (3s) and stability. Additionally, the first design was attempting create a PI controller with a single op amp but I was not able to come up with a functioning design so it was changed to 2 inverting op amps instead.',
                 results: 'The simulation achieved the target steady-state response. The physical circuit was built and verified to match the simulation results with less than 5% error.',
-                additionalInfo: 'Proves understanding of control theory concepts implemented via analog hardware.',
+                additionalInfo: 'Proves understanding of control theory concepts implemented in analog circuit design.',
                 imagePath: './images/PI_Controller.jpg',
                 primaryFile: './docs/ECSE1010_Lab2_Omega_POC.pdf'
             },
@@ -1226,8 +1226,8 @@
                 title: 'PWM Control of an LED',
                 date: '2024-10-01',
                 displayDate: 'Oct 2024',
-                description: 'A user-controlled dimmable LED system using Arduino and PWM signaling.',
-                overview: 'Designed a circuit to control LED brightness through Pulse Width Modulation (PWM). The project involved LTspice simulation, Arduino programming for duty cycle control, and physical validation.',
+                description: 'A user-controlled dimmable LED system using PWM.',
+                overview: 'Designed a circuit to control LED brightness through Pulse Width Modulation (PWM) using a voltage input. The project involved LTspice simulation, Arduino programming for duty cycle control, and physical validation.',
                 features: [
                     'PWM signal generation',
                     'Arduino R4 programming',
@@ -1237,9 +1237,7 @@
                     'User-controlled interface'
                 ],
                 categories: ['LTspice', 'MATLAB', 'Arduino', 'Breadboard', 'Microcontroller', 'Analog', 'Digital'],
-                challenges: 'Ensuring the linearity of the perceived brightness vs. duty cycle and verifying the signal integrity on the breadboard.',
-                results: 'Built a fully functional prototype where the user can smoothly adjust the LED brightness by changing the PWM duty cycle via the Arduino.',
-                additionalInfo: 'A foundational project demonstrating the link between software control (Arduino) and hardware behavior (LED brightness).',
+                results: 'Built a functional circuit where the user can smoothly adjust the LED brightness by turning a potentiometer which reflected a change in PWM duty cycle via the Arduino.',
                 imagePath: './images/PWM.jpg',
                 primaryFile: './docs/ECSE1010_Lab1_Omega_POC.pdf'
             }
