@@ -66,6 +66,7 @@
             letter-spacing: 0.1em;
             cursor: pointer;
             transition: color 0.2s ease;
+            text-decoration: none; /* Ensure anchors don't have default underline */
         }
         
         .nav-link:hover {
@@ -184,7 +185,7 @@
             border: none;
             font-size: 0.95rem;
             box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-        }w
+        }
 
         .cta-button:hover {
             transform: translateY(-3px);
@@ -264,9 +265,9 @@
         }
         
         .project-detail-card .project-detail-tags {
-            margin-top: auto;     
+            margin-top: auto;       
             margin-bottom: 0.5rem; 
-            padding-top: 1rem;     
+            padding-top: 1rem;      
         }
         
         @media (max-width: 768px) {
@@ -836,9 +837,12 @@
             
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
             
-            <div class="nav-menu hidden md:flex items-center ml-auto"> <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('home'); closeMobileMenu()">Home</a>
+            <div class="nav-menu hidden md:flex items-center ml-auto"> 
+                <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('home'); closeMobileMenu()">Home</a>
                 <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('about'); closeMobileMenu()">About</a>
                 <a href="#" class="nav-link" onclick="event.preventDefault(); navigatePage('projects'); closeMobileMenu()">Projects</a>
+                
+                <a href="./docs/wangk_Resume.pdf" target="_blank" class="nav-link" onclick="closeMobileMenu()">Resume</a>
                 
                 <a href="#contact" class="nav-link nav-link-cta" onclick="event.preventDefault(); scrollToSection('contact'); closeMobileMenu()">Contact</a>
             </div>
@@ -1092,7 +1096,7 @@
                 ],
                 categories: ['LTspice','Breadboard', 'Analog', 'Digital'],
                 challenges: 'The first design of the comparator used a TL072IP which is a non rail-to-rail op amp which needed to be changed for a rail-to-rail op amp such as the OP484 when implementing the integratorsince the output had to reach a full 5V to reach our intended maximum duty cycle. There were also difficulties with powering the DC fan as it required 0.2A on the datasheet in order to run and the voltage source being used originally had a maximum of 500mA so a simple fix was to use a desktop power source. And the greatest challenge for this lab was actually getting the CO sensor to operate as there was no way to safely generate and test the circuit in an environment with higher CO and so a potentiometer was used instead to simulate different measurements of CO that would have output from the sensor.',
-                results: 'With many iterations of fixes, the circuit was able to operate as expected. The input to be controlled is the CO sensor which was replaced by a potentiometer to easily make changes. When the sensor voltage was higher than the reference voltage, the comparator output became HIGH and a LED turned on. Then with the addition of the ventilation system, when the comparator was HIGH, the DC fan would turn on and receive a pulse input. As time went on, the duty cycle of the pulse signal increased so the fan would be on longer than off for each period until it was ultimately staying on with 100% duty cycle. In the final stage, the alarm system will simply have a constant beeping noise output from a speaker as long as the comparator output is HIGH. Then when the sensor voltage is changed so that is is lower than the reference voltage, the comparator output is LOW and the LED is off, the fan is off, and the speaker will play no sound.',
+                results: 'With many iterations of fixes, the circuit was able to operate as expected. The input to be controlled is the CO sensor which was replaced by a potentiometer to easily make changes. When the sensor voltage was higher than the reference voltage, the comparator output became HIGH and a LED turned on. Then with the addition of the ventilation system, when the comparator was HIGH, the DC fan would turn on and receive a pulse input. As time went on, the duty cycle of the pulse signal increased so the fan would be on longer than off for each period until it was ultimately staying on with 100% duty cycle. In the final stage, the alarm system will simply have a constant beeping noise output from a speaker as long as the comparator output is HIGH. Then when the sensor voltage is changed so that is is lower than the reference voltage, the comparator output is LOW and the LED is off, and the fan is off, and the speaker will play no sound.',
                 additionalInfo: 'For the final stage, there will be a goal to use recycled parts from electronics waste to reuse a speaker or oscillator circuit as part of the alarm system.',
                 imagePath: './images/CO_Sensor.jpg',
                 primaryFile: './docs/ECSE2010_MS2_Omega_ProjectManual.pdf'
