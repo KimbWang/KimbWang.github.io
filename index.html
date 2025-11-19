@@ -1330,16 +1330,17 @@
                     
                     <h3 class="detail-section-title">Project Overview</h3>
                     <p>${project.overview}</p>
+                    
+                    <h3 class="detail-section-title">Technical Skills</h3>
+                    <div class="project-detail-tags">
+                        ${project.categories.map(cat => `<span class="project-detail-tag">${cat}</span>`).join('')}
+                    </div>
         
                     ${primaryFileHtml} <h3 class="detail-section-title">Key Features</h3>
                     <ul>
                         ${project.features.map(feature => `<li>${feature}</li>`).join('')}
                     </ul>
         
-                    <h3 class="detail-section-title">Technical Skills</h3>
-                    <div class="project-detail-tags">
-                        ${project.categories.map(cat => `<span class="project-detail-tag">${cat}</span>`).join('')}
-                    </div>
         
                     <h3 class="detail-section-title">Challenges & Solutions</h3>
                     <p>${project.challenges}</p>
