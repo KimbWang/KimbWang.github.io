@@ -1077,22 +1077,22 @@
         // UPDATED: Project Details with IDs reordered (1 = Most Recent)
         const projectDetails = {
             1: {
-                title: 'CO Sensing & Dynamic Ventilation Control (Analog System)',
+                title: 'CO Sensing, Ventilating, and Alarming System',
                 date: '2025-09-01', 
                 displayDate: 'Sep 2025 - Present',
-                description: 'A two-milestone analog system to detect carbon monoxide, issue an alert, and dynamically control ventilation fan speed based on exposure duration for energy efficiency.',
-                overview: 'This project demonstrates a multi-stage, energy-efficient HVAC safety system built entirely using analog components. Milestone 1 (MS1) focuses on detection and indication, using a comparator to check CO sensor voltage against a fixed reference voltage. Milestone 2 (MS2) implements dynamic ventilation control, where the DC brushless fan speed (using PWM) increases proportionally to the duration of unsafe CO exposure, optimizing air exchange and conserving electricity and costs compared to simple ON/OFF systems. ',
+                description: 'A multi-stage CO sensing, ventilating, and alarming system. Intended to make CO systems in buildings more energy and cost efficient while maintaining safety requirements for working conditions.',
+                overview: 'This system relies on 3 stages involving decision-making depending on a sensor input from reading levels of CO, then can start the ventilation system and alarming system to ensure the safety of workers. These stages involve doing DC motor controls as well as first and second order filtering.',
                 features: [
-                    'Decision-Making: The system utilizes an Op-Amp configured as a comparator to perform basic decision-making. The filtered sensor voltage ($V_{filter}$) is compared against a reference voltage ($V_{ref}$) set by a potentiometer, which simulates the $\\text{50 ppm}$ OSHA threshold for unsafe workplace exposure.',
-                    'Integrator: The $\\text{V}_{comp}$ output feeds into a two-stage op-amp circuit: a non-inverting inverter followed by an inverting integrator. This allows the output voltage ($V_{int}$) to ramp linearly from $0\\text{V}$ to $5\\text{V}$ over $\\text{10 seconds}$ while $\\text{V}_{comp}$ is HIGH.',
-                    'Capacitor Reset Mechanism: A second Op-Amp drives an **NMOS transistor (M1)**. When $\\text{V}_{comp}$ is LOW ($\\text{-5V}$), the NMOS turns ON, instantly discharging the integrating capacitor ($\\text{C}_{int}$) to $0\\text{V}$ to ensure the next ramp always starts correctly.',
-                    'PWM Control: The $\\text{V}_{int}$ signal is fed to the Control Voltage ($\\text{CV}$) pin of a **NE555 Timer** in astable configuration. As $\\text{V}_{int}$ ramps up, the resulting pulse signal\'s duty cycle increases, which accelerates the DC fan speed.',
-                    'Motor Driver & Protection: The PWM pulse signal drives an NMOS transistor (M2) controlling the DC fan\'s operation. A **flyback diode (D1)** is placed in parallel with the fan motor to protect the switching transistor from back-EMF generated when the motor is switched OFF.'
+                    'Involved decision-making using a comparator with inputs from a reference voltage for 50ppm (OSHA Regulations) and the analog output of a MQ-7 CO Sensor to either output HIGH or LOW indicating if there are dangerous levels of CO present.',
+                    'Ventilation stage uses an integrator to create a ramping voltage from 0-5V in the time of 10s which outputs to an astable multivibrator to do PWM based on the input voltage',
+                    'Integrator includes a capacitor reset function so that when the comparator output becomes LOW, the capacitor is discharged so that when comparator output is HIGH again, the ramping voltage always starts from 0V.',
+                    'The astable multivibrator made using a 555 Timer generates a pulse output with an increasing duty cycle % as the input voltage from the integrator is increasing.',
+                    'Final Stage for first and second order filtering is a work in progress but aims to create an alarm system that is also triggered by the comparator output.'
                 ],
                 categories: ['LTspice','Breadboard', 'Analog', 'Digital'],
-                challenges: 'Achieving an immediate and reliable integrator reset was critical for energy efficiency. The solution involved bypassing the standard, slow parallel-resistor discharge method in favor of an active NMOS transistor switch, triggered by an op-amp comparator, to quickly connect the $\\text{C}_{int}$ capacitor to ground. Another tradeoff involved circuit stability versus sensitivity: setting the reference voltage too close to the noise floor can cause the comparator output (and LED) to flicker; while a solution like a Schmitt Trigger adds stability, it would unnecessarily waste energy by delaying the ventilation system\'s turn-off time. Component tolerances, especially for the $\\text{1 M}\\Omega$ resistor in the integrator, are a practical limitation, as they directly affect the **slope of the voltage ramp**.',
-                results: 'The system successfully executed two stages of control: basic indication (MS1) and dynamic speed control (MS2). Simulation confirmed linear voltage ramping for $\\text{V}_{int}$ and proportional increases in the 555 timer\'s **PWM duty cycle** when the dangerous condition is active. The active capacitor discharge was verified to successfully reset $\\text{V}_{int}$ to $0\\text{V}$ when the simulated CO risk ended. The use of a simple ramping function instead of complex PID control was chosen as a cost-effective trade-off, deemed appropriate for gases where levels change slowly.',
-                additionalInfo: 'Initial prototyping required switching the comparator op-amp from the $\\text{TL072IP}$ to the rail-to-rail $\\text{OP484}$ to ensure the output voltage reached the full $\\pm 5\\text{V}$ rails for stable operation in the MS2 blocks. Furthermore, the fan required a high-current $+5\\text{V}$ source (sourced from an external microcontroller like Arduino) for operation, demonstrating the need for external power stages in practical circuit design. **Access the full lab report and detailed simulation data plots via the primary file link below.**',
+                challenges: 'The first design of the comparator used a TL072IP which is a non rail-to-rail op amp which needed to be changed for a rail-to-rail op amp such as the OP484 when implementing the integratorsince the output had to reach a full 5V to reach our intended maximum duty cycle. There were also difficulties with powering the DC fan as it required 0.2A on the datasheet in order to run and the voltage source being used originally had a maximum of 500mA so a simple fix was to use a desktop power source. And the greatest challenge for this lab was actually getting the CO sensor to operate as there was no way to safely generate and test the circuit in an environment with higher CO and so a potentiometer was used instead to simulate different measurements of CO that would have output from the sensor.',
+                results: 'With many iterations of fixes, the circuit was able to operate as expected. The input to be controlled is the CO sensor which was replaced by a potentiometer to easily make changes. When the sensor voltage was higher than the reference voltage, the comparator output became HIGH and a LED turned on. Then with the addition of the ventilation system, when the comparator was HIGH, the DC fan would turn on and receive a pulse input. As time went on, the duty cycle of the pulse signal increased so the fan would be on longer than off for each period until it was ultimately staying on with 100% duty cycle. In the final stage, the alarm system will simply have a constant beeping noise output from a speaker as long as the comparator output is HIGH. Then when the sensor voltage is changed so that is is lower than the reference voltage, the comparator output is LOW and the LED is off, the fan is off, and the speaker will play no sound.',
+                additionalInfo: 'For the final stage, there will be a goal to use recycled parts from electronics waste to reuse a speaker or oscillator circuit as part of the alarm system.',
                 imagePath: './images/CO_Sensor.jpg',
                 primaryFile: './docs/ECSE2010_MS2_Omega_ProjectManual.pdf'
             },
@@ -1100,8 +1100,8 @@
                 title: 'Compass Controlled TI RSLK Car',
                 date: '2025-04-02', 
                 displayDate: 'Apr 2025',
-                description: 'An autonomous robotics project using magnetic sensor feedback and PID control for precise navigation.',
-                overview: 'Developed an autonomous vehicle using the TI RSLK platform. The car utilizes a magnetometer (compass) to determine its heading and makes real-time motor adjustments to follow specific directional instructions.',
+                description: 'A microcontroller powered Car that can be "remote" controlled using a magnetic sensor for directions.',
+                overview: 'Programmed a vehicle using the TI RSLK platform in C. The car utilizes a magnetometer (compass) its heading and roll date to make real-time motor adjustments to follow directional instructions based on a user rotating the magnetometer.',
                 features: [
                     'Integration with MSP432 microcontroller',
                     'I2C communication protocol implementation',
@@ -1111,9 +1111,9 @@
                     'Closed-loop feedback system'
                 ],
                 categories: ['MSP432', 'C', 'I2C', 'Microcontroller'],
-                challenges: 'Interfacing with the magnetic sensor via I2C required strict adherence to protocol timing. Furthermore, tuning the PID controller to ensure smooth turns without overshooting the target heading was a complex iterative process.',
-                results: 'The car successfully reads compass data and executes movement commands with high accuracy. The PID implementation significantly reduced oscillation during turns, resulting in smooth navigation.',
-                additionalInfo: 'Demonstrates proficiency in low-level communication protocols (I2C) and control theory application in robotics.',
+                challenges: 'Tuning the PID controller to ensure smooth turns without overshooting the target heading was a complex iterative process, it was never 100% perfect but would be able to adjust to changes within 1s of the input. Another challenge was having the correct syntax for working with different types of variables that were pulled from different measurement functions which was solved after checking measurement values at each stage to see if it matched expected values.',
+                results: 'The car was successfully reading the compass data and executing movement commands with good accuracy. The PID implementation resulted in mostly smooth movements and even with large movements of the compass, would adjust and smooth out within 1s.',
+                additionalInfo: 'Utilizes I2C data packet protocols as well as a PID control system.',
                 imagePath: './images/Compass_Controlled_Cart.jpg',
                 primaryFile: './code/Compass_Controlled_Cart.c'
             },
@@ -1121,21 +1121,22 @@
                 title: 'Vending Machine Moore FSM',
                 date: '2025-04-01',
                 displayDate: 'Apr 2025',
-                description: 'A digital logic project simulating a vending machine using a multi-state Moore Finite State Machine.',
-                overview: 'Designed a complex state machine to track coin inputs and determine when a total is reached to "vend" an item. The logic was simulated on Logisim and then implemented physically using 74x series logic chips.',
+                description: 'A Moore Finite State Machine that models a vending machine system.',
+                overview: 'Designed a finite state machine taking coin inputs and indicated when a total is reached to allow an item to be purchased. The logic design was first simulated on Logisim with inputs of nickels (5) and dimes (10) and would allow an item to be purchased only at (20). This design was then built on a breadboard using the 74x series chips with button inputs and LED outputs.',
                 features: [
                     'Multi-state Moore FSM architecture',
-                    'Coin input tracking logic',
+                    'Coin input sequential logic',
                     'Logisim simulation and validation',
                     'Physical implementation with 74x series chips',
                     'State transition management',
                     'Circuit troubleshooting and debugging'
                 ],
                 categories: ['Logisim', 'Breadboard', 'Digital'],
-                challenges: 'Minimizing the number of states and logic gates to fit the physical constraints of the breadboard and 74x series chips. Troubleshooting physical connection issues and propagation delays on the breadboard was also a key step.',
-                results: 'Successfully simulated the FSM in Logisim to validate state transitions. The physical circuit was constructed and debugged to match the simulation, correctly vending upon reaching the target total.',
-                additionalInfo: 'Highlights fundamental understanding of digital logic, state machines, and the transition from simulation to physical hardware.',
-                imagePath: './images/Vending_Machine.jpg'
+                challenges: 'The design the logic circuit had to take considerations for possible glitches and timing delays when being built physically which required reading datasheets to see the timing delays for each gate being used. To get around this, usually buffers or inverters could be used to align the timing. Another unexpected issue was powering LEDs since the circuit used one power source to power multiple ICs and multiple LEDs, there was not enough current to actually turn the LEDs on.',
+                results: 'The design, simulations, and built circuit were successful. With 3 button inputs for a nickel, dime, and "vend", there were 3 LEDs to indicate the total put into the vending machine at each state. When the total required was met, with pushing the "vend" button, the LEDs were reset and the system was fully reset.',
+                additionalInfo: 'Used digital logic design that also involved using PUN/PDN to have operational inputs.',
+                imagePath: './images/Vending_Machine.jpg',
+                primaryFile: '.docs/ECSE2610_StudioC_Omega.pdf'
             },
             4: {
                 title: 'Mastermind on a Microcontroller',
@@ -1159,7 +1160,7 @@
                 primaryFile: './code/Mastermind.c' // Code Path Example
             },
             5: {
-                title: 'Implementation of ALU',
+                title: 'Implementation of ALU for Boolean Functions',
                 date: '2025-02-02',
                 displayDate: 'Feb 2025',
                 description: 'Design of an Arithmetic Logic Unit (ALU) using VHDL on a Basys 3 FPGA board.',
@@ -1176,10 +1177,11 @@
                 challenges: 'Defining correct timing constraints in Vivado and ensuring the logic handled edge cases (like overflow or negative numbers) correctly. Mapping the physical I/O of the Basys 3 board to the internal logic required precise constraint file configuration.',
                 results: 'Generated a valid bitstream and successfully programmed the Basys 3 board. All arithmetic and logical functions were verified using on-board switches as inputs and LEDs as outputs.',
                 additionalInfo: 'Demonstrates competence in Hardware Description Languages (VHDL) and the FPGA design flow using Xilinx Vivado.',
-                imagePath: './images/Boolean_FPGA.jpg'
+                imagePath: './images/Boolean_FPGA.jpg',
+                primaryFile: './docs/ECSE2610_StudioA_Omega.pdf'
             },
             6: {
-                title: 'Puzzle Solving Autonomous Raspberry Pi Cart',
+                title: 'Puzzle Solving Raspberry Pi Cart',
                 date: '2024-12-01',
                 displayDate: 'Dec 2024',
                 description: 'A pathfinding cart powered by Raspberry Pi that navigates a grid of unknown dangers to find a treasure.',
