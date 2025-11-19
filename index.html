@@ -1098,25 +1098,22 @@
                 primaryFile: './docs/ECSE2010_MS2_Omega_ProjectManual.pdf'
             },
             2: {
-                title: 'Compass Controlled TI RSLK Car',
-                date: '2025-04-02', 
-                displayDate: 'Apr 2025',
-                description: 'A microcontroller powered Car that can be "remote" controlled using a magnetic sensor for directions.',
-                overview: 'Programmed a vehicle using the TI RSLK platform in C. The car utilizes a magnetometer (compass) its heading and roll date to make real-time motor adjustments to follow directional instructions based on a user rotating the magnetometer.',
+                title: 'LED Sequencer PCB Design',
+                date: '2025-11-01', 
+                displayDate: 'Nov 2025',
+                description: 'A PCB design for an LED Sequencer circuit on Altium',
+                overview: 'Altium Designer was used to draw a schematic for an LED sequencer circuit, then mapped out and made routings on the PCB.',
                 features: [
-                    'Integration with MSP432 microcontroller',
-                    'I2C communication protocol implementation',
-                    'GPIO interaction with magnetic sensors',
-                    'PID control algorithm for motor movements',
-                    'Real-time heading calculation',
-                    'Closed-loop feedback system'
+                    'Altium Designer Professional License',
+                    'Digital and Analog Circuit Design',
+                    'PCB Layout/Formatting',
                 ],
-                categories: ['MSP432', 'C', 'I2C', 'Microcontroller'],
-                challenges: 'Tuning the PID controller to ensure smooth turns without overshooting the target heading was a complex iterative process, it was never 100% perfect but would be able to adjust to changes within 1s of the input. Another challenge was having the correct syntax for working with different types of variables that were pulled from different measurement functions which was solved after checking measurement values at each stage to see if it matched expected values.',
-                results: 'The car was successfully reading the compass data and executing movement commands with good accuracy. The PID implementation resulted in mostly smooth movements and even with large movements of the compass, would adjust and smooth out within 1s.',
-                additionalInfo: 'Utilizes I2C data packet protocols as well as a PID control system.',
-                imagePath: './images/Compass_Controlled_Cart.jpg',
-                primaryFile: './code/Compass_Controlled_Cart.c'
+                categories: ['Altium'],
+                challenges: 'Figuring out the optimal paths for wiring components on the PCB to use both minimal wire and consider rules of PCB component locations.',
+                results: 'The PCB was successfully formatted and a BOM generated to go with it.',
+                additionalInfo: 'Used for a course to get an Altium Designer Certification.',
+                imagePath: './images/LED_PCB.jpg',
+                primaryFile: './docs/LED_PCB.zip'
             },
             3: {
                 title: 'Compass Controlled TI RSLK Car',
