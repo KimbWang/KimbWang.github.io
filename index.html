@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Kimberly Wang, Electrical Engineering Student">
-    <meta name="author" content="Kimberly Wang">
+    
     <title>KWang - Personal Portfolio</title>
+    <meta name="description" content="Portfolio of Kimberly Wang, Electrical Engineering Student. Explore projects in embedded systems, PCB design, and hardware.">
+    <meta name="author" content="Kimberly Wang">
+
+    <meta property="og:title" content="KWang - Personal Portfolio">
+    <meta property="og:description" content="Portfolio of Kimberly Wang, Electrical Engineering Student.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KWang - Personal Portfolio">
+    <meta name="twitter:description" content="Portfolio of Kimberly Wang, Electrical Engineering Student.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -66,7 +74,7 @@
             letter-spacing: 0.1em;
             cursor: pointer;
             transition: color 0.2s ease;
-            text-decoration: none; /* Ensure anchors don't have default underline */
+            text-decoration: none;
         }
         
         .nav-link:hover {
@@ -951,7 +959,9 @@
                 
                     <div class="flex-shrink-0 text-center">
                         <img 
-                            src="./images/profile.jpg" 
+                            id="profileImage"
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                            data-src="./images/profile.jpg"
                             alt="Kimberly Wang Profile" 
                             class="about-profile-img mx-auto"
                             onerror="handleImageError(this)"
@@ -1695,6 +1705,13 @@
         
         // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // Lazy load profile image to prevent social media scrapers from picking it up
+            const profileImg = document.getElementById('profileImage');
+            if (profileImg) {
+                profileImg.src = profileImg.getAttribute('data-src');
+            }
+
             populateFilters();
             renderFeaturedProjects();
             
