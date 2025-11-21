@@ -108,40 +108,93 @@
         
         .nav-link-cta:hover { color: #22c55e !important; }
         
-        /* Cards & Layout */
-        .project-card {
+        /* --- UNIFIED CARD STYLES & BORDER SHINE EFFECT --- */
+        /* This section controls the look for BOTH Home Page cards and All Projects cards */
+        
+        .project-card, 
+        .project-detail-card {
             background-color: rgba(17, 24, 39, 0.8);
             border: 2px solid #22c55e;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* Keeps the shine inside the box */
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
             cursor: pointer;
+        }
+
+        .project-card {
             display: flex;
             flex-direction: column;
         }
-        .project-card::before {
+        
+        .project-detail-card {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* THE SHINE EFFECT - Applies to both card types */
+        .project-card::before,
+        .project-detail-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
-            transition: left 0.5s ease;
+            inset: 0;               /* Snaps to all 4 corners */
+            padding: 2px;           /* MUST match border width */
+            pointer-events: none;   /* Let clicks pass through */
+            z-index: 10;            /* Sit on top of the border */
+            
+            /* The Blue Beam Gradient */
+            background: linear-gradient(
+                90deg, 
+                transparent 0%, 
+                #3b82f6 50%,        /* Bright Blue Beam Center */
+                transparent 100%
+            );
+            
+            /* BEAM SIZE: 50% width prevents the "flash" effect */
+            background-size: 50% 100%;  
+            background-repeat: no-repeat;
+            background-position: -100% 0; /* Start off-screen left */
+            transition: background-position 0.6s ease; 
+
+            /* The Mask: Cuts out the center so only the border shines */
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
         }
-        .project-card:hover::before { left: 100%; }
-        .project-card:hover {
-            border-color: #3b82f6;
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(34, 197, 94, 0.3);
+
+        /* TRIGGER ANIMATION ON HOVER */
+        .project-card:hover::before,
+        .project-detail-card:hover::before {
+            background-position: 200% 0; /* Slide shine to the right */
         }
-        .project-card h3 {
+
+        /* BORDER COLOR CHANGE ON HOVER */
+        .project-card:hover,
+        .project-detail-card:hover {
+            border-color: #3b82f6 !important;
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3); /* Blue Glow */
+        }
+
+        /* TEXT COLOR CHANGE ON HOVER */
+        .project-card h3, 
+        .project-detail-card h3 {
             color: #22c55e;
             font-weight: 700;
             transition: color 0.3s ease;
         }
-        .project-card:hover h3 { color: #3b82f6; }
+        
+        .project-card:hover h3,
+        .project-detail-card:hover h3 { 
+            color: #3b82f6 !important; 
+        }
+
+        /* --- END CARD STYLES --- */
 
         .tech-tag {
             background-color: rgba(34, 197, 94, 0.2);
@@ -231,17 +284,24 @@
             overflow: hidden;
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
         }
+        /* Contact card shine (Separate because it's not unified with blue yet) */
         .contact-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
-            transition: left 0.5s ease;
+            inset: 0;
+            padding: 2px;
+            pointer-events: none;
+            background: linear-gradient(90deg, transparent 0%, #fff 50%, transparent 100%);
+            background-size: 50% 100%;
+            background-repeat: no-repeat;
+            background-position: -100% 0;
+            transition: background-position 0.6s ease;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: 10;
         }
-        .contact-card:hover::before { left: 100%; }
+        .contact-card:hover::before { background-position: 200% 0; }
         .contact-card:hover {
             border-color: #3b82f6;
             transform: translateY(-8px) scale(1.02);
@@ -273,7 +333,7 @@
         }
         
         .project-detail-card .project-detail-tags {
-            margin-top: auto;       
+            margin-top: auto;        
             margin-bottom: 0.5rem; 
             padding-top: 1rem;      
         }
@@ -344,31 +404,6 @@
             height: 100%; 
         }
 
-        .project-detail-card {
-            background-color: rgba(17, 24, 39, 0.8);
-            border: 2px solid #22c55e;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-        }
-        .project-detail-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-        .project-detail-card:hover::before { left: 100%; }
-        
         .project-detail-card .project-detail-image {
             width: 300px;
             height: 250px;
@@ -410,15 +445,11 @@
         }
 
         .project-detail-card h3 {
-            color: #3b82f6;
             font-size: 1.4rem;
-            font-weight: 600;
             margin-bottom: 0.5rem;
             margin-top: 0;
             cursor: pointer;
-            transition: color 0.3s ease;
         }
-        .project-detail-card:hover h3 { color: #22c55e; }
         
         .project-date-display {
             color: #22c55e;
