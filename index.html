@@ -107,10 +107,7 @@
         }
         
         .nav-link-cta:hover { color: #22c55e !important; }
-        
-        /* --- UNIFIED CARD STYLES & BORDER SHINE EFFECT --- */
-        /* This section controls the look for BOTH Home Page cards and All Projects cards */
-        
+
         .project-card, 
         .project-detail-card {
             background-color: rgba(17, 24, 39, 0.8);
@@ -135,31 +132,27 @@
             margin-bottom: 2rem;
         }
 
-        /* THE SHINE EFFECT - Applies to both card types */
         .project-card::before,
         .project-detail-card::before {
             content: '';
             position: absolute;
-            inset: 0;               /* Snaps to all 4 corners */
-            padding: 2px;           /* MUST match border width */
-            pointer-events: none;   /* Let clicks pass through */
-            z-index: 10;            /* Sit on top of the border */
+            inset: 0;
+            padding: 2px;
+            pointer-events: none;
+            z-index: 10;
             
-            /* The Blue Beam Gradient */
             background: linear-gradient(
                 90deg, 
                 transparent 0%, 
-                #3b82f6 50%,        /* Bright Blue Beam Center */
+                #3b82f6 50%,
                 transparent 100%
             );
             
-            /* BEAM SIZE: 50% width prevents the "flash" effect */
             background-size: 50% 100%;  
             background-repeat: no-repeat;
-            background-position: -100% 0; /* Start off-screen left */
+            background-position: -100% 0;
             transition: background-position 0.6s ease; 
 
-            /* The Mask: Cuts out the center so only the border shines */
             -webkit-mask: 
                 linear-gradient(#fff 0 0) content-box, 
                 linear-gradient(#fff 0 0);
@@ -167,21 +160,18 @@
             mask-composite: exclude;
         }
 
-        /* TRIGGER ANIMATION ON HOVER */
         .project-card:hover::before,
         .project-detail-card:hover::before {
-            background-position: 200% 0; /* Slide shine to the right */
+            background-position: 200% 0;
         }
-
-        /* BORDER COLOR CHANGE ON HOVER */
+        
         .project-card:hover,
         .project-detail-card:hover {
             border-color: #3b82f6 !important;
             transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3); /* Blue Glow */
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3);
         }
 
-        /* TEXT COLOR CHANGE ON HOVER */
         .project-card h3, 
         .project-detail-card h3 {
             color: #22c55e;
@@ -193,8 +183,6 @@
         .project-detail-card:hover h3 { 
             color: #3b82f6 !important; 
         }
-
-        /* --- END CARD STYLES --- */
 
         .tech-tag {
             background-color: rgba(34, 197, 94, 0.2);
@@ -284,7 +272,7 @@
             overflow: hidden;
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
         }
-        /* Contact card shine (Separate because it's not unified with blue yet) */
+
         .contact-card::before {
             content: '';
             position: absolute;
@@ -357,14 +345,12 @@
             .projects-grid { grid-template-columns: 1fr; }
         }
 
-        /* Page Containers */
         .page-container {
             display: none;
             min-height: 100vh;
         }
         .page-container.active { display: block; }
 
-        /* Projects Header */
         .projects-page-header {
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(59, 130, 246, 0.1));
             padding: 3rem 0;
@@ -389,7 +375,6 @@
             text-decoration: underline;
         }
 
-        /* Projects Views */
         #projectsListContainer { display: block; }
         
         #projectsListContainer.grid-view {
@@ -553,7 +538,6 @@
             .view-toggle-container { display: none; }
         }
 
-        /* Filter Bar */
         .search-container {
             background-color: rgba(17, 24, 39, 0.8);
             border: 2px solid #22c55e;
@@ -709,7 +693,6 @@
             color: #0f0f0f;
         }
         
-        /* Detail View */
         .project-detail-view {
             background-color: rgba(17, 24, 39, 0.8);
             border: 2px solid #22c55e;
@@ -792,7 +775,6 @@
             .project-detail-view .detail-section-title { font-size: 1.25rem; }
         }
         
-        /* About Page Profile Image - Consolidated and Updated */
         .about-profile-img {
             width: 200px;
             height: 200px;
@@ -802,7 +784,6 @@
             box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
         }
         
-        /* Toast Notification Styles */
         #toast-container {
             position: fixed;
             bottom: 20px;
@@ -979,7 +960,7 @@
             <div class="container mx-auto px-6">
                 <button class="back-button" onclick="navigatePage('home')">← Back to Home</button>
                 <h1 class="text-4xl font-bold text-white">About Me</h1>
-                <p class="text-gray-300 mt-2">Learn about my background</p>
+                <p class="text-gray-300 mt-2">Learn about me</p>
             </div>
         </div>
     
@@ -1010,11 +991,11 @@
                     <div class="flex-1">
                         <h2 class="text-3xl font-bold text-white mb-4">Hello, I'm Kimberly Wang.</h2>
                         <p class="text-gray-300 leading-relaxed mb-6">
-                            I am an Electrical Engineering student at Rensselaer Polytechnic Institute (RPI) with a focus on analog, digital, and computer hardware design. My goal is to apply these skills to innovate within the robotics and automotive industries. Outside of classes, I work as a researcher at the Mercer XLab under ADI Fellow Douglas Mercer and as an Undergraduate Student Assistant for the 'Intro to ECSE' course.
+                            I am an Electrical Engineering student at Rensselaer Polytechnic Institute (RPI) with a focus on hardware design. My goal is to apply these skills to innovate within the robotics and automotive industries. Outside of classes, I work as a Researcher at the Mercer XLab under ADI Fellow Douglas Mercer and as an Student Assistant for the 'Intro to ECSE' course.
 
                         </p>
                         <p class="text-gray-300 leading-relaxed mb-8">
-                            My engineering passion is fueled by a lifelong enthusiasm for cars, motorcycles, and motorsports. I love learning about the technology behind performance machines, whether I'm working on my car or computers. In my downtime, I enjoy staying active by biking or relaxing with a good movie.
+                            My engineering passion is fueled by a lifelong enthusiasm for building design solutions and an admiration for everything machines. I love learning about the technology behind performance machines, whether I'm working on my car or electronics. In my downtime, I enjoy staying active through biking or relaxing with a good movie.
                         </p>
                     </div>
                 
@@ -1038,7 +1019,7 @@
             <div class="container mx-auto px-6">
                 <button class="back-button" onclick="navigatePage('home')">← Back to Home</button>
                 <h1 class="text-4xl font-bold text-white">All Projects</h1>
-                <p class="text-gray-300 mt-2">Explore all of my engineering projects</p>
+                <p class="text-gray-300 mt-2">Explore all of my projects</p>
             </div>
         </div>
 
@@ -1119,8 +1100,6 @@
     <div id="toast-container"></div>
 
         <script>
-        // --- DATA ---
-        // UPDATED: Project Details with IDs reordered (1 = Most Recent)
         const projectDetails = {
             1: {
                 title: 'CO Sensing, Ventilating, and Alarming System',
@@ -1309,17 +1288,15 @@
             }
         };
         
-        // --- GLOBAL STATE ---
+
         let activeFilters = [];
         let filtersCollapsed = false;
         let allCategories = new Set();
-        let currentView = 'list'; // 'list' or 'grid'
+        let currentView = 'list'; 
         
-        // --- CORE NAVIGATION ---
         function navigatePage(page, addToHistory = true) {
             closeMobileMenu();
             
-            // Hide all pages
             document.getElementById('homePage').classList.remove('active');
             document.getElementById('projectsPage').classList.remove('active');
             document.getElementById('projectDetailPage').classList.remove('active');
@@ -1348,10 +1325,8 @@
         
             const container = document.getElementById('projectDetailContent');
             
-            // Use imagePath if available, otherwise fallback to SVG placeholder
             const imageUrl = project.imagePath || `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect fill='%23047857' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='%23A7F3D0' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='bold'%3EPRJ-00${projectId}%3C/text%3E%3C/svg%3E`;
         
-            // Conditional rendering for the primary file link
             let fileLinkText = "View File";
             if (project.primaryFile) {
                 if (project.primaryFile.toLowerCase().endsWith('.pdf')) {
@@ -1376,7 +1351,6 @@
                 </p>
             ` : '';
             
-            // Build the full-page HTML for the project
             container.innerHTML = `
                 <div class="project-detail-view tech-container fade-in">
                     <img 
@@ -1417,7 +1391,6 @@
                 </div>
             `;
             
-            // Switch to the detail page
             document.getElementById('homePage').classList.remove('active');
             document.getElementById('projectsPage').classList.remove('active');
             document.getElementById('aboutPage').classList.remove('active');
@@ -1430,13 +1403,11 @@
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
         
-        // --- Renders the "Featured Projects" on the Home Page ---
         function renderFeaturedProjects() {
             const container = document.getElementById('featuredProjectsGrid');
             if (!container) return; 
             
             let html = '';
-            // Just pick the first 3 projects since IDs are now 1=Newest
             const featuredIds = [1, 2, 3]; 
         
             for (const id of featuredIds) {
@@ -1479,11 +1450,9 @@
         }
         
         
-        // --- 'ALL PROJECTS' PAGE FUNCTIONS ---
         function toggleView(mode) {
             currentView = mode;
             
-            // Update buttons UI
             const buttons = document.querySelectorAll('.view-toggle-btn');
             buttons.forEach(btn => {
                 if ((mode === 'list' && btn.title === 'List View') || 
@@ -1494,7 +1463,6 @@
                 }
             });
         
-            // Toggle class on container
             const container = document.getElementById('projectsListContainer');
             if (mode === 'grid') {
                 container.classList.add('grid-view');
@@ -1649,25 +1617,20 @@
             }
         }
         
-        // --- OTHER HELPER FUNCTIONS ---
         function scrollToSection(sectionId) {
-            // 1. If we are NOT on the home page
             if (!document.getElementById('homePage').classList.contains('active')) {
                 
-                // Switch to home page
                 navigatePage('home'); 
         
-                // Increase timeout to 100ms to give the browser time to render the Home page DOM
                 requestAnimationFrame(() => {
                     setTimeout(() => {
                         const element = document.getElementById(sectionId);
                         if (element) {
                             element.scrollIntoView({ behavior: 'smooth' });
                         }
-                    }, 100); // Increased from 50 to 100
+                    }, 100);
                 });
             } 
-            // 2. If we ARE already on the home page
             else {
                 const element = document.getElementById(sectionId);
                 if (element) {
@@ -1734,10 +1697,8 @@
             img.style.border = "1px dashed #22c55e";
         }
         
-        // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Lazy load profile image to prevent social media scrapers from picking it up
             const profileImg = document.getElementById('profileImage');
             if (profileImg) {
                 profileImg.src = profileImg.getAttribute('data-src');
