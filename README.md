@@ -1,2 +1,2 @@
 # KimbWang.github.io
-Personal Website Source
+Personal website, visit the link to see my work.
