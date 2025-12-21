@@ -1153,9 +1153,26 @@
         <script>
         const projectDetails = {
             1: {
-                title: 'CO Sensing, Ventilating, and Alarming System',
+                title: 'Desktop Robot (Name TBD)',
+                date: '2025-12-01', 
+                displayDate: 'Dec 2025 - Present',
+                description: 'A desktop robot buddy to aid you in productivity',
+                overview: 'Currently WIP',
+                features: [
+                    'Circuit and PCB Design',
+                    'Custom Software',
+                ],
+                categories: ['Altium', 'ESP32', 'C/C++'],
+                challenges: 'WIP',
+                results: 'WIP',
+                additionalInfo: 'Project in collaboration with CE student Aidan Pak.',
+                imagePath: './images/TBD',
+                primaryFile: './docs/TBD'
+            },
+            2: {
+                title: 'CO Sensor System',
                 date: '2025-09-01', 
-                displayDate: 'Sep 2025 - Present',
+                displayDate: 'Sep 2025 - Dec 2025',
                 description: 'A multi-stage CO sensing, ventilating, and alarming system. Intended to make CO systems in buildings more energy and cost efficient while maintaining safety requirements for working conditions.',
                 overview: 'This system relies on 3 stages involving decision-making depending on a sensor input from reading levels of CO, then a ventilation system, and finally an alarming system to ensure the safety of workers. These stages involve doing DC motor controls as well as first and second order filtering.',
                 features: [
@@ -1170,9 +1187,9 @@
                 results: 'With many iterations of fixes, the circuit was able to operate as expected. The input to be controlled is the CO sensor which was replaced by a potentiometer to easily make changes. When the sensor voltage was higher than the reference voltage, the comparator output became HIGH and a LED turned on. Then with the addition of the ventilation system, when the comparator was HIGH, the DC fan would turn on and receive a pulse input. As time went on, the duty cycle of the pulse signal increased so the fan would be on longer than off for each period until it was ultimately staying on with 100% duty cycle. In the final stage, the alarm system will simply have a constant beeping noise output from a speaker as long as the comparator output is HIGH. Then when the sensor voltage is changed so that is is lower than the reference voltage, the comparator output is LOW and the LED is off, and the fan is off, and the speaker will play no sound.',
                 additionalInfo: 'For the final stage, there will be a goal to use recycled parts from electronics waste to reuse a speaker or oscillator circuit as part of the alarm system.',
                 imagePath: './images/CO_Sensor.jpg',
-                primaryFile: './docs/ECSE2010_MS2_Omega_ProjectManual.pdf'
+                primaryFile: './docs/ECSE2010_MS3_Omega_ProjectManual.pdf'
             },
-            2: {
+            3: {
                 title: 'LED Sequencer PCB Design',
                 date: '2025-11-01', 
                 displayDate: 'Nov 2025',
@@ -1190,7 +1207,7 @@
                 imagePath: './images/LED_PCB.jpg',
                 primaryFile: './docs/LED_PCB.zip'
             },
-            3: {
+            4: {
                 title: 'Compass Controlled TI RSLK Car',
                 date: '2025-04-02', 
                 displayDate: 'Apr 2025',
@@ -1204,14 +1221,14 @@
                     'Real-time heading calculation',
                     'Closed-loop feedback system'
                 ],
-                categories: ['MSP432', 'C', 'I2C', 'Microcontroller'],
+                categories: ['MSP432', 'C/C++', 'I2C', 'Microcontroller'],
                 challenges: 'Tuning the PID controller to ensure smooth turns without overshooting the target heading was a complex iterative process, it was never 100% perfect but would be able to adjust to changes within 1s of the input. Another challenge was having the correct syntax for working with different types of variables that were pulled from different measurement functions which was solved after checking measurement values at each stage to see if it matched expected values.',
                 results: 'The car was successfully reading the compass data and executing movement commands with good accuracy. The PID implementation resulted in mostly smooth movements and even with large movements of the compass, would adjust and smooth out within 1s.',
                 additionalInfo: 'Utilizes I2C data packet protocols as well as a PID control system.',
                 imagePath: './images/Compass_Controlled_Cart.jpg',
                 primaryFile: './code/Compass_Controlled_Cart.c'
             },
-            4: {
+            5: {
                 title: 'Vending Machine Moore FSM',
                 date: '2025-04-01',
                 displayDate: 'Apr 2025',
@@ -1232,7 +1249,7 @@
                 imagePath: './images/Vending_Machine.jpg',
                 primaryFile: './docs/ECSE2610_StudioC_Omega.pdf'
             },
-            5: {
+            6: {
                 title: 'Mastermind on a Microcontroller',
                 date: '2025-02-01',
                 displayDate: 'Feb 2025',
@@ -1246,14 +1263,14 @@
                     'Guess validation algorithms',
                     'Win/Loss state machine management'
                 ],
-                categories: ['MSP432', 'C', 'Microcontroller'],
+                categories: ['MSP432', 'C/C++', 'Microcontroller'],
                 challenges: 'Setting up multiple timers for different stages of the game and considering the unique user cases. There needed to be debouncing and delays set for in case the bumper buttons double pressed or were spammed. There was also a necessity to create a response where no inputs were put in where after 20-30s, the guess would be considered wrong.',
                 results: 'Prototypes a fully functional game where users can input guesses, receive feedback via LEDs and text, and correctly trigger win/loss routines. The system runs reliably and consistently with multiple uses and randomized problems.',
                 additionalInfo: 'Demonstrates a translation of gane logic and rules into embedded C code.',
                 imagePath: './images/Mastermind.jpg',
                 primaryFile: './code/Mastermind.c'
             },
-            6: {
+            7: {
                 title: 'Implementation of ALU for Boolean Functions',
                 date: '2025-02-02',
                 displayDate: 'Feb 2025',
@@ -1274,7 +1291,7 @@
                 imagePath: './images/Boolean_FPGA.jpg',
                 primaryFile: './docs/ECSE2610_StudioA_Omega.pdf'
             },
-            7: {
+            8: {
                 title: 'Puzzle Solving Raspberry Pi Cart',
                 date: '2024-12-01',
                 displayDate: 'Dec 2024',
@@ -1295,7 +1312,7 @@
                 imagePath: './images/Wumpus.jpg',
                 primaryFile: './code/Wumpus_World.zip'
             },
-            8: {
+            9: {
                 title: 'PI Controller Design',
                 date: '2024-11-01',
                 displayDate: 'Nov 2024',
@@ -1316,7 +1333,7 @@
                 imagePath: './images/PI_Controller.jpg',
                 primaryFile: './docs/ECSE1010_Lab2_Omega_POC.pdf'
             },
-            9: {
+            10: {
                 title: 'PWM Control of an LED',
                 date: '2024-10-01',
                 displayDate: 'Oct 2024',
